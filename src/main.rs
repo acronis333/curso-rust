@@ -301,8 +301,11 @@ fn main() {
     // cargo check -> testea el proyecto
     // cargo run --bin [programa_rust] -> si el proyecto esta en otro directorio
     // cargo build --release -> para compilarlo con optimizaciones
+    // cargo edit -> nos ayuda con las dependencias inserta o importa el nombre de un crate (libreria o módulo)
+    // -> reescribe el archivo Cargo.toml para adicionar de pendencias -> https://github.com/killercup/cargo-edit
+    // -> viendo la versión que necesitas en crates.io
     // Es una convención en Rust utilizar snake_case para: variables, funciones y archivos
     // SCREAMING_SNAKE_CASE -> para constantes y estáticas, en mayusculas y guiones bajos
     // PascalCas -> se utiliza para tipos, rasgos y enums
-    // Guión bajo (underscores) como sufijo de las variables para que no advierta de "variable no utilizada"
+    // Guión bajo (underscores) como sufijo de las variables para que no salga la advierta de "variable no utilizada
 }
