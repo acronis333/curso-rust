@@ -1,1 +1,1 @@
-/home/javier/code/Rust/curso_rust/target/debug/curso_rust: /home/javier/code/Rust/curso_rust/src/main.rs
+/home/javier/code/rust/curso-rust/target/debug/curso_rust: /home/javier/code/rust/curso-rust/src/main.rs
