@@ -39,9 +39,9 @@
 // el guión bajo no afecta al valor, solo es para hacerlo más legible, se pueden poner varios guiones bajos.
  
 // 01 📌 MACRO "println!" Display the message "Hello, world!"
-// fn main() { 
-//     println!("1 - Hello, world!");
-// }
+fn main() { 
+    println!("1 - Hello, world!");
+}
 
 // 0a 📌 MACRO "format!" para crear un string
 // fn main() {
@@ -254,8 +254,9 @@
 //     let pais = String::from("España"); // se crea la variable "pais" con valor "España"
 //     print_pais(pais); // se llama a la función "print_pais" con la variable "pais"
 //     // print_pais(pais); // ⚠️  ERROR, no se puede usar una variable que ya no es dueña del valor
+
 //     // Al pasar la variable "pais" a la función "print_pais" se transfiere la propiedad del valor a la función y su nuevo dueño es "pais_nombre"
-} 
+// } 
 
 //  📌 ARRAYS - array es una colección de longitud fija de elementos de datos del mismo tipo.
 //  El tipo de datos para un array es [T;N] siendo T el tipo del elemento, y N la longitud fija 
