@@ -259,25 +259,80 @@
 // } 
 
 // Es mejor evitar que la función se apropie del valor, para ello se pueden pasar referencias (prestamos los valores) a la función, ej:. "&String"  
-fn print_pais(pais_nombre: &String) {
-    println!("{}", pais_nombre);
-}
-fn main() {
-    let pais = String::from("España"); // se crea la variable "pais" con valor "España"
-    print_pais(&pais); // se llama a la función "print_pais" con la variable "pais"
-    print_pais(&pais); // 😀 ahora si funciona, se puede usar la variable "pais" en varias funciones
-    println!("{}", pais); // comprobamos que la variable "pais" sigue siendo dueña del valor.
+// fn print_pais(pais_nombre: &String) {
+//     println!("{}", pais_nombre);
+// }
+// fn main() {
+//     let pais = String::from("España"); // se crea la variable "pais" con valor "España"
+//     print_pais(&pais); // se llama a la función "print_pais" con la variable "pais"
+//     print_pais(&pais); // 😀 ahora si funciona, se puede usar la variable "pais" en varias funciones
+//     println!("{}", pais); // comprobamos que la variable "pais" sigue siendo dueña del valor.
     
-} 
+// } 
+
+// 📌 COPIA 
+// Rust tiene una característica especial para los tipos de datos primitivos, la trait "Copy", que permite que los valores se copien en lugar de moverse.
+// Son valores de tamañol fijo, conocido y pequeño que se almacenan en el stack (enteros,flotantes y char), no en el heap, por lo que son rápidos de copiar y no influye que existan varias copias de lo mismo.
+// Pueden copiarse cuando se pasan por parametro a una función, se asignan a otra variable o se devuelven de una función.
+
+// fn print_number(number: i32) { // Esta función no devuelve nada
+//     // Si el  número no se copiara, se movería y no se podría usar, la función seria su dueña.                   
+// println!("{}", number);
+// }
+// fn main() {
+//     let mi_numero = 8;
+//     print_number(mi_numero); // Imprime 8, la función obtiene una copia del valor de "mi_numero"
+//     print_number(mi_numero); // Imprime 8 de nuevo, la función obtiene una copia del valor de "mi_numero".
+// }
+
+// 📌 CLONE
+// El tipo String, no implementa la característica copiar, por lo que el valor de la variable se mueve al pasarla la primera vez, para poder copiarla se usa la trait "Clone".
+// Lo ideal es utilizar la referencia es más eficiente porque clone copia el valor gastando más memoria y la referencia solo el puntero. 
+
+// fn print_country(country_name: String) { // Esta función no devuelve nada
+//     println!("{}", country_name);
+//     }
+//     fn main() {
+//         let country = String::from("España");
+//         print_country(country.clone());
+//         print_country(country);
+//     }
+
+//  📌 TIPOS COLECCIÓN
+// Rust tiene varios tipos de colecciones, como vectores, arrays, tuplas, etc.
+// Sirven para guardar más de un valor en un mismo lugar.
+// Empezamos con los arrays, que son colecciones de longitud fija de elementos de datos del mismo tipo y los más simples y rápidos.
 
 //  📌 ARRAYS - array es una colección de longitud fija de elementos de datos del mismo tipo.
 //  El tipo de datos para un array es [T;N] siendo T el tipo del elemento, y N la longitud fija 
 //  conocida en tiempo de compilación. Los elementos individuales se pueden recuperar con el 
-//  operador [x], siendo x un índice de tipo usize (empezando por 0) del elemento que quieras.              
+//  operador [x], siendo x un índice de tipo usize (empezando por 0) del elemento que quieras. 
+// Los arrays no pueden cambiar el tamaño y sus datos tienen que ser del mismo tipo, sin   embargo son muy rápidos y eficientes.
+ 
+//  📌 ARRAYS - se puede obtener una sección (slice) de un array utilizando una referencia "&" y después utilizando ".." para mostrar el rango
+// Los indices empiezan en 0, por lo que el primer elemento es el 0, el segundo el 1, etc.
+// Los rangos son inclusivos en el primer número y exclusivos en el segundo, por lo que [2..5] obtiene los elementos 2, 3 y 4.
+// Para que se incluya el último número se puede usar de esta forma [0..=10].
+// Para que se incluya el último número, se puede usar [1..] y para que se incluya el primero, se puede usar [..5].
+
+// fn main() {
+//     let numeros: [i32;10] = [1,2,3,4,5,6,7,8,9,10]; // array de 3 elementos de tipo i32
+//     println!("Todo el array: {:?}", numeros); // imprimimos el slice
+
+//     let _slice_1_al_3 = &numeros[1..3]; // obtebemos indices 1 al 2
+//     let _slice_todos = &numeros[1..]; // obtenemos indices 1 al 9 o final
+//     let _slice_1_al_4 = &numeros[..10]; // obtenemos indices 0 al 9
+
+//     println!("Slice de 1 al 3: {:?}", _slice_1_al_3); // imprimimos el slice
+//     println!("Slice de 1 al final: {:?}", _slice_todos); // imprimimos el slice
+//     println!("Slice de 1 al 4: {:?}", _slice_1_al_4); // imprimimos el slice
+// }
+
+//  📌 ARRAYS
 
 // fn main() {
 //     let números: [i32;3] = [1,2,3];
-//     println!("7 - Array {:?}", números);
+//     println!("Array {:?}", números);
 // }
  
 // fn main() {
@@ -290,8 +345,70 @@ fn main() {
 // }
 
 
-// 📌 VECTORES | Estructutas de datos 
+// 📌 VECTORES 
+// Los vectores son colecciones de longitud variable de elementos de datos del mismo tipo.
+// Se pueden añadir o quitar elementos, pero no se pueden mezclar tipos de datos.
+// Los vectores son más flexibles que los arrays, pero son más lentos y ocupan más memoria.
+// Se pueden añadir elementos con el método "push" y quitar elementos con el método "pop".
+// Se pueden acceder a los elementos con el método "get" y se pueden modificar con el método "set".
+// Se pueden obtener secciones de un vector con el método "slice".
+// Se pueden recorrer los elementos de un vector con un bucle "for" y modificarlos con el método "iter_mut". 
+// Se pueden declarar vectores de forma dinámica con la macro "vec!".
+// Se pueden declarar vectores al igual que los arrays, con el tipo de dato y la longitud, ej:. let mut notas_vec: Vec<i32> = vec!();
+// Se pueden declarar vectores al igual que un string mediante el método "new", ej:. let mut notas_vec = Vec::new(); <- vector vacío, no es necesario especificar el tipo de dato.
+// Los vectores siempre contienen valores, para eso son sirven los paréntesis angulares "<>".
+// Un Vec<String> es un vector que contiene elementos de tipo String.
+// Un Vec<i32> es un vector que contiene elementos de tipo i32.
+// Un Vec<(i32, i32)> es un vector que contiene tuplas de dos elementos de tipo i32.
+// Los vectores se relocalizan en la memoria si se añaden más elementos de los que puede contener.
+// Los vectores se pueden clonar con el método "clone".
+// Los vectores se pueden convertir en arrays con el método "as_slice".
+// Los vectores se pueden convertir en strings con el método "join".
+// Los vectores se pueden convertir en strings con el método "join" y en mayúsculas con el método "to_uppercase".
+// Si se conoce el número de elementos que va a contener el vector, se puede usar la macro "with_capacity" para reservar memoria, Vec::with_capacity(10), para que funcione más rápido.
 
+
+// 📌 VECTORES
+// fn main() {
+//     let producto1 = String::from("Agua");
+//     let producto2 = String::from("Leche");
+
+//     let mut mi_vector = Vec::new();
+//     // Si se compilara este prgrama hasta aquí el compilador daría error.
+//     // ya que no conoce el tipo de dato que se va a almacenar en el vector.
+//     mi_vector.push(producto1); // Ahora si lo conoce, es de tipo String.
+//     mi_vector.push(producto2);
+
+//     print!("{:?}", mi_vector); // imprime los elementos del vector.
+// }
+// En lugar de usar .push() para deducir el tipo de elementos que contiene se puede especificar el tipo de dato.
+
+// 📌 VECTORES
+// fn main() {
+//     let mut mi_vector3: Vec<String> = Vec::new(); // El compilador ya sabe que el vector contiene
+//                                                   // elementos de tipo String.
+//     mi_vector3.push(String::from("Agua")); // inserta un elemento de tipo String.
+//     mi_vector3.push("Café".to_string()); // inserta elemento de tipo String con método to_string().
+//     println!("{:?}", mi_vector3); // imprime los elementos del vector Agua y Café.
+// }
+
+// 📌 VECTORES
+// otra forma de declarar un vector con la macro "vec!"
+// fn main() { 
+//     let mut mi_vector4 = vec![1,2,3,4,5]; // Vector de 5 elementos de tipo i32.
+//     mi_vector4.push(6); // inserta un elemento de tipo i32.
+//     mi_vector4.push(7); // inserta un elemento de tipo i32.
+//     println!("{:?}", mi_vector4); // imprime los elementos del vector.
+// }
+
+// 📌 VECTORES
+// Se pueden obtener secciones de un vector igual que en los arrays, con el método "slice".
+// fn main() {
+//     let mut mi_vector5 = vec![1,2,3,4,5]; // Vector de 5 elementos de tipo i32.
+//     let slice = &mi_vector5[1..3]; // obtenemos los elementos 1 y 2.
+//     println!("{:?}", slice); // imprime los elementos del slice.
+
+// 📌 VECTORES
 // fn main () {
 //         let mut notas_vec: Vec<i32> = vec!(); // Vector dinámico (No fijo) vació, integer 32 bits con signo 
 //         notas_vec.push(1); // escribimos un valor
@@ -299,12 +416,50 @@ fn main() {
 //         println!("8 - Nota 1 = {}\n    Nota 2 = {}\n", notas_vec[0], notas_vec[1]);
 // }
 
+// 📌 VECTORES
 // fn main () {
 //     let mut notas_vec: Vec<i32> = vec!(); // Vector dinámico (No fijo) vació, integer 32 bits con signo 
 //     notas_vec.push(1); // escribimos un valor
 //     notas_vec.push(6); // escribimos un segundo valor
 //     println!("8 - Nota 1 = {}\n    Nota 2 = {}\n", notas_vec[0], notas_vec[1]);
 // }
+
+// 📌 TUPLAS, son como una estructura sin nombre de campos, una especie de array donde 
+// cada elemento puede ser de un tipo diferente pero especificado de antemano
+
+// fn main () {
+//     let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
+//     let (random, z_name, has_beers) = tupla; // Desestructuramos la tupla y obtenemos 3 variables
+//     // Imprimimos las variables obtenidas
+//     println!("\n{}", random);
+//     println!("{}", z_name);
+//     println!("{}\n", has_beers);
+// }
+
+// 📌 TUPLAS
+fn main() {
+    let random_tuple = ("Esto es un texto", 8, vec!['a'], 'b', [8,9,10], 7.7);
+    println!(
+        "El interior de la tupla contiene Primer elemento: {:?}
+        Segundo elemento: {:?}
+        Tercer elemento: {:?}  
+        Cuarto elemento: {:?}
+        Quinto elemento: {:?}
+        Sexto elemento: {:?}",
+                random_tuple.0,
+                random_tuple.1,
+                random_tuple.2,
+                random_tuple.3,
+                random_tuple.4,
+                random_tuple.5
+    );
+    for elementos in &random_tuple.4 {
+        println!("{}", elementos);
+    }
+    // println!("{:?}", random_tuple.[0..]);
+}
+
+
 
 //  📌 CONSTANTES Y STATIC
 // fn main () {
@@ -323,14 +478,16 @@ fn main() {
 //                                     // y al mismo tiempo estamos haciendo "shadowing" al  redefinir la variable "xa"
 //     println!("9 - El valor de xa es: {}", xa);
 // }
-
-//  📌 CASTING - conversión de tipos
- 
+//  📌 TUPLAS, son como una estructura sin nombre de campos, una especie de array donde 
+//  cada elemento puede ser de un tipo diferente pero especificado de antemano
 // fn main () {
-    // let a = 13u8;
-    // let b = 7u32;
-    // let c = a as u32 + b;
-    // println!("9 - a convertido a u32: {}", c);
+    // let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
+    // let (random, z_name, has_beers) = tupla; // Desestructuramos la tupla y obtenemos 3 variables
+    // // Imprimimos las variables obtenidas
+    // println!("\n10 - {}", random);
+    // println!("11 - {}", z_name);
+    // println!("12 - {}\n", has_beers);
+// } convertido a u32: {}", c);
     // let t = true;
     // println!("{}", t as u8);
 // }
