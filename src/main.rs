@@ -468,6 +468,52 @@
 //                 random_tuple.5
 //     );
 // }
+  
+// 📌 ENUM - Enumeraciones
+// Las enumeraciones son un tipo de dato que permite definir un tipo de dato con un número limitado de valores posibles.
+// Se pueden definir enumeraciones con la palabra reservada "enum" seguida del nombre de la enumeración y entre llaves los valores posibles separados por comas. (la coma en el último valor es opcional pero importante si solemos cambiar de sitio los valores).
+// Diferencia entre "struct" y "enum", las estructuras permiten definir un tipo de dato con varios campos (Representar una cosa Y otra cosa a la vez), mientras que las enumeraciones permiten definir un tipo de dato con un número limitado de valores posibles, (Representar una cosa O alguna cosa diferente).
+
+// 📌 ENUM - ejemplo de enum
+#[derive(Debug)]
+#[allow(dead_code)]
+
+// Según la hora del día, el cielo puede tener el sol o las estrellas, creamos una enumeración con dos valores posibles.
+// Creamos una función que "devuelve el estado del cielo" según la hora del día, la cual se la pasamos en el argumento de la función, la llamamos "tiempo" y a traves de match devolvemos el valor del enum. que corresponda según el rango de horas.
+// Para llamar a un valor del enum se usa "::" después del nombre del enum y el valor.
+// match es una expresión que permite comparar un valor con una serie de patrones y ejecutar un bloque de código dependiendo de qué patrón coincida, en este caso, el valor de la variable "tiempo" con los valores de la enumeración.
+// la flecha después del patron de rango indica que se devuelva el valor del enum que corresponda.
+
+enum CosasEnElCielo {   // Enumeración con dos valores posibles
+    Sol(String),                // Representa el dia -> Sol
+    Estrellas(String),          // Representa la noche -> Estrellas
+}
+ fn crear_estado_en_el_cielo(tiempo:i32) -> CosasEnElCielo { // Función que "devuelve" el estado del cielo
+    match tiempo {                                           // Según la hora del día a la variable "tiempo"
+        6..=8 => CosasEnElCielo::Sol(String::from("Puedo ver el Sol")),
+        _ => CosasEnElCielo::Estrellas(String::from("Puedo ver las estrellas")),
+    } 
+}
+fn comprobar_el_cielo(estado: &CosasEnElCielo) {
+    match estado {
+        CosasEnElCielo::Sol(a) => println!("{}",a),
+        CosasEnElCielo::Estrellas(b) => println!("{}",b),
+    }
+}
+fn main() {
+    let tiempo = 7; // "Ahora son las 8" creamos variable "tiempo" con valor 8 para pasar a la función "estado_en_el_cielo".
+    let estado = crear_estado_en_el_cielo(tiempo);
+    comprobar_el_cielo(&estado);
+    
+}
+
+    
+ 
+ 
+
+
+
+
 
 
 
@@ -649,24 +695,24 @@
 // Se pueden modificar los valores de una estructura con la palabra clave "mut".
 // Se pueden crear métodos para una estructura con la palabra clave "impl" seguida del nombre de la estructura y los métodos.
 
-#[allow(dead_code)] 
-#[derive(Copy,Clone)]
+// #[allow(dead_code)] 
+// #[derive(Copy,Clone)]
 
-struct Punto {
-x: i32,
-y: i32
-}
-#[allow(dead_code)]
+// struct Punto {
+// x: i32,
+// y: i32
+// }
+// #[allow(dead_code)]
 
-    struct Rectangulo {
-    origen: Punto,
-    ancho: i32,
-    alto: i32
-}  
-fn main() {
-    let p = Punto {x: 50, y: 50};
-        println!("20 - Punto X: {}",p.x);
-}
+//     struct Rectangulo {
+//     origen: Punto,
+//     ancho: i32,
+//     alto: i32
+// }  
+// fn main() {
+//     let p = Punto {x: 50, y: 50};
+//         println!("20 - Punto X: {}",p.x);
+// }
 //  📌 
 
 
