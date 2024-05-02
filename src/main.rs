@@ -344,9 +344,9 @@
 //     println!("7 - {:?}", meses);
 // }
 
-
 // 📌 VECTORES 
-// Los vectores son colecciones de longitud variable de elementos de datos del mismo tipo.
+
+// Los vectores son estructuras de datos dinámicas que permiten almacenar más de un valor en un solo lugar, colecciones de longitud variable de elementos del mismo tipo.
 // Se pueden añadir o quitar elementos, pero no se pueden mezclar tipos de datos.
 // Los vectores son más flexibles que los arrays, pero son más lentos y ocupan más memoria.
 // Se pueden añadir elementos con el método "push" y quitar elementos con el método "pop".
@@ -411,25 +411,39 @@
 // 📌 VECTORES
 // fn main () {
 //         let mut notas_vec: Vec<i32> = vec!(); // Vector dinámico (No fijo) vació, integer 32 bits con signo 
-//         notas_vec.push(1); // escribimos un valor
-//         notas_vec.push(6); // escribimos un segundo valor
-//         println!("8 - Nota 1 = {}\n    Nota 2 = {}\n", notas_vec[0], notas_vec[1]);
+//         notas_vec.push(1); // escribimos un valor "1" en la posicion 0
+//         notas_vec.push(6); // escribimos un segundo valor "6" en la posicion 1.
+//         println!("Nota 1 = {}\n    Nota 2 = {}\n", notas_vec[0], notas_vec[1]);
 // }
 
 // 📌 VECTORES
-// fn main () {
-//     let mut notas_vec: Vec<i32> = vec!(); // Vector dinámico (No fijo) vació, integer 32 bits con signo 
-//     notas_vec.push(1); // escribimos un valor
-//     notas_vec.push(6); // escribimos un segundo valor
-//     println!("8 - Nota 1 = {}\n    Nota 2 = {}\n", notas_vec[0], notas_vec[1]);
+// Se pueden obtener secciones de un vector igual que en los arrays, con el método "slice".
+// fn main() {
+//     let random_vector = vec!["Esto es un texto", "8", "a", "b", "8,9,10", "7.7"];
+//     println!(
+//         "El interior del vector contiene Primer elemento: {:?}
+//         Segundo elemento: {:?}
+//         Tercer elemento: {:?}  
+//         Cuarto elemento: {:?}
+//         Quinto elemento: {:?}
+//         Sexto elemento: {:?}",
+//                 random_vector[0],
+//                 random_vector[1],
+//                 random_vector[2],
+//                 random_vector[3],
+//                 random_vector[4],
+//                 random_vector[5]
+//     );
+//     for elementos in &random_vector[4..] { // No se puede  hacer un slice (iterar) en tuplas
+//         println!("{}", elementos);
+//     }
 // }
 
-// 📌 TUPLAS, son como una estructura sin nombre de campos, una especie de array donde 
-// cada elemento puede ser de un tipo diferente pero especificado de antemano
-
+// 📌 TUPLAS y desestructuración
 // fn main () {
 //     let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
 //     let (random, z_name, has_beers) = tupla; // Desestructuramos la tupla y obtenemos 3 variables
+//Si se necesita desestructurar un conjunto de elementos, pero no se quieren todos, se puede utilizar _.
 //     // Imprimimos las variables obtenidas
 //     println!("\n{}", random);
 //     println!("{}", z_name);
@@ -437,27 +451,24 @@
 // }
 
 // 📌 TUPLAS
-fn main() {
-    let random_tuple = ("Esto es un texto", 8, vec!['a'], 'b', [8,9,10], 7.7);
-    println!(
-        "El interior de la tupla contiene Primer elemento: {:?}
-        Segundo elemento: {:?}
-        Tercer elemento: {:?}  
-        Cuarto elemento: {:?}
-        Quinto elemento: {:?}
-        Sexto elemento: {:?}",
-                random_tuple.0,
-                random_tuple.1,
-                random_tuple.2,
-                random_tuple.3,
-                random_tuple.4,
-                random_tuple.5
-    );
-    for elementos in &random_tuple.4 {
-        println!("{}", elementos);
-    }
-    // println!("{:?}", random_tuple.[0..]);
-}
+// fn main() {
+//     let random_tuple = ("Esto es un texto", "8", "vec!['a']", "'b'", "[8,9,10], 7.7");
+//     println!(
+//         "El interior de la tupla contiene Primer elemento: {:?}
+//         Segundo elemento: {:?}
+//         Tercer elemento: {:?}  
+//         Cuarto elemento: {:?}
+//         Quinto elemento: {:?}
+//         Sexto elemento: {:?}",
+//                 random_tuple.0,
+//                 random_tuple.1,
+//                 random_tuple.2,
+//                 random_tuple.3,
+//                 random_tuple.4,
+//                 random_tuple.5
+//     );
+// }
+
 
 
 
@@ -478,7 +489,8 @@ fn main() {
 //                                     // y al mismo tiempo estamos haciendo "shadowing" al  redefinir la variable "xa"
 //     println!("9 - El valor de xa es: {}", xa);
 // }
-//  📌 TUPLAS, son como una estructura sin nombre de campos, una especie de array donde 
+
+//  📌 TUPLAS Y DESESTRUCTURACIÓN, son como una estructura sin nombre de campos, una especie de array donde 
 //  cada elemento puede ser de un tipo diferente pero especificado de antemano
 // fn main () {
     // let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
@@ -492,17 +504,6 @@ fn main() {
     // println!("{}", t as u8);
 // }
 
-    
-//  📌 TUPLAS, son como una estructura sin nombre de campos, una especie de array donde 
-//  cada elemento puede ser de un tipo diferente pero especificado de antemano
-// fn main () {
-    // let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
-    // let (random, z_name, has_beers) = tupla; // Desestructuramos la tupla y obtenemos 3 variables
-    // // Imprimimos las variables obtenidas
-    // println!("\n10 - {}", random);
-    // println!("11 - {}", z_name);
-    // println!("12 - {}\n", has_beers);
-// }
     
 //  📌 EXPRESIONES AVANZADAS con variables "let", expresión condicional con "if, else", 
 //   en Rust si algo no lleva punto y coma se vuelve Y evalúa como una expresión
@@ -570,14 +571,13 @@ fn main() {
     
 // fn main() {
     
-//     // let s1 =  String::from("Bolero - Maurice Ravel");
-//     // let s2 = s1.clone();
-//     // f(s2);ste 
-
-//     // Este código daría error si al hacer la llamada a la función f hemos transferido la propiedad 
-//     // del valor de s1 a f. Por ello, cuando intentamos hacer el print no vamos a poder ya que 
-//     // s1 ya no es dueña de la cadena de texto. 
-//     // Para solucionar estos problemas tenemos los préstamos, tal y como ha quedado el código.
+// let s1 =  String::from("Bolero - Maurice Ravel");
+// let s2 = s1.clone();
+// f(s2);ste 
+// Este código daría error si al hacer la llamada a la función f hemos transferido la propiedad 
+// del valor de s1 a f. Por ello, cuando intentamos hacer el print no vamos a poder ya que 
+// s1 ya no es dueña de la cadena de texto. 
+// Para solucionar estos problemas tenemos los préstamos, tal y como ha quedado el código.
 // }
 
     
@@ -641,25 +641,35 @@ fn main() {
 
 //  📌  Structs, traits y POO en Rust
 
-//  📌 ESTRUCTURAS son datos agrupados por clave-valor.
+//  📌 ESTRUCTURAS 
+// Las estructuras son un tipo de dato que permite agrupar varios valores en un solo objeto.
+// Se definen con la palabra clave "struct" seguida del nombre de la estructura y las claves y tipos de datos.
+// Se pueden crear instancias de una estructura con la palabra clave "let" seguida del nombre de la estructura y los valores.
+// Se pueden acceder a los valores de una estructura con el operador "." seguido del nombre del valor.
+// Se pueden modificar los valores de una estructura con la palabra clave "mut".
+// Se pueden crear métodos para una estructura con la palabra clave "impl" seguida del nombre de la estructura y los métodos.
 
-//     #[derive(Copy,Clone)]
-//     struct Punto{
-//     x: i32,
-//     y: i32
-// }
+#[allow(dead_code)] 
+#[derive(Copy,Clone)]
 
-//     struct Rectangulo{
-//     origen: Punto,
-//     ancho: i32,
-//     alto: i32
-// }  
-//     let p = Punto {x: 50, y: 50};
-//         println!("20 - Punto X: {}",p.x);
+struct Punto {
+x: i32,
+y: i32
+}
+#[allow(dead_code)]
 
+    struct Rectangulo {
+    origen: Punto,
+    ancho: i32,
+    alto: i32
+}  
+fn main() {
+    let p = Punto {x: 50, y: 50};
+        println!("20 - Punto X: {}",p.x);
+}
 //  📌 
 
-    
+
 // #[derive(Copy,Clone)]
 //     struct Punto{
 //     x: i32,
@@ -711,7 +721,8 @@ fn main() {
 // 📌 APUNTES Y NOTAS VARIAS
 
 // #[allow(dead_code)] // suprime las advertencias de código no utilizado
-// # [ no_mangle ] // evita que el compilador cambie el nombre de la función, cuando optimice el código.
+// #[ no_mangle ] // evita que el compilador cambie el nombre de la función, cuando optimice el código.
+// #[derive(Debug)] // permite imprimir la estructura con println!("{:?}", estructura)
 // Guión bajo (underscores) como sufijo de las variables (delante de ellas) para que no salga la advierta de "variable no utilizada
 // Es una convención en Rust utilizar snake_case para: variables, funciones y archivos
 // SCREAMING_SNAKE_CASE -> para constantes y estáticas, en mayusculas y guiones bajos
