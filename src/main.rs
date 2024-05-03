@@ -475,37 +475,61 @@
 // Diferencia entre "struct" y "enum", las estructuras permiten definir un tipo de dato con varios campos (Representar una cosa Y otra cosa a la vez), mientras que las enumeraciones permiten definir un tipo de dato con un número limitado de valores posibles, (Representar una cosa O alguna cosa diferente).
 
 // 📌 ENUM - ejemplo de enum
-#[derive(Debug)]
-#[allow(dead_code)]
+// #[derive(Debug)]
+// #[allow(dead_code)]
 
 // Según la hora del día, el cielo puede tener el sol o las estrellas, creamos una enumeración con dos valores posibles.
 // Creamos una función que "devuelve el estado del cielo" según la hora del día, la cual se la pasamos en el argumento de la función, la llamamos "tiempo" y a traves de match devolvemos el valor del enum. que corresponda según el rango de horas.
 // Para llamar a un valor del enum se usa "::" después del nombre del enum y el valor.
 // match es una expresión que permite comparar un valor con una serie de patrones y ejecutar un bloque de código dependiendo de qué patrón coincida, en este caso, el valor de la variable "tiempo" con los valores de la enumeración.
 // la flecha después del patron de rango indica que se devuelva el valor del enum que corresponda.
+// 📌 ENUM
 
-enum CosasEnElCielo {   // Enumeración con dos valores posibles
-    Sol(String),                // Representa el dia -> Sol
-    Estrellas(String),          // Representa la noche -> Estrellas
-}
- fn crear_estado_en_el_cielo(tiempo:i32) -> CosasEnElCielo { // Función que "devuelve" el estado del cielo
-    match tiempo {                                           // Según la hora del día a la variable "tiempo"
-        6..=8 => CosasEnElCielo::Sol(String::from("Puedo ver el Sol")),
-        _ => CosasEnElCielo::Estrellas(String::from("Puedo ver las estrellas")),
-    } 
-}
-fn comprobar_el_cielo(estado: &CosasEnElCielo) {
-    match estado {
-        CosasEnElCielo::Sol(a) => println!("{}",a),
-        CosasEnElCielo::Estrellas(b) => println!("{}",b),
-    }
-}
+// enum CosasEnElCielo {   // Enumeración con dos valores posibles
+//     Sol(String),                // Representa el dia -> Sol
+//     Estrellas(String),          // Representa la noche -> Estrellas
+// }
+//  fn crear_estado_en_el_cielo(tiempo:i32) -> CosasEnElCielo { // Función que "devuelve" el estado del cielo
+//     match tiempo {                                           // Según la hora del día a la variable "tiempo"
+//         6..=8 => CosasEnElCielo::Sol(String::from("Puedo ver el Sol")),
+//         _ => CosasEnElCielo::Estrellas(String::from("Puedo ver las estrellas")),
+//     } 
+// }
+// fn comprobar_el_cielo(estado: &CosasEnElCielo) {
+//     match estado {
+//         CosasEnElCielo::Sol(a) => println!("{}",a),
+//         CosasEnElCielo::Estrellas(b) => println!("{}",b),
+//     }
+// }
+// fn main() {
+//     let tiempo = 7; // "Ahora son las 8" creamos variable "tiempo" con valor 8 para pasar a la función "estado_en_el_cielo".
+//     let estado = crear_estado_en_el_cielo(tiempo);
+//     comprobar_el_cielo(&estado);   
+// }
+
+// 📌 BUCLES - Podemos crear un bucle con loop hacer que continue hasta que queramos que se detenga con "break", por ejemplo comparando un valor
+// fn main() {
+//     loop {
+//         // Este bucle se ejecuta indefinidamente.
+//     }
+// } 
+
+// 📌 BUCLES
 fn main() {
-    let tiempo = 7; // "Ahora son las 8" creamos variable "tiempo" con valor 8 para pasar a la función "estado_en_el_cielo".
-    let estado = crear_estado_en_el_cielo(tiempo);
-    comprobar_el_cielo(&estado);
+    let mut contador = 0;
+    loop {
+        contador += 1;
+        println!("Contador: {}", contador);
+        if contador == 10 {
+            println!("¡Hemos llegado a 10!");
+            break;
+        }
+    }
     
 }
+
+
+
 
     
  
