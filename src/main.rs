@@ -13,9 +13,10 @@
 //     let a = 13u8; // tipo de dato "u8" sin signo de 8 bits
 //     let b = 7u32; // tipo de dato "u32" sin signo de 32 bits
 //     let c = a as u32 + b; // convertimos "a" a "u32" y sumamos "b"
-//     println!("0 - a convertido a u32: {}", c); // imprimimos el resultado
-// otro ejemplo de casting de tipo integer -> tipo  char, tipo booleano -> tipo integer. 
-//     let a = 65u8; // para convertirlo a char debe ser un integer de 8 bits sin signo, si fuera u32 deberíamos convertirlo antes a u8.
+//     println!("variable \"a\" convertido a u32: {}", c); // imprimimos el resultado
+//     // otro ejemplo de casting de tipo integer -> tipo  char, tipo booleano -> tipo integer. 
+//     let a = 65u8; // para convertirlo a char debe ser un integer de 8 bits sin signo, 
+//                   // si fuera u32 deberíamos convertirlo antes a u8.
 //     let falso: bool = false; // tipo de dato "bool" falso.
 //     println!("0 - {} -> {}", a as char, falso as u8); // imprimimos el resultado.
 // }
@@ -38,12 +39,12 @@
 // ejemplo:. let b = 24_u8; // tipo de dato "u8" sin signo de 8 bits.
 // el guión bajo no afecta al valor, solo es para hacerlo más legible, se pueden poner varios guiones bajos.
  
-// 01 📌 MACRO "println!" Display the message "Hello, world!"
+// 01 📌 MACRO "println!" - Display the message "Hello, world!"
 // fn main() { 
 //     println!("1 - Hello, world!");
 // }
 
-// 0a 📌 MACRO "format!" para crear un string
+// 01 📌 MACRO "format!" - Para crear un String
 // fn main() {
 //     let s = format!(" Hello, world!");
 //     println!("{}", s);
@@ -51,12 +52,12 @@
 //     let nombre = "Javier";
 //     let apellido = "García";
 //     let ciudad = "Elche";
-//     let imprimir = format!("1 - Hola, soy {} {} y vivo en {}", nombre, apellido, ciudad);
-//     print!("{}", imprimir);
+//     let imprimir = format!("1 - Hola, soy {} {} y vivo en {} ", nombre, apellido, ciudad);
+//     println!("{}", imprimir);
 //     // Otra forma de construir un string con .into() y .to_string()
 //     let mi_string = "Hola, mundo".to_string();
 //     let mi_string2: String = "Hola, mundo".into(); // de esta forma se debe especificar el tipo de dato.
-//     print!("mi_string: {} y mi_string2: {}", mi_string, mi_string2);
+//     println!("mi_string: {} y mi_string2: {}", mi_string, mi_string2);
 // }
 
 // 01 📌 Pasar argumentos a la macro println!() entre corchetes "brakes"
@@ -72,14 +73,14 @@
     // println!("Valor con variable a: {}", a); // imprimir variable "a"
 // }
 
-// 01 📌 Imprimir valor pasado por función =========================================================
+// 01 📌 Imprimir valor pasado por función 
 // fn main () {
 //     println!("Hola número: {}", numero());
 // } 
 // fn numero() -> i32 {
-//     42 // ojo devuelve un valor de tipo i32 si no lleva punto y coma, con ella  da error
+//     42 // ojo devuelve un valor de tipo i32 si no lleva punto y coma, con ella daría error
 // }
-// ========================================================================================
+// ==========================================================================================
 
 // 01 📌 VARIABLES
 // Las variables existen dentro ed un bloque de código, se declaran con "let" y se pueden reasignar, pero desaparecen al salir del bloque, ejemplo:. la linea de impresión de "b" da error porque no existe fuera del bloque
@@ -94,7 +95,8 @@
 
 // 01 📌  MÁS SOBRE LA IMPRESIÓN
 // "#r" antepuesto ala variable le permite utilizar nombres reservados, ej, como let, fn, struct, etc.
-// "#r", a veces se necesita imprimir muchas " y caracteres de escape, para ello se usa al comienzo "#r" antes de las primeras comillas
+// "#r", a veces se necesita imprimir muchas " y caracteres de escape,
+// para ello se usa al comienzo "#r" antes de las primeras comillas 
 // Lo siguiente imprime los códigos ASCII de todas las letras a imprimir, tienen que ser solo vocales y no llevar tilde.
 //  fn main() {
 //     println!("{:?}", b"Esto es un texto"); // imprime los códigos ASCII de todas las letras a imprimir.
@@ -107,7 +109,6 @@
 //     println!("1 - Ciudad: {ciudad}, País: {pais}, Provincia: {provincia} Este repite ciudad -> {ciudad}");
 // }  
 
- 
 // 01 📌 Usar bloque de código para devolver un valor, devolución sin punto y coma, de lo contrario devolvería nada "()"
 // fn main() {
 //     let mi_numero = {
@@ -158,7 +159,6 @@
 //     let _x: u32 = 42; // integer de 32 bits sin signo
 //     let url: String = String::from("http://desarrollosdigitales.info"); // tipo "String"
 //     let a_url: &str = "http://desarrollosdigitales.info"; // tipo texto "&str"
-
 //     println!("5 - Esto es un String: {}", url);
 //     println!("5 - Esto es un Texto &str: {}", a_url);
 // }
@@ -184,7 +184,6 @@
 // 02 📌 SHADOWING, OCULTACIÓN
 // Recordamos que el ocultamiento de variables no destruye la variable anterior, solo la bloquea, la oculta, "shadowing", con el uso de referencias se puede acceder a la variable anterior.
 // fn main() {
-
 //     let pais = String::from("España"); // variable "pais" con valor "España"
 //     let pais_ref = &pais; // variable "pais_ref" con referencia a "pais"
 //     let pais = 8; // redefinimos la variable "pais" con el valor 8
@@ -198,7 +197,6 @@
 // El puntero que se ve en rust se denomina "referencia" y se representa con "&", ej:. &variable
 // &variable1, es una referencia a la variable, no es el valor en sí, es una referencia a la dirección de memoria
 // esto significa que variable1 sigue siendo la dueña del valor, solo lo ha prestado y entrega una referencia
-
 // ejemplo de referencia: &variable1, es una referencia a la variable, no es el valor en sí, es una referencia a la dirección de memoria
 // fn main() {
 //     let pais = "España"; // variable "pais" con valor "España"
@@ -209,7 +207,6 @@
 //     println!("{}", ref_dos);
 //     println!("{}", ref_tres);
 // }
-
 
 // 02 📌 MÁS SOBRE REFERENCIAS
 // Como protege rust el acceso a zonas de memoria erróneas, no permite el acceso a zonas de memoria que no le pertenecen, un ejemplo.
@@ -235,7 +232,7 @@
 //     let num_modify = &mi_numero;
 //     println!("{}", num_modify);
 // }
-
+// 02 📌  REFERENCIAS MUTABLES
 // Se dispone de {p} para imprimir la dirección de memoria de una variable, ej:. "{:p}"
 // fn main() {
 //     let a = 42; // variable "a" con valor 42
@@ -253,11 +250,10 @@
 // fn main() {
 //     let pais = String::from("España"); // se crea la variable "pais" con valor "España"
 //     print_pais(pais); // se llama a la función "print_pais" con la variable "pais"
-//     // print_pais(pais); // ⚠️  ERROR, no se puede usar una variable que ya no es dueña del valor
-
-//     // Al pasar la variable "pais" a la función "print_pais" se transfiere la propiedad del valor a la función y su nuevo dueño es "pais_nombre"
+// print_pais(pais); // ⚠️  ERROR, no se puede usar una variable que ya no es dueña del valor.
+// Al pasar la variable "pais" a la función "print_pais" se transfiere la propiedad del valor.
+// a la función, por lo que la variable "pais" ya no es dueña del valor.
 // } 
-
 // Es mejor evitar que la función se apropie del valor, para ello se pueden pasar referencias (prestamos los valores) a la función, ej:. "&String"  
 // fn print_pais(pais_nombre: &String) {
 //     println!("{}", pais_nombre);
@@ -266,15 +262,13 @@
 //     let pais = String::from("España"); // se crea la variable "pais" con valor "España"
 //     print_pais(&pais); // se llama a la función "print_pais" con la variable "pais"
 //     print_pais(&pais); // 😀 ahora si funciona, se puede usar la variable "pais" en varias funciones
-//     println!("{}", pais); // comprobamos que la variable "pais" sigue siendo dueña del valor.
-    
+//     println!("{}", pais); // comprobamos que la variable "pais" sigue siendo dueña del valor.  
 // } 
 
 // 📌 COPIA 
 // Rust tiene una característica especial para los tipos de datos primitivos, la trait "Copy", que permite que los valores se copien en lugar de moverse.
 // Son valores de tamañol fijo, conocido y pequeño que se almacenan en el stack (enteros,flotantes y char), no en el heap, por lo que son rápidos de copiar y no influye que existan varias copias de lo mismo.
 // Pueden copiarse cuando se pasan por parametro a una función, se asignan a otra variable o se devuelven de una función.
-
 // fn print_number(number: i32) { // Esta función no devuelve nada
 //     // Si el  número no se copiara, se movería y no se podría usar, la función seria su dueña.                   
 // println!("{}", number);
@@ -288,7 +282,6 @@
 // 📌 CLONE
 // El tipo String, no implementa la característica copiar, por lo que el valor de la variable se mueve al pasarla la primera vez, para poder copiarla se usa la trait "Clone".
 // Lo ideal es utilizar la referencia es más eficiente porque clone copia el valor gastando más memoria y la referencia solo el puntero. 
-
 // fn print_country(country_name: String) { // Esta función no devuelve nada
 //     println!("{}", country_name);
 //     }
@@ -314,27 +307,24 @@
 // Los rangos son inclusivos en el primer número y exclusivos en el segundo, por lo que [2..5] obtiene los elementos 2, 3 y 4.
 // Para que se incluya el último número se puede usar de esta forma [0..=10].
 // Para que se incluya el último número, se puede usar [1..] y para que se incluya el primero, se puede usar [..5].
-
 // fn main() {
 //     let numeros: [i32;10] = [1,2,3,4,5,6,7,8,9,10]; // array de 3 elementos de tipo i32
 //     println!("Todo el array: {:?}", numeros); // imprimimos el slice
-
 //     let _slice_1_al_3 = &numeros[1..3]; // obtebemos indices 1 al 2
 //     let _slice_todos = &numeros[1..]; // obtenemos indices 1 al 9 o final
 //     let _slice_1_al_4 = &numeros[..10]; // obtenemos indices 0 al 9
-
 //     println!("Slice de 1 al 3: {:?}", _slice_1_al_3); // imprimimos el slice
 //     println!("Slice de 1 al final: {:?}", _slice_todos); // imprimimos el slice
 //     println!("Slice de 1 al 4: {:?}", _slice_1_al_4); // imprimimos el slice
 // }
 
 //  📌 ARRAYS
-
 // fn main() {
 //     let números: [i32;3] = [1,2,3];
 //     println!("Array {:?}", números);
 // }
- 
+
+//  📌 ARRAYS
 // fn main() {
 //     let mut notas_array: [u32; 5] = [0; 5];  // Array con tamaño fijo de 5 elementos e inicializadas las 5 posiciones con ceros
 //     let meses = ["Enero, febrero, marzo, abril, mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"]; // Array de tipo String
@@ -345,7 +335,6 @@
 // }
 
 // 📌 VECTORES 
-
 // Los vectores son estructuras de datos dinámicas que permiten almacenar más de un valor en un solo lugar, colecciones de longitud variable de elementos del mismo tipo.
 // Se pueden añadir o quitar elementos, pero no se pueden mezclar tipos de datos.
 // Los vectores son más flexibles que los arrays, pero son más lentos y ocupan más memoria.
@@ -367,18 +356,15 @@
 // Los vectores se pueden convertir en strings con el método "join" y en mayúsculas con el método "to_uppercase".
 // Si se conoce el número de elementos que va a contener el vector, se puede usar la macro "with_capacity" para reservar memoria, Vec::with_capacity(10), para que funcione más rápido.
 
-
 // 📌 VECTORES
 // fn main() {
 //     let producto1 = String::from("Agua");
 //     let producto2 = String::from("Leche");
-
 //     let mut mi_vector = Vec::new();
 //     // Si se compilara este prgrama hasta aquí el compilador daría error.
 //     // ya que no conoce el tipo de dato que se va a almacenar en el vector.
 //     mi_vector.push(producto1); // Ahora si lo conoce, es de tipo String.
 //     mi_vector.push(producto2);
-
 //     print!("{:?}", mi_vector); // imprime los elementos del vector.
 // }
 // En lugar de usar .push() para deducir el tipo de elementos que contiene se puede especificar el tipo de dato.
@@ -439,15 +425,18 @@
 //     }
 // }
 
-// 📌 TUPLAS y desestructuración
+//  📌 TUPLAS Y DESESTRUCTURACIÓN, son como una estructura sin nombre de campos, una especie de array donde 
+//  cada elemento puede ser de un tipo diferente pero especificado de antemano
 // fn main () {
-//     let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
-//     let (random, z_name, has_beers) = tupla; // Desestructuramos la tupla y obtenemos 3 variables
-//Si se necesita desestructurar un conjunto de elementos, pero no se quieren todos, se puede utilizar _.
-//     // Imprimimos las variables obtenidas
-//     println!("\n{}", random);
-//     println!("{}", z_name);
-//     println!("{}\n", has_beers);
+    // let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
+    // let (random, z_name, has_beers) = tupla; // Desestructuramos la tupla y obtenemos 3 variables
+    // // Imprimimos las variables obtenidas
+    // println!("\n10 - {}", random);
+    // println!("11 - {}", z_name);
+    // println!("12 - {}\n", has_beers);
+// } convertido a u32: {}", c);
+    // let t = true;
+    // println!("{}", t as u8);
 // }
 
 // 📌 TUPLAS
@@ -477,14 +466,13 @@
 // 📌 ENUM - ejemplo de enum
 // #[derive(Debug)]
 // #[allow(dead_code)]
-
 // Según la hora del día, el cielo puede tener el sol o las estrellas, creamos una enumeración con dos valores posibles.
 // Creamos una función que "devuelve el estado del cielo" según la hora del día, la cual se la pasamos en el argumento de la función, la llamamos "tiempo" y a traves de match devolvemos el valor del enum. que corresponda según el rango de horas.
 // Para llamar a un valor del enum se usa "::" después del nombre del enum y el valor.
 // match es una expresión que permite comparar un valor con una serie de patrones y ejecutar un bloque de código dependiendo de qué patrón coincida, en este caso, el valor de la variable "tiempo" con los valores de la enumeración.
 // la flecha después del patron de rango indica que se devuelva el valor del enum que corresponda.
-// 📌 ENUM
 
+// 📌 ENUM
 // enum CosasEnElCielo {   // Enumeración con dos valores posibles
 //     Sol(String),                // Representa el dia -> Sol
 //     Estrellas(String),          // Representa la noche -> Estrellas
@@ -510,23 +498,190 @@
 // 📌 BUCLES - Podemos crear un bucle con loop hacer que continue hasta que queramos que se detenga con "break", por ejemplo comparando un valor
 // fn main() {
 //     loop {
-//         // Este bucle se ejecuta indefinidamente.
+//         break; // Este bucle se ejecuta indefinidamente si no se le pone un "break".
 //     }
 // } 
 
 // 📌 BUCLES
-fn main() {
-    let mut contador = 0;
-    loop {
-        contador += 1;
-        println!("Contador: {}", contador);
-        if contador == 10 {
-            println!("¡Hemos llegado a 10!");
-            break;
-        }
-    }
-    
+// fn main() {
+//     let mut contador = 0; // inicializamos la variable "contador" con valor 0.
+//     loop {                // creamos un bucle "loop".
+//         contador += 1;    // incrementamos el valor de "contador" en 1.
+//         println!("Contador: {}", contador); // imprimimos el valor de "contador".
+//         if contador == 10 { // si el valor de "contador" es igual a 10.
+//             println!("¡Hemos llegado a 10!"); // imprimimos el mensaje.
+//             break; // salimos del bucle.
+//         }
+//     }
+// }
+
+// 📌 BUCLES ANIDADOS - Si se inserta un bucle dentro de otro es posible darles nombre para indicar a Rust a qué bucle salir cuando se ejecuta una sentencia break. 
+// fn main() {
+//     let mut contador = 0; // inicializamos la variable "contador" con valor 0.
+//     let mut contador2 = 0; // inicializamos la variable "contador2" con valor 0.
+//     println!("Entro en el primer bucle");
+//     'primer_bucle: loop {
+//         // Damos nombre de esta forma 'nombre_bucle: loop.
+//         contador += 1; // incrementamos el valor de "contador" en 1.
+//         println!("El contador es ahora: {}", contador);
+//         if contador > 9 {
+//             // Inicia un segundo bucle
+//             'segundo_bucle: loop {
+//                 contador2 += 1; // incrementamos el valor de "contador2" en 1.
+//                 if contador2 == 3 {
+//                     break 'primer_bucle; // Salimos del primer bucle para saliar del programa.
+//                 }
+//             }         
+//         } 
+//     } 
+// }  
+
+// 📌 BUCLES - While
+// Este bucle se ejecuta mientras la condición sea verdadera " TRUE", si la condición es falsa "FALSE" no se ejecuta.
+// fn main() {
+//     let mut contador = 0; // inicializamos la variable "contador" con valor 0.
+//     while contador < 10 {
+//         contador += 1; // incrementamos el valor de "contador" en 1.
+//         println!("Contador: {}", contador); // imprimimos el valor de "contador".
+//     }
+// }
+
+// 📌 BUCLES - for
+// El bucle "for" repite la ejecución un número determinado de veces, también se utiliza para recorrer una colección de elementos, como un array o un vector.
+// // ".." y "..=", crea un rango de valores, el primero es excluyente ("0..5", rrecorre el 0,1,2,3,4) y el segundo es incluyente ("0..=5", recorre el 0,1,2,3,4,5).
+// fn main() {
+//     for contador in 0..5 {
+//         println!("Contador excluyente: {}", contador);
+//     }
+//     println!(" "); // imprime un espacio en blanco
+//     for contador in 0..=5 {
+//         println!("Contador incluyente: {}", contador);
+//         if contador == 2 {
+//             break; // Salimos del bucle y devolvemos el valor de "contador".
+//         }
+//     }
+// }
+// En los bucles for se puede usar "continue" para saltar a la siguiente iteración y "break" para salir del bucle.
+// En los bucles for se crea una variable a la que le asignamos el valor de cada iteración, en este caso "contador". si no se necesita la variable se puede usar "_" para indicar que no se va a usar.
+
+// 📌 BUCLES - loop con break y devolución de valor.
+// Break tambien se puede usar para devolver un valor, para ello escribimos "break valor" y el valor o variable que queremos devolver.
+// 📌 
+// fn main() {
+//     let mut contador = 5;
+//     let mi_numero = loop {
+//         contador +=1;
+//         if contador % 53 == 3 {
+//             break contador;
+//         }
+//     };
+//     println!("{}", mi_numero);
+// }
+
+// 📌 BUCLES - for (Comprobación de colores con un bucle)
+// fn match_colores(rbg: (i32, i32, i32)) {
+//     println!("Comparación de un color con {} rojo, {} azul, y {} verde:", rbg.0, rbg.1, rbg.2);
+//     let new_vec = vec![(rbg.0, "rojo"), (rbg.1, "azul"), (rbg.2, "verde")]; // Coloca los colores en un vec. Dentro son tuplas con los nombres de los colores
+//     let mut todos_tienen_al_menos_10 = true; // Comienza a verdadero y se cambia a falso si algún compomente no tiene 10
+//     for item in new_vec { // cada item es una tupla con un número y un nombre de color.
+//         if item.0 < 10 { // item.0 es el número, si es menor que 10
+//             todos_tienen_al_menos_10 = false; // Ahora es false
+//             println!("No mucho {}.", item.1) // item.1 es el color, se imprime el nombre del color.
+//         }
+//     }
+//     if todos_tienen_al_menos_10 { // Comprueba si es verdadero e imprime si lo es
+//         println!("Cada compomente de color tiene al menos 10.")
+//     }
+//     println!(); // Añade una línea vacía para separar
+// }
+
+// 📌 BUCLES -
+// fn main() {
+//     let first = (200, 20,0);
+//     let second = (50, 50, 50);
+//     let third = (200, 50, 0);
+//     match_colores(first);
+//     match_colores(second);
+//     match_colores(third);
+// }
+
+// 📌  IMPLEMENTACIÓN - Implementaciones de funciones asociadas a los tipos definidos como tal.
+// Se utiliza el bloque "impl" para implementar funciones asociadas a un tipo de dato definido por el usuario
+// como son "struct" y "enum".
+// En un bloque "impl" se pueden definir dos tipos diferentes de métodos:
+// MÉTODOS: que toman "self" (o &self o &mut self) como primer argumento, llamados métodos de instancia.
+// Estos métodos utilizan un punto sobre una variable del tipo struct o enum para llamar a la función, 
+// ej:. "mi_instancia.mi_metodo()", x.clone(), et.
+// FUNCIONES ASOCIADAS al tipo: que no toman "self" como primer parámetro, en otros lenguajes se llaman métodos estáticos.
+// funciones relacionadas con el tipo de datos pero que no necesitan una instancia del tipo para funcionar.
+// Se llaman con el nombre del tipo seguido de dos puntos dobles "::" y el nombre de la función, 
+// ej:. "MiTipo::mi_funcion()", String::from(), etc.
+// Ejemplo de implimentación para crear animales y los imprime.
+// para poder usar {:?} al imprimir un tipo de dato personalizado, se debe añadir 
+// #[derive(Debug)] antes de la definición del tipo, a esto se le denomina atributo
+//
+#[derive(Debug)]
+struct Animal {   // Definimos un tipo de dato "Animal" con dos campos.
+    edad: u8,
+    tipo_animal: TipoAnimal,
 }
+
+#[derive(Debug)]
+enum TipoAnimal {
+    Gato,
+    Perro,
+}
+
+impl Animal {
+    fn new() -> Self {
+        // Self, aquí se refiere a la estructura Animal
+        // También se puede usar "Animal" en lugar de "Self"
+        
+        Self {
+            // Cuando se escriba Animal::new(), se creará un gato de 10 años.
+            edad: 10,
+            tipo_animal: TipoAnimal::Gato,
+        }
+
+    }
+
+
+    fn cambiar_a_perro(&mut self) {
+      // como está dentro de Animal, &mut self significa &mut Animal.
+      // Usa .cambiar_a_perro() para convertir el gato en un perro.
+      // con &mut self, se puede modificar el valor de la estructura.                                                
+        println!("!Cambiando el animal a perro¡");
+        self.tipo_animal = TipoAnimal::Perro;
+    }
+    fn cambiar_a_gato(&mut self) {
+      // como está dentro de Animal, &mut self significa &mut Animal.
+      // Usa .cambiar_a_gato() para convertir el perro en un gato.
+      // con &mut self, se puede modificar el valor de la estructura.                                                
+      println!("!Cambiando el animal a gato");
+      self.tipo_animal = TipoAnimal::Gato;
+    }
+    fn comprobar_tipo(&self) {
+       // se lee a sí mismo self, por lo que no se puede modificar.
+       match self.tipo_animal {
+        TipoAnimal::Perro => println!("Es un perro"),
+        TipoAnimal::Gato => println!("Es un gato"),
+       } 
+    }
+}
+
+fn main() {
+    let mut animal_nuevo = Animal::new();
+    animal_nuevo.comprobar_tipo();
+    animal_nuevo.cambiar_a_perro();
+    animal_nuevo.comprobar_tipo();
+    animal_nuevo.cambiar_a_gato();
+    animal_nuevo.comprobar_tipo();
+}
+
+
+
+
+
 
 
 
@@ -551,7 +706,6 @@ fn main() {
 // }
 
 //  📌 CONSTANTES y casting ("as")
-
 // fn main () {
 //     const CONSTANTE: f64 = 3.14;   // constante valor para PI, SCREAMING_SNAKE_CASE para las constantes
 //     let xa = 42;       // variable con asignación de tipo y valor
@@ -559,21 +713,6 @@ fn main() {
 //                                     // y al mismo tiempo estamos haciendo "shadowing" al  redefinir la variable "xa"
 //     println!("9 - El valor de xa es: {}", xa);
 // }
-
-//  📌 TUPLAS Y DESESTRUCTURACIÓN, son como una estructura sin nombre de campos, una especie de array donde 
-//  cada elemento puede ser de un tipo diferente pero especificado de antemano
-// fn main () {
-    // let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
-    // let (random, z_name, has_beers) = tupla; // Desestructuramos la tupla y obtenemos 3 variables
-    // // Imprimimos las variables obtenidas
-    // println!("\n10 - {}", random);
-    // println!("11 - {}", z_name);
-    // println!("12 - {}\n", has_beers);
-// } convertido a u32: {}", c);
-    // let t = true;
-    // println!("{}", t as u8);
-// }
-
     
 //  📌 EXPRESIONES AVANZADAS con variables "let", expresión condicional con "if, else", 
 //   en Rust si algo no lleva punto y coma se vuelve Y evalúa como una expresión
@@ -590,7 +729,6 @@ fn main() {
 // }
 
 //  📌 EXPRESIONES AVANZADAS con variables "let", una operación de "a*b"
-    
 // fn main () {
 //     let u = 2;
 //     let _xa = u+age;                // el valor de "u" se suma al de "age"
@@ -638,7 +776,6 @@ fn main() {
 
 // 📌 IMPLICACIONES - Pasar una variable tal cual a una función si no es del tipo Copy 
 // implica que perdemos el acceso a ese valor!
-    
 // fn main() {
     
 // let s1 =  String::from("Bolero - Maurice Ravel");
