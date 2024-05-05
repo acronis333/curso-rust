@@ -606,11 +606,11 @@
 // }
 
 // 📌  IMPLEMENTACIÓN - Implementaciones de funciones asociadas a los tipos definidos como tal.
-// Se utiliza el bloque "impl" para implementar funciones asociadas a un tipo de dato definido por el usuario
+// Se utiliza el bloque "impl" para "implementar funciones asociadas" a un tipo de dato definido por el usuario
 // como son "struct" y "enum".
-// En un bloque "impl" se pueden definir dos tipos diferentes de métodos:
+// En un bloque "impl" se pueden definir 2 tipos diferentes de métodos:
 // MÉTODOS: que toman "self" (o &self o &mut self) como primer argumento, llamados métodos de instancia.
-// Estos métodos utilizan un punto sobre una variable del tipo struct o enum para llamar a la función, 
+// Estos métodos utilizan un punto "." sobre una variable del tipo struct o enum para llamar a la función, 
 // ej:. "mi_instancia.mi_metodo()", x.clone(), et.
 // FUNCIONES ASOCIADAS al tipo: que no toman "self" como primer parámetro, en otros lenguajes se llaman métodos estáticos.
 // funciones relacionadas con el tipo de datos pero que no necesitan una instancia del tipo para funcionar.
@@ -620,75 +620,255 @@
 // para poder usar {:?} al imprimir un tipo de dato personalizado, se debe añadir 
 // #[derive(Debug)] antes de la definición del tipo, a esto se le denomina atributo
 //
-#[derive(Debug)]
-struct Animal {   // Definimos un tipo de dato "Animal" con dos campos.
-    edad: u8,
-    tipo_animal: TipoAnimal,
-}
+// #[derive(Debug)]
+// struct Animal {   // Definimos un tipo de dato "Animal" con dos campos.
+//     edad: u8,
+//     tipo_animal: TipoAnimal,
+// }
+// #[derive(Debug)]
+// enum TipoAnimal {
+//     Gato,
+//     Perro,
+// }
+// impl Animal {
+//     fn new() -> Self {  // creamos una función asociada al tipo "Animal" que devuelve un "Animal", se refiere a la estructura Animal
+//         // También se puede usar "Animal" en lugar de "Self"
+//         Self {
+//             // Cuandfn main() {
+//     let mut animal_nuevo = Animal::new();
+//     animal_nuevo.comprobar_tipo();
+//     animal_nuevo.cambiar_a_perro();
+//     animal_nuevo.comprobar_tipo();
+//     animal_nuevo.cambiar_a_gato();
+//     animal_nuevo.comprobar_tipo();
+// }
+//     }
+//     fn cambiar_a_perro(&mut self) {
+//       // como está dentro de Animal, &mut self significa &mut Animal.
+//       // Usa .cambiar_a_perro() para convertir el gato en un perro.
+//       // con &mut self, se puede modificar el valor de la estructura.                                                
+//         println!("!Cambiando el animal a perro¡");
+//         self.tipo_animal = TipoAnimal::Perro;
+//     }
+//     fn cambiar_a_gato(&mut self) {
+//       // como está dentro de Animal, &mut self significa &mut Animal.
+//       // Usa .cambiar_a_gato() para convertir el perro en un gato.
+//       // con &mut self, se puede modificar el valor de la estructura.                                                
+//       println!("!Cambiando el animal a gato");
+//       self.tipo_animal = TipoAnimal::Gato;
+//     }
+//     fn comprobar_tipo(&self) {
+//        // se lee a sí mismo self, por lo que no se puede modificar.
+//        match self.tipo_animal {
+//         TipoAnimal::Perro => println!("Es un perro"),
+//         TipoAnimal::Gato => println!("Es un gato"),
+//        } 
+//     }
+// }
+// fn main() {
+//     let mut animal_nuevo = Animal::new();
+//     animal_nuevo.comprobar_tipo();
+//     animal_nuevo.cambiar_a_perro();
+//     animal_nuevo.comprobar_tipo();
+//     animal_nuevo.cambiar_a_gato();
+//     animal_nuevo.comprobar_tipo();
+// }
 
-#[derive(Debug)]
-enum TipoAnimal {
-    Gato,
-    Perro,
-}
+// 📌 impl - ejemplo de imnplementación de un struct un enum.
+// Crear un coche, con datos Marca, Modelo, Año
+// Cambiar de marca ese coche
+// Comprobar la marca de ese coche
+// Se debe recordar que Selg (el tipo Self) y self (la variable self) funcionan como abreviaturas del tipo que sea en cada momento.
+// #[allow(dead_code)] 
+// #[derive(Debug)]
+// struct Coche {      // Definimos una estructura con un tipo de dato "Coche" con tres campos.
+//     año: u16,
+//     modelo: String,
+//     marca_coche: MarcaCoche,
+// }
+// #[derive(Debug)]
+// #[allow(dead_code)] 
+// enum MarcaCoche {  // Definimos una enum con un tipo de dato "MarcaCoche" con tres valores posibles.
+//     Citroen,
+//     Nissan,
+//     Mercedes,
+// } 
+// impl Coche {
+//     fn new() -> Self {
+//         Self {
+//             marca_coche:MarcaCoche::Citroen,
+//             año: 1998,
+//             modelo: String::from("gti"),
+//         }
+//     }
+//     fn cambiar_marca_mercedes(&mut self) {
+//         println!("Cambiando la marca a Mercedes");
+//         self.marca_coche = MarcaCoche::Mercedes;
+//     }
+//     fn comprobar_marca_coche(&self) {
+//         match self.marca_coche {
+//             MarcaCoche::Citroen => println!("Es un Citroen"),
+//             MarcaCoche::Mercedes => println!("Es un Mercedes"),
+//             MarcaCoche::Nissan => println!("Es un Nissan"),
+//         }
+//     }
+// }
+// fn main() {
+//     let mut nuevo_coche1 = Coche::new();
+//     println!("{:?}",nuevo_coche1);
+//     nuevo_coche1.cambiar_marca_mercedes();
+//     nuevo_coche1.comprobar_marca_coche();
+// }
 
-impl Animal {
-    fn new() -> Self {
-        // Self, aquí se refiere a la estructura Animal
-        // También se puede usar "Animal" en lugar de "Self"
-        
-        Self {
-            // Cuando se escriba Animal::new(), se creará un gato de 10 años.
-            edad: 10,
-            tipo_animal: TipoAnimal::Gato,
-        }
+// 📌 impl - ejemplo de imnplementación de un enum.
+// enum Estado {
+//     Bueno,
+//     Malo,
+//     Somnoliente,
+// }
+// impl Estado {
+//     fn consultar(&self) {
+//         match self {
+//             Estado::Bueno => println !("Me siento bien"),
+//             Estado::Malo => println !("Eh, no me siento tan bien"),
+//             Estado::Somnoliente => println !("Necesito dormir ahora"),
+//         }
+//     }
+// }
+// fn main() {
+//     let mi_estado = Estado::Malo;
+//     mi_estado.consultar();
+// }
 
-    }
+// 📌 DESESTRUCTURAR - los valores de un struct
+// #[derive(Debug)]
+// #[allow(dead_code)]
+// struct Persona { // Crea una estructura simple para Persona
+//     nombre: String,
+//     real_nombre: String,
+//     altura: u8,
+//     felicidad: bool,
+// }
+// fn main() {
+//      let papa_doc = Persona { // se crea la variable papa_doc
+//          nombre: "Papa Doc".to_string(),
+//          real_nombre: "Javier".to_string(),
+//          altura: 170,
+//          felicidad: false,
+//      };
+//      println!("{:?}", papa_doc);
+//      // ahora desestructuramos a la variable papa_doc
+//      let Persona {
+//         nombre: a,
+//         real_nombre: b,
+//         altura: c,
+//         felicidad: d,
+//      } = papa_doc;
+//      println!("{} {} {} {}", a,b,c,d,);
+// } 
+
+// 📌 DESESTRUCTURAR
+// #[derive(Debug)]
+// #[allow(dead_code)]
+// struct Ciudad {
+//     nombre: String,
+//     nombre_antes: String,
+//     poblacion: u32,
+//     fecha_fundacion: u32,
+// }
+// impl Ciudad {
+//     fn new(nombre: String, nombre_antes: String, poblacion: u32, fecha_fundacion: u32) -> Self {
+//         Self {
+//             nombre,
+//             nombre_antes,
+//             poblacion,
+//             fecha_fundacion,
+//         }
+//     }
+// }
+// fn procesar_valores_ciudad(ciudad: &Ciudad) {
+//     let Ciudad {
+//         nombre,
+//         nombre_antes,
+//         ..
+//     } = ciudad;
+//         // se dispone de los valores separados
+//     let dos_nombres = vec![nombre, nombre_antes]; 
+//     println!("Los dos nombres de la ciudad son {:?}", dos_nombres);
+//     println!("{:?}{:?}", nombre_antes, nombre);
+// }
+// fn main() {
+//     let tallinn = Ciudad::new("Tallinn".to_string(), "Reval".to_string(),  426_538, 1219);
+//     procesar_valores_ciudad(&tallinn);
+//     let elche = Ciudad::new("Elche".to_string(), "Elx".to_string(), 300_000, 19_04_2024);
+//     println!("{:?}", elche);
+// }
+
+// 📌 REFERENCIAS Y EL OPERADOR PUNTO.
+// Las referencias son una forma de referenciar un valor sin tener que moverlo, se crean con "&" seguido del nombre de la variable.
+// Las referencias no pueden ser mutables y no se pueden modificar.
+// Para modificar una referencia se usa "&mut" seguido del nombre de la variable.
+// El operador punto "." se usa para acceder a los campos de una estructura o enum a través de una referencia.
+// Para acceder al valor de una referencia se usa "*" seguido del nombre de la referencia.
+// fn main() {
+//     let mi_numero = 9;           // Creamos una variable "mi_numero" con valor 9.
+//     let referencia = &mi_numero; // Creamos una referencia a "mi_numero".
+
+//     println!("{}", mi_numero == referencia); // ⚠️ Comparamos "mi_numero" con el valor de la referencia, pero da error, hay que utilizar "*" en la referencia.
+// }
+// fn main() {
+//     let mi_numero = 9;           // Creamos una variable "mi_numero" con valor 9.
+//     let referencia = &mi_numero; // Creamos una referencia a "mi_numero".
+
+//     println!("{}", mi_numero == *referencia); // 🎉 Comparamos "mi_numero" con el valor de la referencia, con el asterisco en la referencia si funciona.
+// }
+
+// 📌 REFERENCIAS Y EL OPERADOR PUNTO. 
+// struct Item { // Creamos una estructura "Item" con un campo "numero" de tipo u8.
+//     numero: u8,
+// }
+// fn main() {
+//     let item = Item { // Creamos una variable item con una estructura de tipo "Item" y  con un campo "numero" de tipo u8.
+//         numero: 8,    // tipo u8 Integer de 8 bits sin signo.
+//     };
+//     let referencia_numero = &item.numero; // el tipo de referencia_numero es &u8
+//     println!("{}", *referencia_numero == 8); // ⚠️ &u8 y u8 no se pueden comparar entre sí.
+// }
+
+// 📌 REFERENCIAS Y EL OPERADOR PUNTO. 
+// Con el operador punto se desreferencia automáticamente, por lo que no es necesario usar "*".
+// struct Item {
+//     numero: u8,
+// }
+// fn main() {
+//     let item = Item {
+//         numero: 8,
+//     };
+//     let referencia_item = &item; // el tipo de referencia_item es &Item
+//     println!("{}", referencia_item.numero == 8); // así sí funciona sin el asterisco.
+// }
+
+// 📌 GENÉRICOS
+// En las funciones genéricas se puede usar cualquier tipo de dato, se definen con "<T>" después del nombre de la función.
+// Se puede usar cualquier letra o palabra después de "<" y antes de ">" para definir un genérico.
+// Se puede usar un genérico en el nombre de la función, en los argumentos y en el tipo de retorno.
+
+// 📌 GENÉRICOS
+// En las funciones es necesario especificar el tipo de dato de cada parámetro de entrada y de salida.
+// fn devuelve_numero(numero: i32) -> i32 {
+//     println!("Ahí va tu numero.");
+//      numero
+// }
+// fn main() {
+//     let nuevo_numero = devuelve_numero(8);
+//     println!("El número es: {}", nuevo_numero);
+// }
+
+// 📌 GENÉRICOS                                       
 
 
-    fn cambiar_a_perro(&mut self) {
-      // como está dentro de Animal, &mut self significa &mut Animal.
-      // Usa .cambiar_a_perro() para convertir el gato en un perro.
-      // con &mut self, se puede modificar el valor de la estructura.                                                
-        println!("!Cambiando el animal a perro¡");
-        self.tipo_animal = TipoAnimal::Perro;
-    }
-    fn cambiar_a_gato(&mut self) {
-      // como está dentro de Animal, &mut self significa &mut Animal.
-      // Usa .cambiar_a_gato() para convertir el perro en un gato.
-      // con &mut self, se puede modificar el valor de la estructura.                                                
-      println!("!Cambiando el animal a gato");
-      self.tipo_animal = TipoAnimal::Gato;
-    }
-    fn comprobar_tipo(&self) {
-       // se lee a sí mismo self, por lo que no se puede modificar.
-       match self.tipo_animal {
-        TipoAnimal::Perro => println!("Es un perro"),
-        TipoAnimal::Gato => println!("Es un gato"),
-       } 
-    }
-}
-
-fn main() {
-    let mut animal_nuevo = Animal::new();
-    animal_nuevo.comprobar_tipo();
-    animal_nuevo.cambiar_a_perro();
-    animal_nuevo.comprobar_tipo();
-    animal_nuevo.cambiar_a_gato();
-    animal_nuevo.comprobar_tipo();
-}
 
 
-
-
-
-
-
-
-
-    
- 
- 
 
 
 
