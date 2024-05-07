@@ -850,7 +850,7 @@
 
 // 📌 GENÉRICOS
 // En las funciones genéricas se puede usar cualquier tipo de dato, se definen con "<T>" después del nombre de la función.
-// Se puede usar cualquier letra o palabra después de "<" y antes de ">" para definir un genérico.
+// Se puede usar cualquier letra o palabra después de "<" y antes de ">" para definir un genérico, normalmente se usa "T" para "Type" y "E" para "Element" y "K" para "Key"n y "V" para "Value" y "S" para "String"y "I" para "Integer".
 // Se puede usar un genérico en el nombre de la función, en los argumentos y en el tipo de retorno.
 
 // 📌 GENÉRICOS
@@ -864,7 +864,43 @@
 //     println!("El número es: {}", nuevo_numero);
 // }
 
-// 📌 GENÉRICOS                                       
+// 📌 GENÉRICOS   
+// Los generics data types son una forma de definir una función que puede aceptar cualquier tipo de dato y evita duplicar código.
+// fn devuelve_numero<T>(numero: T) -> T {
+//     println!("Ahí va tu numero.");
+//     numero
+// }
+// fn main() {
+//     let nuevo_numero = devuelveNumero(8);
+//     println!("El número es: {}", nuevo_numero);
+// }
+
+// 📌 GENÉRICOS
+// Vamos a procesar una lista de números y devolver un vector con los números que sean mayores a un determinado valor
+// fn numeros_mayores_a<T: std::cmp::PartialOrd>(lista: &Vec<T>, numero: T) -> Vec<&T> {
+//     let mut resultado: Vec<&T> = vec![];
+//     for elemento in lista {
+//         if *elemento > numero  {
+//             resultado.push(elemento);
+//         }
+        
+//     }
+//     resultado
+// }
+
+// fn main() {
+//     let lista = vec![10, 12, 5, 6, 8]; // variable lista con un vector de números
+//     let numero = 9;                    // variable numero con valor 9 para comparar con los números de la lista
+
+//     let resultado =  numeros_mayores_a(&lista, numero); // llamamos a la función "numeros_mayores_a" con la lista y el número y obtenemos el resultado.
+    
+//     println!("Los números mayores a {} son {:?}", numero, resultado); // resultado es un vector con los números mayores a 9, lo imprimimos.
+
+//     for elemento in resultado {        // creamos un bucle para imprimit los elementos del vector resultado.
+//         println!("número :{}", elemento);
+//     } 
+// } 
+
 
 
 
