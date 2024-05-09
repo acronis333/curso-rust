@@ -464,8 +464,6 @@
 // Diferencia entre "struct" y "enum", las estructuras permiten definir un tipo de dato con varios campos (Representar una cosa Y otra cosa a la vez), mientras que las enumeraciones permiten definir un tipo de dato con un número limitado de valores posibles, (Representar una cosa O alguna cosa diferente).
 
 // 📌 ENUM - ejemplo de enum
-// #[derive(Debug)]
-// #[allow(dead_code)]
 // Según la hora del día, el cielo puede tener el sol o las estrellas, creamos una enumeración con dos valores posibles.
 // Creamos una función que "devuelve el estado del cielo" según la hora del día, la cual se la pasamos en el argumento de la función, la llamamos "tiempo" y a traves de match devolvemos el valor del enum. que corresponda según el rango de horas.
 // Para llamar a un valor del enum se usa "::" después del nombre del enum y el valor.
@@ -473,6 +471,8 @@
 // la flecha después del patron de rango indica que se devuelva el valor del enum que corresponda.
 
 // 📌 ENUM
+// #[derive(Debug)]
+// #[allow(dead_code)]
 // enum CosasEnElCielo {   // Enumeración con dos valores posibles
 //     Sol(String),                // Representa el dia -> Sol
 //     Estrellas(String),          // Representa la noche -> Estrellas
@@ -740,6 +740,27 @@
 //     mi_estado.consultar();
 // }
 
+// 📌 IMPLEMENTACIÓN
+// #[derive(Debug)]
+// #[allow(dead_code)]
+// struct Rectangulo {
+//     ancho: i32,
+//     alto: i32,
+//  }
+// impl Rectangulo {
+//     fn area(&self) -> i32 {
+//         self.alto * self.ancho
+//     }
+// }
+// fn main() {
+//    let rectangulo1 = Rectangulo {
+//     ancho: 35,
+//     alto: 32,
+//    };
+//    let rect = rectangulo1.area();
+//    println!("{}", rect);
+// }
+
 // 📌 DESESTRUCTURAR - los valores de un struct
 // #[derive(Debug)]
 // #[allow(dead_code)]
@@ -871,7 +892,7 @@
 //     numero
 // }
 // fn main() {
-//     let nuevo_numero = devuelveNumero(8);
+//     let nuevo_numero = devuelve_numero(8);
 //     println!("El número es: {}", nuevo_numero);
 // }
 
@@ -883,23 +904,38 @@
 //         if *elemento > numero  {
 //             resultado.push(elemento);
 //         }
-        
 //     }
 //     resultado
 // }
-
 // fn main() {
 //     let lista = vec![10, 12, 5, 6, 8]; // variable lista con un vector de números
 //     let numero = 9;                    // variable numero con valor 9 para comparar con los números de la lista
-
 //     let resultado =  numeros_mayores_a(&lista, numero); // llamamos a la función "numeros_mayores_a" con la lista y el número y obtenemos el resultado.
-    
 //     println!("Los números mayores a {} son {:?}", numero, resultado); // resultado es un vector con los números mayores a 9, lo imprimimos.
-
 //     for elemento in resultado {        // creamos un bucle para imprimit los elementos del vector resultado.
 //         println!("número :{}", elemento);
 //     } 
 // } 
+
+// 📌 GENERICOS
+// fn mayor_i32(lista: &[i32]) -> i32 {
+//     let mut mayor = lista[0];
+//     for &item in lista {
+//         if item > mayor {
+//             mayor = item;
+//         }
+//     }
+//     mayor
+// }
+// fn main() {
+//     let lista_numeros = vec![20,45, 77, 13,66];
+//     let resultado = mayor_i32(&lista_numeros);
+//     println!("El mayor numero de la lista es:{}", resultado);
+// }
+
+// 📌 PRUEBAS
+
+
 
 
 
