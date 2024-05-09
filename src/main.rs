@@ -1,6 +1,6 @@
 // use std::vec; // importamos el módulo vec de la librería estándar de Rust
   
-// 00 📌 TIPOS DE DATOS - char
+// 📌 TIPOS DE DATOS - char
 // fn main() {
 //     let primera_letra = 'A'; // tipo de dato "char" con comillas simples
 //     let espacio = ' '; // tipo de dato "char" con comillas simples
@@ -8,7 +8,7 @@
 //     print!("0 - {} {} {}\n", primera_letra, espacio, cono_fiesta);
 // }
 
-// 00 📌 Convertir tipos de datos de forma segura con "as"
+// 📌 Convertir tipos de datos de forma segura con "as"
 // fn main() {
 //     let a = 13u8; // tipo de dato "u8" sin signo de 8 bits
 //     let b = 7u32; // tipo de dato "u32" sin signo de 32 bits
@@ -21,7 +21,7 @@
 //     println!("0 - {} -> {}", a as char, falso as u8); // imprimimos el resultado.
 // }
 
-// 00 📌 Calcular la memoria que ocupa por ejemplo un char y contar los caracteres de un str.
+// 📌 Calcular la memoria que ocupa por ejemplo un char y contar los caracteres de un str.
 // fn main() {
 //     let a = 'A'; // tipo de dato "char" con comillas simples
 //     let b = '🎉'; // Emoji también son char, gracias al Unicode otros lenguajes también son char
@@ -32,19 +32,19 @@
 //     println!("0 - Otra forma de imprimir el tamaño: {}", c.len()); // imprimimos el tamaño de un str
 // }
 
-// 00 📌 Para la inferencia de tipos en los números utilizamos el tipo seguido del valor
+// 📌 Para la inferencia de tipos en los números utilizamos el tipo seguido del valor
 // ejemplo:. let a = 13u8; // tipo de dato "u8" sin signo de 8 bits.
 // también se puede añadir un guió bajo para separar los números y hacerlos más legibles
 // ejemplo:. let a = 1_000_000; // tipo de dato "i32" con signo de 32 bits.
 // ejemplo:. let b = 24_u8; // tipo de dato "u8" sin signo de 8 bits.
 // el guión bajo no afecta al valor, solo es para hacerlo más legible, se pueden poner varios guiones bajos.
  
-// 01 📌 MACRO "println!" - Display the message "Hello, world!"
+// 📌 MACRO "println!" - Display the message "Hello, world!"
 // fn main() { 
 //     println!("1 - Hello, world!");
 // }
 
-// 01 📌 MACRO "format!" - Para crear un String
+// 📌 MACRO "format!" - Para crear un String
 // fn main() {
 //     let s = format!(" Hello, world!");
 //     println!("{}", s);
@@ -60,20 +60,20 @@
 //     println!("mi_string: {} y mi_string2: {}", mi_string, mi_string2);
 // }
 
-// 01 📌 Pasar argumentos a la macro println!() entre corchetes "brakes"
+// 📌 Pasar argumentos a la macro println!() entre corchetes "brakes"
 // llamar a macro println! con 4 argumentos: a string, a valor, string, a valor
 // fn main() { 
 //     println!("2 - {} - {} - {} - {}", "Hola", 42, "mundo", 13);
 // }
 
-// 01 📌 Imprimir valores directos y con variables
+// 📌 Imprimir valores directos y con variables
 // fn main() {
     // println!("Valor directo sin pasar variable: {}", 42); // imprimir valor directo
     // let a = 42;
     // println!("Valor con variable a: {}", a); // imprimir variable "a"
 // }
 
-// 01 📌 Imprimir valor pasado por función 
+// 📌 Imprimir valor pasado por función 
 // fn main () {
 //     println!("Hola número: {}", numero());
 // } 
@@ -82,7 +82,7 @@
 // }
 // ==========================================================================================
 
-// 01 📌 VARIABLES
+// 📌 VARIABLES
 // Las variables existen dentro ed un bloque de código, se declaran con "let" y se pueden reasignar, pero desaparecen al salir del bloque, ejemplo:. la linea de impresión de "b" da error porque no existe fuera del bloque
 // fn main() {
 //     let a = 42;
@@ -93,7 +93,7 @@
 //     // println!("1 - Valor de b: {}", _b); // ERROR, b no existe fuera del bloque
 // }
 
-// 01 📌  MÁS SOBRE LA IMPRESIÓN
+// 📌  MÁS SOBRE LA IMPRESIÓN
 // "#r" antepuesto ala variable le permite utilizar nombres reservados, ej, como let, fn, struct, etc.
 // "#r", a veces se necesita imprimir muchas " y caracteres de escape,
 // para ello se usa al comienzo "#r" antes de las primeras comillas 
@@ -109,7 +109,7 @@
 //     println!("1 - Ciudad: {ciudad}, País: {pais}, Provincia: {provincia} Este repite ciudad -> {ciudad}");
 // }  
 
-// 01 📌 Usar bloque de código para devolver un valor, devolución sin punto y coma, de lo contrario devolvería nada "()"
+// 📌 Usar bloque de código para devolver un valor, devolución sin punto y coma, de lo contrario devolvería nada "()"
 // fn main() {
 //     let mi_numero = {
 //         let segundo_numero = 29;
@@ -119,7 +119,7 @@
 //     println!("1 - Valor de a: {:?}", mi_numero); // otra forma de imprimir valor, con {:?} se imprime el valor de la variable
 // }
 
-// 01 📌 VISALIZACIÓN Y DEPURACIÓN
+// 📌 VISALIZACIÓN Y DEPURACIÓN
 // Existen variables que no se pueden imprimir usando {} en println! aquí es necesario usar la impresión de depuración
 // Existen variables que no se pueden imprimir usando {:?}, como los booleanos, para ello se usa "{:}"
 // Esta forma {#:?} se llama "pretty print" y es muy útil para depurar
@@ -130,7 +130,7 @@
 //     // así con todos los tipos de datos, por ejemplo: i16, u16,i32,u32,i64,u64,i128,u128
 // }
 
-// 01 📌 Los valores númericos se pueden imprimir en binario, octal, hexadecimal, etc.
+// 📌 Los valores númericos se pueden imprimir en binario, octal, hexadecimal, etc.
 // fn main() {
 //     let a = 42; // variable "a" con valor 42
 //     println!("6 - Valor de \"a\" en binario: {:b}", a); // imprimimos el valor de "a" en binario
@@ -138,7 +138,7 @@
 //     println!("6 - Valor de \"a\" en hexadecimal: {:x}", a); // imprimimos el valor de "a" en hexadecimal
 // }
 
-// 01 📌 Se pueden añadir numeros entre las llaves para indicar el orden de las variables a utilizar
+// 📌 Se pueden añadir numeros entre las llaves para indicar el orden de las variables a utilizar
 // fn main () {
 //     let nombre_padre = "Juan";
 //     let nombre_hijo = "Pedro";
@@ -146,7 +146,7 @@
 //     println!("Este es {1}  {2}, hijo de {0} {2}.", nombre_padre, nombre_hijo, apellido);
 // }
 
-// 01 📌 Imprimir variables y una tupla de diferentes tipos
+// 📌 Imprimir variables y una tupla de diferentes tipos
 // fn main() {
 //     let text1 = "3 - La primera letra del alfabeto";
 //     let text2 = "La última letra del alfabeto:";
@@ -154,7 +154,7 @@
 //     println!("3 - {}: {} y {} {} y \n2 - array pos 0 = {} \n2 - array pos 1 = {}", text1, 'A', text2, 'Z', sa.0, sa.1);
 // }
 
-// 01 📌 Aquí los tipos los e implementado yo, después de la variable insertar los ":" y el tipo.
+// 📌 Aquí los tipos los e implementado yo, después de la variable insertar los ":" y el tipo.
 // fn main() {
 //     let _x: u32 = 42; // integer de 32 bits sin signo
 //     let url: String = String::from("http://desarrollosdigitales.info"); // tipo "String"
@@ -163,14 +163,14 @@
 //     println!("5 - Esto es un Texto &str: {}", a_url);
 // }
 
-// 02 📌 VARIABLES Y MUTABILIDAD
+// 📌 VARIABLES Y MUTABILIDAD
 // fn main() { 
 //     let mut number = 5; // mut proporciona mutabilidad a la variable, pero no podemos cambiar el tipo de dato
 //     number += 1;
 //     println!("valor que reemplaza el anterior '5' por misma variable: {}",number);
 // }
 
-// 02 📌 SHADOWING, OCULTACIÓN
+// 📌 SHADOWING, OCULTACIÓN
 // fn main() {
 //     let number = 5; // variable "number" con valor 5
 //     println!("Valor de number: {}", number); // imprimimos el valor de "number" = 5
@@ -181,7 +181,7 @@
 //     // ejemplo de utilidad: para hacer varios calculos con la misma variable.
 // }
 
-// 02 📌 SHADOWING, OCULTACIÓN
+// 📌 SHADOWING, OCULTACIÓN
 // Recordamos que el ocultamiento de variables no destruye la variable anterior, solo la bloquea, la oculta, "shadowing", con el uso de referencias se puede acceder a la variable anterior.
 // fn main() {
 //     let pais = String::from("España"); // variable "pais" con valor "España"
@@ -193,7 +193,7 @@
 //     // la variable pais se destruirá al salir del bloque,
 // }
 
-// 02 📌 LA PILA Y LA MEMORIA DINÁMICA - REFERENCIAS
+// 📌 LA PILA Y LA MEMORIA DINÁMICA - REFERENCIAS
 // El puntero que se ve en rust se denomina "referencia" y se representa con "&", ej:. &variable
 // &variable1, es una referencia a la variable, no es el valor en sí, es una referencia a la dirección de memoria
 // esto significa que variable1 sigue siendo la dueña del valor, solo lo ha prestado y entrega una referencia
@@ -208,7 +208,7 @@
 //     println!("{}", ref_tres);
 // }
 
-// 02 📌 MÁS SOBRE REFERENCIAS
+// 📌 MÁS SOBRE REFERENCIAS
 // Como protege rust el acceso a zonas de memoria erróneas, no permite el acceso a zonas de memoria que no le pertenecen, un ejemplo.
 // fn return_str() -> &'static str {
 //     let pais = String::from("España");
@@ -221,7 +221,7 @@
 // }
 // ===================================================================================
 
-// 02 📌  REFERENCIAS MUTABLES
+// 📌  REFERENCIAS MUTABLES
 // Regla: no se puede usar una referencia mutable al mismo tiempo que una referencia inmutable
 // fn main() {
 //     let mut mi_numero = 8;
@@ -242,7 +242,7 @@
 //     println!("6 - Valor de \"b\": {}", b); // imprimimos el valor de "b"
 // }
 
-//  📌 PASO DE REFERENCIAS A FUNCIONES
+// 📌 PASO DE REFERENCIAS A FUNCIONES
 // Regla de Rust para todas los valores, "un valor solo puede tener un dueño a la vez".
 // fn print_pais(pais_nombre: String) {
 //     println!("{}", pais_nombre);
@@ -291,18 +291,18 @@
 //         print_country(country);
 //     }
 
-//  📌 TIPOS COLECCIÓN
+// 📌 TIPOS COLECCIÓN
 // Rust tiene varios tipos de colecciones, como vectores, arrays, tuplas, etc.
 // Sirven para guardar más de un valor en un mismo lugar.
 // Empezamos con los arrays, que son colecciones de longitud fija de elementos de datos del mismo tipo y los más simples y rápidos.
 
-//  📌 ARRAYS - array es una colección de longitud fija de elementos de datos del mismo tipo.
+// 📌 ARRAYS - array es una colección de longitud fija de elementos de datos del mismo tipo.
 //  El tipo de datos para un array es [T;N] siendo T el tipo del elemento, y N la longitud fija 
 //  conocida en tiempo de compilación. Los elementos individuales se pueden recuperar con el 
 //  operador [x], siendo x un índice de tipo usize (empezando por 0) del elemento que quieras. 
 // Los arrays no pueden cambiar el tamaño y sus datos tienen que ser del mismo tipo, sin   embargo son muy rápidos y eficientes.
  
-//  📌 ARRAYS - se puede obtener una sección (slice) de un array utilizando una referencia "&" y después utilizando ".." para mostrar el rango
+// 📌 ARRAYS - se puede obtener una sección (slice) de un array utilizando una referencia "&" y después utilizando ".." para mostrar el rango
 // Los indices empiezan en 0, por lo que el primer elemento es el 0, el segundo el 1, etc.
 // Los rangos son inclusivos en el primer número y exclusivos en el segundo, por lo que [2..5] obtiene los elementos 2, 3 y 4.
 // Para que se incluya el último número se puede usar de esta forma [0..=10].
@@ -318,13 +318,13 @@
 //     println!("Slice de 1 al 4: {:?}", _slice_1_al_4); // imprimimos el slice
 // }
 
-//  📌 ARRAYS
+// 📌 ARRAYS
 // fn main() {
 //     let números: [i32;3] = [1,2,3];
 //     println!("Array {:?}", números);
 // }
 
-//  📌 ARRAYS
+// 📌 ARRAYS
 // fn main() {
 //     let mut notas_array: [u32; 5] = [0; 5];  // Array con tamaño fijo de 5 elementos e inicializadas las 5 posiciones con ceros
 //     let meses = ["Enero, febrero, marzo, abril, mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"]; // Array de tipo String
@@ -425,7 +425,7 @@
 //     }
 // }
 
-//  📌 TUPLAS Y DESESTRUCTURACIÓN, son como una estructura sin nombre de campos, una especie de array donde 
+// 📌 TUPLAS Y DESESTRUCTURACIÓN, son como una estructura sin nombre de campos, una especie de array donde 
 //  cada elemento puede ser de un tipo diferente pero especificado de antemano
 // fn main () {
     // let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
@@ -933,16 +933,6 @@
 //     println!("El mayor numero de la lista es:{}", resultado);
 // }
 
-// 📌 PRUEBAS
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1007,15 +997,11 @@
 //     println!("{}",s1); // ERROR hemos movido el valor de s1 a "s2" "s1" ya no es dueño de ese valor", ya no podemos imprimir s1 
 //     // ERROR NO IMPRIme s1
 // }
-    
-
 // Este código da error porque el tipo String no implementa Copy. Entonces la línea let s2 = s1; 
 // lo que ha hecho en realidad ha sido mover el valor. Mover significa que le ha transferido el 
 // ser dueño del valor de la cadena de texto a s2. Por tanto s1 ya no es dueña del valor y no puede 
 // operar con él. Esto pasa en los tipos que no implementan Copy, que transfieren la propiedad 
 // a otra variable. Si queremos hacer una copia real, tendremos que recurrir al clonado. 
-    
-    
     
 // 📌 El tipo String implementa Clone así que es posible generar otro dato String exactamente igual 
 // pero independiente al original.
@@ -1101,47 +1087,41 @@
 //  📌  Structs, traits y POO en Rust
 
 //  📌 ESTRUCTURAS 
-// Las estructuras son un tipo de dato que permite agrupar varios valores en un solo objeto.
-// Se definen con la palabra clave "struct" seguida del nombre de la estructura y las claves y tipos de datos.
+// Las estructuras son un tipo de dato que permite agrupar varios campos con diferentes tipos en un solo objeto.
+// Se definen con la palabra clave "struct" seguida del nombre de la estructura y los campos o atributos y sus tipos de datos.
 // Se pueden crear instancias de una estructura con la palabra clave "let" seguida del nombre de la estructura y los valores.
 // Se pueden acceder a los valores de una estructura con el operador "." seguido del nombre del valor.
 // Se pueden modificar los valores de una estructura con la palabra clave "mut".
 // Se pueden crear métodos para una estructura con la palabra clave "impl" seguida del nombre de la estructura y los métodos.
 
-// #[allow(dead_code)] 
-// #[derive(Copy,Clone)]
-
+//  📌 ESTRUCTURAS e IMPLEMENTACIONES con "impl"
+// #![allow(unused)]
+// #[derive(Debug)]
+// #[derive(Copy, Clone)] // añadimos el atributo "Copy" para que se puedan copiar las estructuras
 // struct Punto {
-// x: i32,
-// y: i32
-// }
-// #[allow(dead_code)]
-
-//     struct Rectangulo {
-//     origen: Punto,
-//     ancho: i32,
-//     alto: i32
-// }  
-// fn main() {
-//     let p = Punto {x: 50, y: 50};
-//         println!("20 - Punto X: {}",p.x);
-// }
-//  📌 
-
-
-// #[derive(Copy,Clone)]
-//     struct Punto{
 //     x: i32,
-//     y: i32
+//     y: i32,
+// }
+// struct Rectangulo {
+//     origen: Punto,
+//     alto: i32,
+//     ancho: i32,
+// }
+// impl Rectangulo {
+//     fn area (&self) -> i32 {
+//         self.alto * self.ancho
+//     } 
+// }
+// fn main() {
+//     let p = Punto {x: 50, y: 24,};
+//     println!("punto x: {}", p.x);
+//     let rectangulo = Rectangulo {origen: p, alto: 50, ancho: 50};
+//     println!("El Area es: {}", rectangulo.area());
 // }
 
-//     struct Rectangulo{
-//     origen: Punto,
-//     ancho: i32,
-//     alto: i32
-// }  
-//     let p = Punto {x: 50, y: 50};
-//         println!("20 - Punto X: {}",p.x);
+// 📌 ESTRUCTURAS e IMPLEMENTACIONES con "impl"
+
+
 
       
 
@@ -1179,7 +1159,8 @@
 
 // 📌 APUNTES Y NOTAS VARIAS
 
-// #[allow(dead_code)] // suprime las advertencias de código no utilizado
+// #[allow(dead_code)] suprime las advertencias para código muerto o  no utilizado en el ámbito donde se encuentra la directiva.
+// #![allow(unused)] directiva de nivel de atributo que desactiva las advertencias para el código no utilizado en todo el archivo. 
 // #[ no_mangle ] // evita que el compilador cambie el nombre de la función, cuando optimice el código.
 // #[derive(Debug)] // permite imprimir la estructura con println!("{:?}", estructura)
 // Guión bajo (underscores) como sufijo de las variables (delante de ellas) para que no salga la advierta de "variable no utilizada
@@ -1211,4 +1192,59 @@
 // Un usize e isize siempre o}año de la cadena de texto en la pila, es de tamaño variable + el tamaño de la referencia, generalmente 4 u 8 bytes.
    
     
+// 📌 PRUEBAS arrays, vectores, 
+#![allow(unused)] // desactiva las advertencias para el código no utilizado en el ámbito donde se encuentra la directiva.
+// fn main() {
+// // Arrays
+// let mut notas_array: [i32;5] = [0;5];   
+// notas_array[0] = 1;
+// println!("La nota es: {}", notas_array[0]); 
+// println!("La nota es: {:?}", notas_array);
+// // Vectores
+// let mut notas_vec: Vec<i32> = vec![1;5];
+// notas_vec.push(2);
+// println!("La nota es: {}", notas_vec[0]);
+// println!("La nota es: {:?}", notas_vec);
+// //
+// // Constantes, let shadowing y casting
+// const PI:f64 = 3.14159;
+// let x = 42;
+// let x = (x as f64) + PI;
+// println!("El valor de x es: {}", x);
+// //
+// // Tuplas y desestructuración
+// // Podemos entender una tupla como una estructura de datos que puede contener varios valores de diferentes tipos pero sin nombre, como una especi de array con tipos de datos diferentes pero especificado de antemano.
+// let tupla = (42, "hola", true); // asignamos una tupla con 3 valores
+// let (valor, saludo, verdad) = tupla; // desestructuración en 3 variables
+// println!("Mi saludo: {}", saludo); // imprimimos la variable saludo
+// let (_, _, verdad ) = tupla; // desestructuración de la tupla en 3 variables, pero solo nos interesa la tercera
+// println!("Mi saludo: {}", verdad);
+// let cojo_valor = tupla.0; // accedemos al valor de la tupla con el punto y el índice
+// println!("Mi valor: {}", cojo_valor);
+// // Expresiones avanzadas con let
+// let edad = 57;
+// let compara = if edad > 57 { // el resultado de la expresión se asigna a la variable compara
+//     "Eres mayor de 56"       //  si no hay punto y coma, se convierte en una expresión, no se vuelve un statement o sentencia
+// } else {    
+//     "Eres menor de 56"
+// };
+// println!("Eres: {}", compara);
+// // Más expresiones avanzadas con let
+// let age = 15;
+// let a = 5;
+// let b = 42;
+// let x = {               // se complican las expresiones con let hasta niveles insospechados, pero es posible hacerlo en Rust, pero es bastante cómodo en la práctica
+//     let u = a*b;
+//     u+age
+// };
+// println!("El valor de x es: {}", x);
+// }
+
+// 📌 Funciones de primer nivel
+// 
+fn ladrar() {
+    println!("Guau");
+}
+
+
 
