@@ -297,19 +297,20 @@
 // Empezamos con los arrays, que son colecciones de longitud fija de elementos de datos del mismo tipo y los más simples y rápidos.
 
 // 📌 ARRAYS - array es una colección de longitud fija de elementos de datos del mismo tipo.
-//  El tipo de datos para un array es [T;N] siendo T el tipo del elemento, y N la longitud fija 
-//  conocida en tiempo de compilación. Los elementos individuales se pueden recuperar con el 
-//  operador [x], siendo x un índice de tipo usize (empezando por 0) del elemento que quieras. 
-// Los arrays no pueden cambiar el tamaño y sus datos tienen que ser del mismo tipo, sin   embargo son muy rápidos y eficientes.
+// El tipo de datos para un array es [T;N] siendo T el tipo del elemento, y N la longitud fija 
+// conocida en tiempo de compilación. Los elementos individuales se pueden recuperar con el 
+// operador [x], siendo x un índice de tipo usize (empezando por 0) del elemento que quieras. 
+// Los arrays no pueden cambiar el tamaño y sus datos tienen que ser del mismo tipo, sin embargo son muy rápidos y eficientes.
  
-// 📌 ARRAYS - se puede obtener una sección (slice) de un array utilizando una referencia "&" y después utilizando ".." para mostrar el rango
+// 📌 ARRAYS - se puede obtener una sección (slice) de un array utilizando una referencia "&" y después utilizando ".." para mostrar el rango.
 // Los indices empiezan en 0, por lo que el primer elemento es el 0, el segundo el 1, etc.
 // Los rangos son inclusivos en el primer número y exclusivos en el segundo, por lo que [2..5] obtiene los elementos 2, 3 y 4.
 // Para que se incluya el último número se puede usar de esta forma [0..=10].
 // Para que se incluya el último número, se puede usar [1..] y para que se incluya el primero, se puede usar [..5].
 // fn main() {
-//     let numeros: [i32;10] = [1,2,3,4,5,6,7,8,9,10]; // array de 3 elementos de tipo i32
+//     let numeros: [i32;10] = [1,2,3,4,5,6,7,8,9,10]; // array literal de 10 elementos de tipo i32
 //     println!("Todo el array: {:?}", numeros); // imprimimos el slice
+//
 //     let _slice_1_al_3 = &numeros[1..3]; // obtebemos indices 1 al 2
 //     let _slice_todos = &numeros[1..]; // obtenemos indices 1 al 9 o final
 //     let _slice_1_al_4 = &numeros[..10]; // obtenemos indices 0 al 9
@@ -320,11 +321,13 @@
 
 // 📌 ARRAYS
 // fn main() {
-//     let números: [i32;3] = [1,2,3];
-//     println!("Array {:?}", números);
+//     let numeros: [i32;3] = [1,2,3];
+//     println!("Array {:?}", numeros);
+//     //
+    
 // }
-
-// 📌 ARRAYS
+ 
+// 📌 ARRAYS - Podemos inizializar un array con un valor, ver ejemplo 👇 
 // fn main() {
 //     let mut notas_array: [u32; 5] = [0; 5];  // Array con tamaño fijo de 5 elementos e inicializadas las 5 posiciones con ceros
 //     let meses = ["Enero, febrero, marzo, abril, mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"]; // Array de tipo String
@@ -940,12 +943,16 @@
 
 
 //  📌 CONSTANTES Y STATIC
-// fn main () {
-//     const PI:f64 = 3.14159; // las constantes no cambian nunca su valor, se declaran con "const" y en mayúsculas
-//     static ESTACIONES: [&str; 4] = ["Primavera", "Verano", "Otoño", "Invierno"]; // las variables estáticas pueden ser mutables, se declaran con "static" y en mayúsculas, son como variables globales.
-//     println!("Vamos de paseo, {} {} {}", PI, PI, PI);
-//     println!("Las estaciones son: {:?}\n", ESTACIONES);
-// }
+// Las variables estáticas son como las constantes pero pueden ser mutables, se declaran con "static" y en mayúsculas, son como variables globales, no se eliminan cuando termina el bloque en el que se declaran o la función, permanecen en memoria hasta que el programa finaliza, su alcance es global se pueden acceder desde cualquier parte del programa, el timepo de vida es el mismo que el del programa, son inmutables por defecto, lo que significa que su valor no se puede modificar después de su inicialización. Sin embargo, se pueden declarar como mutables utilizando la palabra clave mut.
+// ejemplo: "static mut VARIABLE_ESTATICA_MUTABLE: tipo_de_dato = valor_inicial;"
+// Por convención, las constantes se suelen escribir con todas las letras en mayúsculas, normalmente están fuera del main para que existan en todo el programas.
+
+fn main () {
+    const PI:f64 = 3.14159; // las constantes no cambian nunca su valor, se declaran con "const" y en mayúsculas
+    static ESTACIONES: [&str; 4] = ["Primavera", "Verano", "Otoño", "Invierno"]; // las variables estáticas pueden ser mutables, se declaran con "static" y en mayúsculas, son como variables globales.
+    println!("Vamos de paseo, {} {} {}", PI, PI, PI);
+    println!("Las estaciones son: {:?}\n", ESTACIONES);
+}
 
 //  📌 CONSTANTES y casting ("as")
 // fn main () {
@@ -1045,12 +1052,9 @@
 // println!("{}",s1);
 
 // 📌 FUNCIONES SIMPLES - Si la función devuelve un valor se debe poner una flecha
-// y el tipo del valor de devolución. Para devolver un valor se puede usar return  o se puede dejar la última línea sin punto y coma. 
-// fn suma(a:i32, b:i32) ->i32 {
-//     a+b
+// y el tipo del valor de devolución. Para devolver un valor se puede usar returnfn ladrar() {
+//     println!("Guau");
 // }
-// fn main () 
-// let a = 5;
 // let b = 42;
 // let c= suma(a,b);
 // println!("17 - resultado es: {}",c);
@@ -1193,7 +1197,7 @@
    
     
 // 📌 PRUEBAS arrays, vectores, 
-#![allow(unused)] // desactiva las advertencias para el código no utilizado en el ámbito donde se encuentra la directiva.
+// #![allow(unused)] // desactiva las advertencias para el código no utilizado en el ámbito donde se encuentra la directiva.
 // fn main() {
 // // Arrays
 // let mut notas_array: [i32;5] = [0;5];   
@@ -1242,9 +1246,9 @@
 
 // 📌 Funciones de primer nivel
 // 
-fn ladrar() {
-    println!("Guau");
-}
+// fn ladrar() {
+//     println!("Guau");
+// }
 
 
 
