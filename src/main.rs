@@ -118,7 +118,7 @@
 //     // pero al conocer que lo vamos a sumar a un f32, elige un f32 para mi_otro_decimal
 //     let tercer_decimal = mi_decimal + mi_otro_decimal;
 // }
-//
+
 // 📌 FUNCIONES - funciones simples - Si la función devuelve un valor se debe poner una flecha
 // y el tipo del valor de devolución. Para devolver un valor se puede usar return o simplemente un valor sin punto y coma.
 //
@@ -149,13 +149,13 @@
 //     }
 //     hacer_n_veces(ladrar,10); // imprime 10 veces resultado de la función ladrar
 // }
-//
-// 📌 - Rust como tal no admite devolver varios valores a la vez, pero es posible usar tuplas y simularlo.
+  
+// 📌 FUNCIONES - Devolución de valores, como tal no admite devolver varios valores a la vez, pero es posible usar tuplas y simularlo.
 //
 // fn string_length_and_lines(txt: &String) -> (usize,usize) {
 // (txt.len(),txt.lines().count()) // función contar cantidad caracteres
 // }
-//
+
 // fn main() {
 // let ss = String::from("Europe's Skies - Alexander Rybak\nSuper Strut - Deodato\nEl Cóndor Pasa - Uña Ramos"); // asignamos 3 lineas de tipo String a variable "ss"
 // let (length,lines) = string_length_and_lines(&ss); // asignamos el valor de la función contar_cantidad_caracteres
@@ -163,9 +163,8 @@
 // println!("18 - La lista de canciones tiene una longitud de {} caracteres y {} líneas",length,lines); // salida por pantalla variables resultados
 // }
 
+// 📌 FUNIONES - Usar bloque de código,para devolver un valor, devolución sin punto y coma, de lo contrario devolvería nada "()"
 
-
-// 📌 Usar bloque de código para devolver un valor, devolución sin punto y coma, de lo contrario devolvería nada "()"
 // fn main() {
 //     let mi_numero = {
 //         let segundo_numero = 29;
@@ -227,7 +226,7 @@
 //     println!("Hello, world!");
 // }
 
-// 📌  IMPRESIÓN - más sobre ella
+// 📌 IMPRESIÓN - más sobre ella
 // "#r" antepuesto ala variable le permite utilizar nombres reservados, ej, como let, fn, struct, etc.
 // "#r", a veces se necesita imprimir muchas " y caracteres de escape,
 // para ello se usa al comienzo "#r" antes de las primeras comillas 
@@ -284,6 +283,18 @@
 // fn numero() -> i32 {
 //     42 // ojo devuelve un valor de tipo i32 si no lleva punto y coma, con ella daría error
 // }
+
+// 📌 CONSTANTES
+// Las constantes son valores inmutables que se pueden definir en cualquier ámbito, incluidos los globales.
+// Se definen con la palabra clave "const" y se les debe asignar un tipo de dato.
+// Se les debe asignar un valor constante, no se les puede asignar un valor que se calcule en tiempo de ejecución.
+// Se escriben en mayúsculas y con guiones bajos para separar las palabras.
+// Las constantes no pueden ser sombreadas por variables con el mismo nombre
+// son validas en todo el tiempo de vida del programa dentro del ámbito en el que se declararon 
+// y se pueden declarar en cualquier ámbito, incluido el global.
+// SCREAMING_SNAKE_CASE -> para constantes y estáticas, en mayusculas y guiones bajos
+// ejemplo: const MAX_POINTS: u32 = 100_000; // constante de tipo u32 con valor 100_000
+
 
 // 📌 VARIABLES - ámbito de una variable
 // Se pueden asignar variables sin valor, pero se debe especificar el tipo de dato, ej:. let a: i32;
@@ -421,7 +432,7 @@
 //     println!("{}", pais); // comprobamos que la variable "pais" sigue siendo dueña del valor.  
 // } 
 
-// 📌 COPIA 
+// 📌 VARIABLES - COPIA 
 // Rust tiene una característica especial para los tipos de datos primitivos, la trait "Copy", que permite que los valores se copien en lugar de moverse.
 // Son valores de tamañol fijo, conocido y pequeño que se almacenan en el stack (enteros,flotantes y char), no en el heap, por lo que son rápidos de copiar y no influye que existan varias copias de lo mismo.
 // Pueden copiarse cuando se pasan por parametro a una función, se asignan a otra variable o se devuelven de una función.
@@ -435,7 +446,7 @@
 //     print_number(mi_numero); // Imprime 8 de nuevo, la función obtiene una copia del valor de "mi_numero".
 // }
 
-// 📌 CLONE
+// 📌 VARIABLES - CLONE
 // El tipo String, no implementa la característica copiar, por lo que el valor de la variable se mueve al pasarla la primera vez, para poder copiarla se usa la trait "Clone".
 // Lo ideal es utilizar la referencia es más eficiente porque clone copia el valor gastando más memoria y la referencia solo el puntero. 
 // fn print_country(country_name: String) { // Esta función no devuelve nada
@@ -456,13 +467,14 @@
 //  El tipo de datos para un array es [T;N] siendo T el tipo del elemento, y N la longitud fija 
 //  conocida en tiempo de compilación. Los elementos individuales se pueden recuperar con el 
 //  operador [x], siendo x un índice de tipo usize (empezando por 0) del elemento que quieras. 
-// Los arrays no pueden cambiar el tamaño y sus datos tienen que ser del mismo tipo, sin   embargo son muy rápidos y eficientes.
+// Los arrays no pueden cambiar el tamaño y sus datos tienen que ser del mismo tipo,son muy rápidos y eficientes.
  
 // 📌 ARRAYS - se puede obtener una sección (slice) de un array utilizando una referencia "&" y después utilizando ".." para mostrar el rango
 // Los indices empiezan en 0, por lo que el primer elemento es el 0, el segundo el 1, etc.
 // Los rangos son inclusivos en el primer número y exclusivos en el segundo, por lo que [2..5] obtiene los elementos 2, 3 y 4.
 // Para que se incluya el último número se puede usar de esta forma [0..=10].
 // Para que se incluya el último número, se puede usar [1..] y para que se incluya el primero, se puede usar [..5].
+
 // fn main() {
 //     let numeros: [i32;10] = [1,2,3,4,5,6,7,8,9,10]; // array literal de 10 elementos de tipo i32
 //     println!("Todo el array: {:?}", numeros); // imprimimos el slice
@@ -552,7 +564,7 @@
 //     let slice = &mi_vector5[1..3]; // obtenemos los elementos 1 y 2.
 //     println!("{:?}", slice); // imprime los elementos del slice.
 
-// 📌 VECTORES
+// 📌 VECTORES 
 // fn main () {
 //         let mut notas_vec: Vec<i32> = vec!(); // Vector dinámico (No fijo) vació, integer 32 bits con signo 
 //         notas_vec.push(1); // escribimos un valor "1" en la posicion 0
@@ -560,7 +572,7 @@
 //         println!("Nota 1 = {}\n    Nota 2 = {}\n", notas_vec[0], notas_vec[1]);
 // }
 
-// 📌 VECTORES
+// 📌 VECTORES 
 // Se pueden obtener secciones de un vector igual que en los arrays, con el método "slice".
 // fn main() {
 //     let random_vector = vec!["Esto es un texto", "8", "a", "b", "8,9,10", "7.7"];
@@ -584,14 +596,19 @@
 // }
 
 // 📌 TUPLAS Y DESESTRUCTURACIÓN, son como una estructura sin nombre de campos, una especie de array donde 
-//  cada elemento puede ser de un tipo diferente pero especificado de antemano
+// cada elemento puede ser de un tipo diferente pero especificado de antemano
+// Las tuplas son un tipo de dato que permite agrupar varios valores en un solo valor compuesto.
+// Podemos agrupar valores de diferentes tipos en una tupla, pero una vez definida, no se pueden añadir o quitar elementos.
+// Podemos desestructurar una tupla para obtener los valores individuales, podemos acceder a los valores 
+// de una tupla mediante el operador "." seguido del índice del valor.
+
 // fn main () {
     // let tupla = (23,"Javier", true);       // Formamos la tupla directamente con valores de tipo (integer, texto, boleano)    
     // let (random, z_name, has_beers) = tupla; // Desestructuramos la tupla y obtenemos 3 variables
     // // Imprimimos las variables obtenidas
-    // println!("\n10 - {}", random);
-    // println!("11 - {}", z_name);
-    // println!("12 - {}\n", has_beers);
+    // println!("\n{}", random);
+    // println!("{}", z_name);
+    // println!("{}\n", has_beers);
 // } convertido a u32: {}", c);
     // let t = true;
     // println!("{}", t as u8);
