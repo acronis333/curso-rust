@@ -1,4 +1,4 @@
-// IMPORTACIONES DE LIBRERIAS, MÓDULOS o CRATES
+// 📌 IMPORTACIONE Y USO DE LIBRERIAS -  MÓDULOS - CRATES - etc.
 // use std::vec; // importamos el módulo vec de la librería estándar de Rust
 
 // 📌   TIPOS DATOS BÁSICOS
@@ -88,7 +88,7 @@
 //     let one = x.2;
 // }
 // 
-// El Tipo Arreglo: Un arreglo es una colección de valores del mismo tipo. Los valores de un arreglo se llaman elementos.
+// Tipo Arreglo: Un arreglo es una colección de valores del mismo tipo. Los valores de un arreglo se llaman elementos.
 // - Los elementos de un arreglo tienen un tamaño fijo, que se establece en tiempo de compilación.
 // - Se pueden acceder mediante índices, que comienzan en 0, se pueden desestructurar para asignarlos a variables individuales.
 // - Los elementos de un arreglo se pueden acceder directamente usando un índice entre corchetes.
@@ -136,7 +136,7 @@
 // ladrar();
 // }
 //
-// 📌 FUNCIONES - pasar como parametros,lo que quiere decir que pueden pasarse por entre funciones
+// 📌 FUNCIONES - pasar como parámetros,lo que quiere decir que pueden pasarse por entre funciones
 //     
 // fn hacer_n_veces(f:fn(),n:i64) {
 //     for _ in 0..n {
@@ -149,6 +149,7 @@
 //     }
 //     hacer_n_veces(ladrar,10); // imprime 10 veces resultado de la función ladrar
 // }
+//
 // 📌 - Rust como tal no admite devolver varios valores a la vez, pero es posible usar tuplas y simularlo.
 //
 // fn string_length_and_lines(txt: &String) -> (usize,usize) {
@@ -161,16 +162,91 @@
 // // a variable longitud y lineas
 // println!("18 - La lista de canciones tiene una longitud de {} caracteres y {} líneas",length,lines); // salida por pantalla variables resultados
 // }
-//
 
 
 
-// 📌 MACRO "println!" - Display the message "Hello, world!"
+// 📌 Usar bloque de código para devolver un valor, devolución sin punto y coma, de lo contrario devolvería nada "()"
+// fn main() {
+//     let mi_numero = {
+//         let segundo_numero = 29;
+//         segundo_numero + 13
+//     };
+//     println!("1 - Valor de a: {}", mi_numero);
+//     println!("1 - Valor de a: {:?}", mi_numero); // otra forma de imprimir valor, con {:?} se imprime el valor de la variable
+// }
+
+// 📌 IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN
+// Existen variables que no se pueden imprimir usando {} en println! aquí es necesario usar la impresión de depuración
+// Existen variables que no se pueden imprimir usando {:?}, como los booleanos, para ello se usa "{:}"
+// Esta forma {#:?} se llama "pretty print" y es muy útil para depurar
+// Con print! se imprime sin salto de línea, con println! se imprime con salto de línea
+// Si queremos ver el mayor y menor valor de un tipo de dato, podemos usar std::mem::size_of_val(&variable)
+// Ver el menor y mayor número que se puede representar, se puede usar MIN y MAX
+// ejemplo: println!("El menor i8 es {} y el mayor i8 es {}.", std::i8::MIN, std::i8::MAX); // cambiar tipo numérico
+
+// fn main() {
+//     println!("El menor de i8 es \"{}\" y el mayor es \"{}\"", i8::MIN, i8::MAX);
+//     // así con todos los tipos de datos, por ejemplo: i16, u16,i32,u32,i64,u64,i128,u128
+// }
+
+// 📌 IMPRESIÓN - Los valores numéricos se pueden imprimir en binario, octal, hexadecimal, etc.
+// fn main() {
+//     let a = 42; // variable "a" con valor 42
+//     println!("Valor de \"a\" en binario: {:b}", a); // imprimimos el valor de "a" en binario
+//     println!("Valor de \"a\" en octal: {:o}", a); // imprimimos el valor de "a" en octal
+//     println!("Valor de \"a\" en hexadecimal: {:x}", a); // imprimimos el valor de "a" en hexadecimal
+// }
+
+// 📌 IMPRESIÓN - se pueden añadir números entre las llaves para indicar el orden de las variables a utilizar
+// fn main () {
+//     let nombre_padre = "Juan";
+//     let nombre_hijo = "Pedro";
+//     let apellido = "Pérez";
+//     println!("Este es {1}  {2}, hijo de {0} {2}.", nombre_padre, nombre_hijo, apellido);
+// }
+
+// 📌 IMPRESIÓN - variables y una tupla de diferentes tipos
+// fn main() {
+//     let text1 = "La primera letra del alfabeto";
+//     let text2 = "La última letra del alfabeto:";
+//     let sa = (13, false);
+//     println!("{}: {} y {} {} y \n - array pos 0 = {} \n - array pos 1 = {}", text1, 'A', text2, 'Z', sa.0, sa.1);
+// }
+
+// 📌 IMPRESIÓN - Aquí los tipos los e implementado yo, después de la variable insertar los ":" y el tipo.
+// fn main() {
+//     let _x: u32 = 42; // integer de 32 bits sin signo
+//     let url: String = String::from("http://desarrollosdigitales.info"); // tipo "String"
+//     let a_url: &str = "http://desarrollosdigitales.info"; // tipo texto "&str"
+//     println!("Esto es un String: {}", url);
+//     println!("Esto es un Texto &str: {}", a_url);
+// }
+
+// 📌 IMPRESIÓN - MACRO "println!" - Display the message "Hello, world!"
 // fn main() { 
 //     println!("Hello, world!");
 // }
 
-// 📌 MACRO "format!" - Para crear un String
+// 📌  IMPRESIÓN - más sobre ella
+// "#r" antepuesto ala variable le permite utilizar nombres reservados, ej, como let, fn, struct, etc.
+// "#r", a veces se necesita imprimir muchas " y caracteres de escape,
+// para ello se usa al comienzo "#r" antes de las primeras comillas 
+// Lo siguiente imprime los códigos ASCII de todas las letras a imprimir, tienen que ser solo vocales y no llevar tilde.
+
+//  fn main() {
+//     println!("{:?}", b"Esto es un texto"); // imprime los códigos ASCII de todas las letras a imprimir.
+//  }
+
+// Se pueden poner nombres de variables en las llaves, ej:. "{ciudad}", "{pais}", "{provincia}", etc. o incluso números, ej:. "{1}", "{2}", "{3}", etc. o repetirlos, ej:. "{ciudad}", "{ciudad}", "{ciudad}", etc.
+
+// fn main() {
+//     let ciudad = "Elche";
+//     let pais = "España";
+//     let provincia = "Alicante";
+//     println!("Ciudad: {ciudad}, País: {país}, Provincia: {provincia} Este repite ciudad -> {ciudad}");
+// }  
+
+// 📌 IMPRESIÓN - MACRO "format!" - Para crear un String
 // fn main() {
 //     let s = format!(" Hello, world!");
 //     println!("{}", s);
@@ -186,117 +262,56 @@
 //     println!("mi_string: {} y mi_string2: {}", mi_string, mi_string2);
 // }
 
-// 📌 Pasar argumentos a la macro println!() entre corchetes "brakes"
-// llamar a macro println! con 4 argumentos: a string, a valor, string, a valor
+// 📌 IMPRESIÓN - pasar argumentos a la macro println!() entre corchetes "brakes"
+// - Llamar a macro println! con 4 argumentos: a string, a valor, string, a valor
+
 // fn main() { 
 //     println!("2 - {} - {} - {} - {}", "Hola", 42, "mundo", 13);
 // }
 
-// 📌 Imprimir valores directos y con variables
+// 📌 IMPRESIÓN -  valores directos y con variables
 // fn main() {
     // println!("Valor directo sin pasar variable: {}", 42); // imprimir valor directo
     // let a = 42;
     // println!("Valor con variable a: {}", a); // imprimir variable "a"
 // }
 
-// 📌 Imprimir valor pasado por función 
+// 📌 IMPRESIÓN -  valor pasado por función 
 // fn main () {
 //     println!("Hola número: {}", numero());
 // } 
+
 // fn numero() -> i32 {
 //     42 // ojo devuelve un valor de tipo i32 si no lleva punto y coma, con ella daría error
 // }
-// ==========================================================================================
 
-// 📌 VARIABLES
-// Las variables existen dentro ed un bloque de código, se declaran con "let" y se pueden reasignar, pero desaparecen al salir del bloque, ejemplo:. la linea de impresión de "b" da error porque no existe fuera del bloque
+// 📌 VARIABLES - ámbito de una variable
+// Se pueden asignar variables sin valor, pero se debe especificar el tipo de dato, ej:. let a: i32;
+// Las variables existen dentro de un bloque, se declaran con "let" y se pueden reasignar, pero desaparecen al salir del bloque
+// la linea de impresión de "b" da error porque no existe fuera del bloque
+
+
 // fn main() {
 //     let a = 42;
 //     {
 //         let _b = 13;
 //     }
-//     println!("1 - Valor de a: {}", a);
-//     // println!("1 - Valor de b: {}", _b); // ERROR, b no existe fuera del bloque
+//     println!("Valor de a: {}", a);
+//     println!("Valor de b: {}", _b); // 🤣 ERROR, b no existe fuera del bloque
 // }
 
-// 📌  IMPRESIÓN - más sobre ella
-// "#r" antepuesto ala variable le permite utilizar nombres reservados, ej, como let, fn, struct, etc.
-// "#r", a veces se necesita imprimir muchas " y caracteres de escape,
-// para ello se usa al comienzo "#r" antes de las primeras comillas 
-// Lo siguiente imprime los códigos ASCII de todas las letras a imprimir, tienen que ser solo vocales y no llevar tilde.
-//  fn main() {
-//     println!("{:?}", b"Esto es un texto"); // imprime los códigos ASCII de todas las letras a imprimir.
-//  }
-// Se pueden poner nombres de variables en las llaves, ej:. "{ciudad}", "{pais}", "{provincia}", etc. o incluso números, ej:. "{1}", "{2}", "{3}", etc. o repetirlos, ej:. "{ciudad}", "{ciudad}", "{ciudad}", etc.
-// fn main() {
-//     let ciudad = "Elche";
-//     let pais = "España";
-//     let provincia = "Alicante";
-//     println!("1 - Ciudad: {ciudad}, País: {país}, Provincia: {provincia} Este repite ciudad -> {ciudad}");
-// }  
+// 📌 VARIABLES - mutabilidad
+// Para poder modificar la variable se debe añadir mut después de let
 
-// 📌 Usar bloque de código para devolver un valor, devolución sin punto y coma, de lo contrario devolvería nada "()"
-// fn main() {
-//     let mi_numero = {
-//         let segundo_numero = 29;
-//         segundo_numero + 13
-//     };
-//     println!("1 - Valor de a: {}", mi_numero);
-//     println!("1 - Valor de a: {:?}", mi_numero); // otra forma de imprimir valor, con {:?} se imprime el valor de la variable
-// }
-
-// 📌 VISUALIZACIÓN Y DEPURACIÓN
-// Existen variables que no se pueden imprimir usando {} en println! aquí es necesario usar la impresión de depuración
-// Existen variables que no se pueden imprimir usando {:?}, como los booleanos, para ello se usa "{:}"
-// Esta forma {#:?} se llama "pretty print" y es muy útil para depurar
-// Con print! se imprime sin salto de línea, con println! se imprime con salto de línea
-// Si queremos ver el mayor y menor valor de un tipo de dato, podemos usar std::mem::size_of_val(&variable)
-// fn main() {
-//     println!("El menor de i8 es \"{}\" y el mayor es \"{}\"", i8::MIN, i8::MAX);
-//     // así con todos los tipos de datos, por ejemplo: i16, u16,i32,u32,i64,u64,i128,u128
-// }
-
-// 📌 Los valores numéricos se pueden imprimir en binario, octal, hexadecimal, etc.
-// fn main() {
-//     let a = 42; // variable "a" con valor 42
-//     println!("6 - Valor de \"a\" en binario: {:b}", a); // imprimimos el valor de "a" en binario
-//     println!("6 - Valor de \"a\" en octal: {:o}", a); // imprimimos el valor de "a" en octal
-//     println!("6 - Valor de \"a\" en hexadecimal: {:x}", a); // imprimimos el valor de "a" en hexadecimal
-// }
-
-// 📌 Se pueden añadir números entre las llaves para indicar el orden de las variables a utilizar
-// fn main () {
-//     let nombre_padre = "Juan";
-//     let nombre_hijo = "Pedro";
-//     let apellido = "Pérez";
-//     println!("Este es {1}  {2}, hijo de {0} {2}.", nombre_padre, nombre_hijo, apellido);
-// }
-
-// 📌 Imprimir variables y una tupla de diferentes tipos
-// fn main() {
-//     let text1 = "3 - La primera letra del alfabeto";
-//     let text2 = "La última letra del alfabeto:";
-//     let sa = (13, false);
-//     println!("3 - {}: {} y {} {} y \n2 - array pos 0 = {} \n2 - array pos 1 = {}", text1, 'A', text2, 'Z', sa.0, sa.1);
-// }
-
-// 📌 Aquí los tipos los e implementado yo, después de la variable insertar los ":" y el tipo.
-// fn main() {
-//     let _x: u32 = 42; // integer de 32 bits sin signo
-//     let url: String = String::from("http://desarrollosdigitales.info"); // tipo "String"
-//     let a_url: &str = "http://desarrollosdigitales.info"; // tipo texto "&str"
-//     println!("5 - Esto es un String: {}", url);
-//     println!("5 - Esto es un Texto &str: {}", a_url);
-// }
-
-// 📌 VARIABLES Y MUTABILIDAD
 // fn main() { 
-//     let mut number = 5; // mut proporciona mutabilidad a la variable, pero no podemos cambiar el tipo de dato
+//     let mut number = 5; // mut proporciona mutabilidad a la variable en cuanto al dato, pero no podemos cambiar el tipo de dato
+//                         // salvo que hagamos shadowing (ocultación) de la variable.
 //     number += 1;
 //     println!("valor que reemplaza el anterior '5' por misma variable: {}",number);
 // }
 
-// 📌 SHADOWING, OCULTACIÓN
+// 📌 SHADOWING - Ocultación
+
 // fn main() {
 //     let number = 5; // variable "number" con valor 5
 //     println!("Valor de number: {}", number); // imprimimos el valor de "number" = 5
@@ -307,8 +322,12 @@
 //     // ejemplo de utilidad: para hacer varios calculos con la misma variable.
 // }
 
-// 📌 SHADOWING, OCULTACIÓN
-// Recordamos que el ocultamiento de variables no destruye la variable anterior, solo la bloquea, la oculta, "shadowing", con el uso de referencias se puede acceder a la variable anterior.
+// 📌 SHADOWING, Ocultación
+// Recordamos que el ocultamiento de variables no destruye la variable anterior, solo la bloquea, la oculta, "shadowing" 
+// con el uso de referencias se puede acceder a la variable anterior.
+// En general, se usa la ocultación de variables en estos casos. Cuando se quiere usar una variable para un cálculo 
+// y luego otro más, sin tener mucho interés por los valores intermedios.
+
 // fn main() {
 //     let pais = String::from("España"); // variable "pais" con valor "España"
 //     let pais_ref = &pais; // variable "pais_ref" con referencia a "pais"
@@ -319,11 +338,14 @@
 //     // la variable pais se destruirá al salir del bloque,
 // }
 
-// 📌 LA PILA Y LA MEMORIA DINÁMICA - REFERENCIAS
+// 📌 LA PILA Y LA MEMORIA DINÁMICA - PUNTERO = REFERENCIA (que apunta a la memoria de otro valor)
+// La pila "stack" es una estructura de datos que almacena variables en un orden determinado, se accede a ellas mediante un puntero.
+// La memoria dinámica "heap" es una estructura de datos que almacena variables en un orden aleatorio
+// se accede a ellas mediante un puntero.
 // El puntero que se ve en rust se denomina "referencia" y se representa con "&", ej:. &variable
 // &variable1, es una referencia a la variable, no es el valor en sí, es una referencia a la dirección de memoria
 // esto significa que variable1 sigue siendo la dueña del valor, solo lo ha prestado y entrega una referencia
-// ejemplo de referencia: &variable1, es una referencia a la variable, no es el valor en sí, es una referencia a la dirección de memoria
+
 // fn main() {
 //     let pais = "España"; // variable "pais" con valor "España"
 //     let ref_uno = &pais; // variable "ref_uno" con referencia a "pais"
@@ -334,21 +356,23 @@
 //     println!("{}", ref_tres);
 // }
 
-// 📌 MÁS SOBRE REFERENCIAS
+// 📌 REFERENCIAS
 // Como protege rust el acceso a zonas de memoria erróneas, no permite el acceso a zonas de memoria que no le pertenecen, un ejemplo.
+
 // fn return_str() -> &'static str {
 //     let pais = String::from("España");
 //     let pais_ref = &pais;
-//     pais_ref    // ⚠️ emoji warning <- ERROR, no se puede devolver una referencia a un valor que se destruirá al salir de la función.
+//     pais_ref    // ⚠️ warning <- ERROR, no se puede devolver una referencia a un valor que se destruirá al salir de la función.
 // }
+
 // fn main() {
 //     let pais = return_str();
 //     println!("{}", pais);
 // }
-// ===================================================================================
 
-// 📌  REFERENCIAS MUTABLES
+// 📌 REFERENCIAS MUTABLES
 // Regla: no se puede usar una referencia mutable al mismo tiempo que una referencia inmutable
+
 // fn main() {
 //     let mut mi_numero = 8;
 //     let num_ref = &mut mi_numero;
@@ -364,27 +388,32 @@
 // fn main() {
 //     let a = 42; // variable "a" con valor 42
 //     let b = &a; // variable "b" con referencia a "a"
-//     println!("6 - Dirección de memoria de \"a\": {:p}", b); // imprimimos la dirección de memoria de "a"
-//     println!("6 - Valor de \"a\": {}", a); // imprimimos el valor de "a"
-//     println!("6 - Valor de \"b\": {}", b); // imprimimos el valor de "b"
+//     println!("Dirección de memoria de \"a\": {:p}", b); // imprimimos la dirección de memoria de "a"
+//     println!("Valor de \"a\": {}", a); // imprimimos el valor de "a"
+//     println!("Valor de \"b\": {}", b); // imprimimos el valor de "b"
 // }
 
 // 📌 PASO DE REFERENCIAS A FUNCIONES
 // Regla de Rust para todas los valores, "un valor solo puede tener un dueño a la vez".
+
 // fn print_pais(pais_nombre: String) {
 //     println!("{}", pais_nombre);
 // }
+
 // fn main() {
-//     let pais = String::from("España"); // se crea la variable "pais" con valor "España"
+//     let pais = String::from("MÁS SOBRE España"); // se crea la variable "pais" con valor "España"
 //     print_pais(pais); // se llama a la función "print_pais" con la variable "pais"
-// print_pais(pais); // ⚠️  ERROR, no se puede usar una variable que ya no es dueña del valor.
+//     print_pais(pais); // ⚠️  ERROR, no se puede usar una variable que ya no es dueña del valor.
 // Al pasar la variable "pais" a la función "print_pais" se transfiere la propiedad del valor.
 // a la función, por lo que la variable "pais" ya no es dueña del valor.
 // } 
-// Es mejor evitar que la función se apropie del valor, para ello se pueden pasar referencias (prestamos los valores) a la función, ej:. "&String"  
+
+// Es mejor evitar que la función se apropie del valor, para ello se pueden pasar referencias (prestamos los valores) a la función, ej:. "&String" 
+
 // fn print_pais(pais_nombre: &String) {
 //     println!("{}", pais_nombre);
 // }
+
 // fn main() {
 //     let pais = String::from("España"); // se crea la variable "pais" con valor "España"
 //     print_pais(&pais); // se llama a la función "print_pais" con la variable "pais"
