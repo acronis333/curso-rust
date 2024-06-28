@@ -8,8 +8,7 @@
 //     print!("0 - {} {} {}\n", primera_letra, espacio, cono_fiesta);
 // }
 
-<<<<<<< HEAD
-// // 📌 Convertir tipos de datos de forma segura con "as"
+//  📌 Convertir tipos de datos de forma segura con "as"
 //    fn main() {
 //        let a = 13u8; // tipo de dato "u8" sin signo de 8 bits
 //        let b = 7u32; // tipo de dato "u32" sin signo de 32 bits
@@ -22,19 +21,6 @@
 // //     otro ejemplo de casting de tipo integer -> tipo  char, tipo booleano -> tipo integer. 
 //        let falso: bool = false; // tipo de dato "bool" falso.
 //        println!("0 - {} -> {}", a as char, falso as u8); // imprimimos el resultado.
-=======
-// 📌 Convertir tipos de datos de forma segura con "as"
-// fn main() {
-//     let a = 13u8; // tipo de dato "u8" sin signo de 8 bits
-//     let b = 7u32; // tipo de dato "u32" sin signo de 32 bits
-//     let c = a as u32 + b; // convertimos "a" a "u32" y sumamos "b"
-//     println!("variable \"a\" convertido a u32: {}", c); // imprimimos el resultado
-//     // otro ejemplo de casting de tipo integer -> tipo  char, tipo booleano -> tipo integer. 
-//     let a = 65u8; // para convertirlo a char debe ser un integer de 8 bits sin signo, 
-//                   // si fuera u32 deberíamos convertirlo antes a u8.
-//     let falso: bool = false; // tipo de dato "bool" falso.
-//     println!("0 - {} -> {}", a as char, falso as u8); // imprimimos el resultado.
->>>>>>> 304cd9c7f72f2266e916cf0bb5f81a8cae5ab63d
 // }
 
 // 📌 Calcular la memoria que ocupa por ejemplo un char y contar los caracteres de un str.
@@ -48,7 +34,6 @@
 //     println!("0 - Otra forma de imprimir el tamaño: {}", c.len()); // imprimimos el tamaño de un str
 // }
 
-<<<<<<< HEAD
 // 📌 INFERENCIA EN TIPO DE DATOS - Para la inferencia de tipos en los números utilizamos el tipo seguido del valor
 //    ejemplo:. let a = 13u8; // tipo de dato "u8" sin signo de 8 bits.
 //    también se puede añadir un guió bajo para separar los números y hacerlos más legibles
@@ -73,15 +58,6 @@
 
 
  
-=======
-// 📌 Para la inferencia de tipos en los números utilizamos el tipo seguido del valor
-// ejemplo:. let a = 13u8; // tipo de dato "u8" sin signo de 8 bits.
-// también se puede añadir un guió bajo para separar los números y hacerlos más legibles
-// ejemplo:. let a = 1_000_000; // tipo de dato "i32" con signo de 32 bits.
-// ejemplo:. let b = 24_u8; // tipo de dato "u8" sin signo de 8 bits.
-// el guión bajo no afecta al valor, solo es para hacerlo más legible, se pueden poner varios guiones bajos.
- 
->>>>>>> 304cd9c7f72f2266e916cf0bb5f81a8cae5ab63d
 // 📌 MACRO "println!" - Display the message "Hello, world!"
 // fn main() { 
 //     println!("1 - Hello, world!");
@@ -149,7 +125,7 @@
 //     let ciudad = "Elche";
 //     let pais = "España";
 //     let provincia = "Alicante";
-//     println!("1 - Ciudad: {ciudad}, País: {pais}, Provincia: {provincia} Este repite ciudad -> {ciudad}");
+//     println!("1 - Ciudad: {ciudad}, País: {país}, Provincia: {provincia} Este repite ciudad -> {ciudad}");
 // }  
 
 // 📌 Usar bloque de código para devolver un valor, devolución sin punto y coma, de lo contrario devolvería nada "()"
@@ -162,7 +138,7 @@
 //     println!("1 - Valor de a: {:?}", mi_numero); // otra forma de imprimir valor, con {:?} se imprime el valor de la variable
 // }
 
-// 📌 VISALIZACIÓN Y DEPURACIÓN
+// 📌 VISUALIZACIÓN Y DEPURACIÓN
 // Existen variables que no se pueden imprimir usando {} en println! aquí es necesario usar la impresión de depuración
 // Existen variables que no se pueden imprimir usando {:?}, como los booleanos, para ello se usa "{:}"
 // Esta forma {#:?} se llama "pretty print" y es muy útil para depurar
@@ -173,7 +149,7 @@
 //     // así con todos los tipos de datos, por ejemplo: i16, u16,i32,u32,i64,u64,i128,u128
 // }
 
-// 📌 Los valores númericos se pueden imprimir en binario, octal, hexadecimal, etc.
+// 📌 Los valores numéricos se pueden imprimir en binario, octal, hexadecimal, etc.
 // fn main() {
 //     let a = 42; // variable "a" con valor 42
 //     println!("6 - Valor de \"a\" en binario: {:b}", a); // imprimimos el valor de "a" en binario
@@ -181,7 +157,7 @@
 //     println!("6 - Valor de \"a\" en hexadecimal: {:x}", a); // imprimimos el valor de "a" en hexadecimal
 // }
 
-// 📌 Se pueden añadir numeros entre las llaves para indicar el orden de las variables a utilizar
+// 📌 Se pueden añadir números entre las llaves para indicar el orden de las variables a utilizar
 // fn main () {
 //     let nombre_padre = "Juan";
 //     let nombre_hijo = "Pedro";
@@ -275,7 +251,8 @@
 //     let num_modify = &mi_numero;
 //     println!("{}", num_modify);
 // }
-// 02 📌  REFERENCIAS MUTABLES
+//
+// 📌  REFERENCIAS MUTABLES
 // Se dispone de {p} para imprimir la dirección de memoria de una variable, ej:. "{:p}"
 // fn main() {
 //     let a = 42; // variable "a" con valor 42
@@ -340,21 +317,12 @@
 // Empezamos con los arrays, que son colecciones de longitud fija de elementos de datos del mismo tipo y los más simples y rápidos.
 
 // 📌 ARRAYS - array es una colección de longitud fija de elementos de datos del mismo tipo.
-<<<<<<< HEAD
 //  El tipo de datos para un array es [T;N] siendo T el tipo del elemento, y N la longitud fija 
 //  conocida en tiempo de compilación. Los elementos individuales se pueden recuperar con el 
 //  operador [x], siendo x un índice de tipo usize (empezando por 0) del elemento que quieras. 
 // Los arrays no pueden cambiar el tamaño y sus datos tienen que ser del mismo tipo, sin   embargo son muy rápidos y eficientes.
  
 // 📌 ARRAYS - se puede obtener una sección (slice) de un array utilizando una referencia "&" y después utilizando ".." para mostrar el rango
-=======
-// El tipo de datos para un array es [T;N] siendo T el tipo del elemento, y N la longitud fija 
-// conocida en tiempo de compilación. Los elementos individuales se pueden recuperar con el 
-// operador [x], siendo x un índice de tipo usize (empezando por 0) del elemento que quieras. 
-// Los arrays no pueden cambiar el tamaño y sus datos tienen que ser del mismo tipo, sin embargo son muy rápidos y eficientes.
- 
-// 📌 ARRAYS - se puede obtener una sección (slice) de un array utilizando una referencia "&" y después utilizando ".." para mostrar el rango.
->>>>>>> 304cd9c7f72f2266e916cf0bb5f81a8cae5ab63d
 // Los indices empiezan en 0, por lo que el primer elemento es el 0, el segundo el 1, etc.
 // Los rangos son inclusivos en el primer número y exclusivos en el segundo, por lo que [2..5] obtiene los elementos 2, 3 y 4.
 // Para que se incluya el último número se puede usar de esta forma [0..=10].
@@ -362,10 +330,6 @@
 // fn main() {
 //     let numeros: [i32;10] = [1,2,3,4,5,6,7,8,9,10]; // array literal de 10 elementos de tipo i32
 //     println!("Todo el array: {:?}", numeros); // imprimimos el slice
-<<<<<<< HEAD
-=======
-//
->>>>>>> 304cd9c7f72f2266e916cf0bb5f81a8cae5ab63d
 //     let _slice_1_al_3 = &numeros[1..3]; // obtebemos indices 1 al 2
 //     let _slice_todos = &numeros[1..]; // obtenemos indices 1 al 9 o final
 //     let _slice_1_al_4 = &numeros[..10]; // obtenemos indices 0 al 9
@@ -381,13 +345,8 @@
 //     //
     
 // }
-<<<<<<< HEAD
 
 // 📌 ARRAYS
-=======
- 
-// 📌 ARRAYS - Podemos inizializar un array con un valor, ver ejemplo 👇 
->>>>>>> 304cd9c7f72f2266e916cf0bb5f81a8cae5ab63d
 // fn main() {
 //     let mut notas_array: [u32; 5] = [0; 5];  // Array con tamaño fijo de 5 elementos e inicializadas las 5 posiciones con ceros
 //     let meses = ["Enero, febrero, marzo, abril, mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"]; // Array de tipo String
@@ -1007,12 +966,12 @@
 // ejemplo: "static mut VARIABLE_ESTATICA_MUTABLE: tipo_de_dato = valor_inicial;"
 // Por convención, las constantes se suelen escribir con todas las letras en mayúsculas, normalmente están fuera del main para que existan en todo el programas.
 
-fn main () {
-    const PI:f64 = 3.14159; // las constantes no cambian nunca su valor, se declaran con "const" y en mayúsculas
-    static ESTACIONES: [&str; 4] = ["Primavera", "Verano", "Otoño", "Invierno"]; // las variables estáticas pueden ser mutables, se declaran con "static" y en mayúsculas, son como variables globales.
-    println!("Vamos de paseo, {} {} {}", PI, PI, PI);
-    println!("Las estaciones son: {:?}\n", ESTACIONES);
-}
+// fn main () {
+//     const PI:f64 = 3.14159; // las constantes no cambian nunca su valor, se declaran con "const" y en mayúsculas
+//     static ESTACIONES: [&str; 4] = ["Primavera", "Verano", "Otoño", "Invierno"]; // las variables estáticas pueden ser mutables, se declaran con "static" y en mayúsculas, son como variables globales.
+//     println!("Vamos de paseo, {} {} {}", PI, PI, PI);
+//     println!("Las estaciones son: {:?}\n", ESTACIONES);
+// }
 
 //  📌 CONSTANTES y casting ("as")
 // fn main () {
@@ -1172,13 +1131,8 @@ fn main () {
 // Se pueden crear métodos para una estructura con la palabra clave "impl" seguida del nombre de la estructura y los métodos.
 
 //  📌 ESTRUCTURAS e IMPLEMENTACIONES con "impl"
-<<<<<<< HEAD
 // #![allow(unused)] // atributo para desactivar advertencias de variables no utilizadas
 // #[derive(Debug)]  // atributo para imprimir la estructura con println!("{:?}", estructura)
-=======
-// #![allow(unused)]
-// #[derive(Debug)]
->>>>>>> 304cd9c7f72f2266e916cf0bb5f81a8cae5ab63d
 // #[derive(Copy, Clone)] // añadimos el atributo "Copy" para que se puedan copiar las estructuras
 // struct Punto {
 //     x: i32,
@@ -1201,7 +1155,6 @@ fn main () {
 //     println!("El Area es: {}", rectangulo.area());
 // }
 
-<<<<<<< HEAD
 // 📌 MÉTODO .len()
 //    El método len() en Rust es un método genérico que devuelve la longitud de una colección.
 //    Se puede usar en vectores, arrays, slices, strings, etc.
@@ -1246,8 +1199,6 @@ fn main () {
 
 
 
-=======
->>>>>>> 304cd9c7f72f2266e916cf0bb5f81a8cae5ab63d
 // 📌 ESTRUCTURAS e IMPLEMENTACIONES con "impl"
 
 
@@ -1322,11 +1273,7 @@ fn main () {
    
     
 // 📌 PRUEBAS arrays, vectores, 
-<<<<<<< HEAD
 #![allow(unused)] // desactiva las advertencias para el código no utilizado en el ámbito donde se encuentra la directiva.
-=======
-// #![allow(unused)] // desactiva las advertencias para el código no utilizado en el ámbito donde se encuentra la directiva.
->>>>>>> 304cd9c7f72f2266e916cf0bb5f81a8cae5ab63d
 // fn main() {
 // // Arrays
 // let mut notas_array: [i32;5] = [0;5];   
@@ -1373,15 +1320,6 @@ fn main () {
 // println!("El valor de x es: {}", x);
 // }
 
-<<<<<<< HEAD
-
-=======
-// 📌 Funciones de primer nivel
-// 
-// fn ladrar() {
-//     println!("Guau");
-// }
->>>>>>> 304cd9c7f72f2266e916cf0bb5f81a8cae5ab63d
 
 
 
