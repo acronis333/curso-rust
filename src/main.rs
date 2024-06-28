@@ -1,37 +1,102 @@
+// IMPORTACIONES DE LIBRERIAS, MÓDULOS o CRATES
 // use std::vec; // importamos el módulo vec de la librería estándar de Rust
-  
-// 📌 TIPOS DE DATOS - char
+
+// 📌   TIPOS DATOS BÁSICOS
+
+// Booleanos - bool para representar verdadero/falso.
+// Números enteros sin signo - u8 u32 u64 u128 para representar números enteros positivos.
+// Números enteros con signo - i8 i32 i64 i128 para representar números enteros positivos y negativos.
+// Números enteros de tamaño de puntero - usize isize se usan para representar índices y tamaños de elementos en memoria.
+// Números en coma flotante - f32 f64.
+// En relación a textos - str char.
+// Tuplas - (valor,valor,...) para pasar secuencias fijas de valores en la pila.
+// Slices - &[T] para referenciar “vistas” en secuencias de valores en la memoria.
+// Un string siempre ocupa 24 bytes en la pila, independientemente de su longitud, es de tamaño fijo.
+// Un i8 siempre ocupa 1 byte en la pila, independientemente de su valor, es de tamaño fijo.
+// Un i32 siempre ocupa 4 bytes en la pila, independientemente de su valor, es de tamaño fijo.
+// Un f32 siempre ocupa 4 bytes en la pila, independientemente de su valor, es de tamaño fijo.
+// Un f64 siempre ocupa 8 bytes en la pila, independientemente de su valor, es de tamaño fijo.
+// Un char siempre ocupa 4 bytes en la pila, independientemente de su valor, es de tamaño fijo.
+// Un bool siempre ocupa 1 byte en la pila, independientemente de su valor, es de tamaño fijo.
+// Un usize e isize siempre o}año de la cadena de texto en la pila, es de tamaño variable + el tamaño de la referencia, generalmente 4 u 8 bytes.
+
+// 📌 TIPOS DE DATOS - (char) - dato alfabético más primitivo del lenguaje que representa un único carácter Unicode, de 32 bits
+// se puede utilizar para almacenar un solo carácter Unicode, como una letra, un número, un emoji, etc. entre comillas simples
+// significa que puede representar mucho más que ASCII. Letras acentuadas; Caracteres chinos, japoneses y coreanos; Emojis etc.
+// - Recordar que el espacio en blanco también es un carácter Unicode. 
+// - Se puede utilizar para almacenar, comparar, convertir y mostrar caracteres Unicode.
+// - Almacenar caracteres individuales: Se puede utilizar el tipo char para almacenar un único carácter Unicode en una variable. 
+// esto puede ser útil para trabajar con cadenas de texto o para procesar caracteres individuales.
+// - Comparar caracteres: Se pueden comparar dos valores char para determinar si son iguales o diferentes. 
+// esto puede ser útil para ordenar cadenas de texto o para buscar caracteres específicos en una cadena.
+// - Convertir caracteres a otros tipos: Se pueden convertir valores char a otros tipos de datos, como String o u8. 
+// esto puede ser útil para trabajar con datos de cadena o para almacenar caracteres en formato binario.
+//
 // fn main() {
 //     let primera_letra = 'A'; // tipo de dato "char" con comillas simples
 //     let espacio = ' '; // tipo de dato "char" con comillas simples
 //     let cono_fiesta = '🎉'; // Emoji también son char, gracias al Unicode otros lenguajes también son char
 //     print!("0 - {} {} {}\n", primera_letra, espacio, cono_fiesta);
-// }
+//
+// ejemplos:
+//
+// ALMACENAR un carácter en una variable
+//     let caracter: char = 'a';
 
-//  📌 Convertir tipos de datos de forma segura con "as"
-//    fn main() {
-//        let a = 13u8; // tipo de dato "u8" sin signo de 8 bits
-//        let b = 7u32; // tipo de dato "u32" sin signo de 32 bits
-//        let c = a as u32 + b; // convertimos "a" a "u32" y sumamos "b"
-//        println!("variable \"a\" convertido a u32: {}", c); // imprimimos el resultado
-// //     Doble conversión de tipo de dato:
-// //     let mi_numero = 100; println!("{}", mi_numero as u8 as char) 
-//        let a = 65u8; // para convertirlo a char debe ser un integer de 8 bits sin signo, 
-//                   // si fuera i32 o u32 deberíamos convertirlo antes a u8.
-// //     otro ejemplo de casting de tipo integer -> tipo  char, tipo booleano -> tipo integer. 
-//        let falso: bool = false; // tipo de dato "bool" falso.
-//        println!("0 - {} -> {}", a as char, falso as u8); // imprimimos el resultado.
-// }
-
-// 📌 Calcular la memoria que ocupa por ejemplo un char y contar los caracteres de un str.
+// COMPARAR dos caracteres
+//     let caracter1: char = 'b';
+//     let caracter2: char = 'c';
+//
+//     if caracter1 == caracter2 {
+//     println!("Los caracteres son iguales");
+//     } else {
+//     println!("Los caracteres son diferentes");
+//     }
+//
+// CONVERTIR un carácter a una cadena
+//     let caracter: char = 'd';
+//     let cadena = caracter.to_string();
+//     println!("La cadena es: {}", cadena);
+//
+// CONVERTIR un carácter a un valor u8
+//     let caracter: char = 'e';
+//     let valor_u8: u8 = caracter as u8;
+//     println!("El valor u8 es: {}", valor_u8);
+//
+// 📌 TIPOS DE DATOS COMPUESTOS - Tipos compuestos pueden agrupar múltiples valores en un solo tipo. 
+// - Tipos compuestos pueden agrupar múltiples valores en un solo tipo. Rust tiene dos tipos compuestos primitivos: tuplas y arreglos.
+// Tipo tupla: Una tupla es una colección de valores de diferentes tipos. Los valores de una tupla se llaman elementos.
+// - Los elementos de una tupla pueden ser de cualquier tipo, incluidos otros tipos compuestos como tuplas y arreglos.
+// - Los elementos de una tupla se pueden acceder mediante índices, que comienzan en 0.
+// // - Los elementos de una tupla se pueden desestructurar para asignarlos a variables individuales.
 // fn main() {
-//     let a = 'A'; // tipo de dato "char" con comillas simples
-//     let b = '🎉'; // Emoji también son char, gracias al Unicode otros lenguajes también son char
-//     let c = "Esto es un str";
-//     println!("0 - Tamaño de un char: {} bytes", std::mem::size_of_val(&a)); // imprimimos el tamaño de un char
-//     println!("0 - Tamaño de un char: {} bytes", std::mem::size_of_val(&b)); // imprimimos el tamaño de un char
-//     println!("0 - Tamaño en caracteres de un str: {}", c.chars().count()); // imprimimos el tamaño de un str
-//     println!("0 - Otra forma de imprimir el tamaño: {}", c.len()); // imprimimos el tamaño de un str
+//     let tup = (500, 6.4, 1);
+//
+//     let (x, y, z) = tup;
+//
+//     println!("The value of y is: {y}");
+// }
+// - También podemos acceder directamente a un elemento de la tupla usando un punto (.) seguido del índice del valor que queremos acceder. 
+//
+// fn main() {
+//     let x: (i32, f64, u8) = (500, 6.4, 1);
+//
+//     let five_hundred = x.0;
+//
+//     let six_point_four = x.1;
+//
+//     let one = x.2;
+// }
+// 
+// El Tipo Arreglo: Un arreglo es una colección de valores del mismo tipo. Los valores de un arreglo se llaman elementos.
+// - Los elementos de un arreglo tienen un tamaño fijo, que se establece en tiempo de compilación.
+// - Se pueden acceder mediante índices, que comienzan en 0, se pueden desestructurar para asignarlos a variables individuales.
+// - Los elementos de un arreglo se pueden acceder directamente usando un índice entre corchetes.
+// - Los arreglos son más útiles cuando sabe que el número de elementos no cambiará. Por ejemplo, si está utilizando los nombres 
+// del mes en un programa, probablemente usaría un arreglo en lugar de un vector porque sabe que siempre contendrá 12 elementos:
+// ejemplo:
+// let meses = ["January", "February", "March", "April", "May", "June", "July", August", "September", "October", "November", "December"];
+// ejemplo: let a: [i32; 5] = [1, 2, 3, 4, 5]; -> tipo = i32, longitud = 5 elementos 
 // }
 
 // 📌 INFERENCIA EN TIPO DE DATOS - Para la inferencia de tipos en los números utilizamos el tipo seguido del valor
@@ -53,14 +118,56 @@
 //     // pero al conocer que lo vamos a sumar a un f32, elige un f32 para mi_otro_decimal
 //     let tercer_decimal = mi_decimal + mi_otro_decimal;
 // }
- 
+//
+// 📌 FUNCIONES - funciones simples - Si la función devuelve un valor se debe poner una flecha
+// y el tipo del valor de devolución. Para devolver un valor se puede usar return o simplemente un valor sin punto y coma.
+//
+// fn suma(a: i32, b: i32) -> i32 {
+//     a + b
+// }
+// fn ladrar() {
+//     println!("Guau");
+// }
+//
+// fn main() {
+// let b = 42;
+// let c= suma(a,b);
+// println!("17 - resultado es: {}",c);
+// ladrar();
+// }
+//
+// 📌 FUNCIONES - pasar como parametros,lo que quiere decir que pueden pasarse por entre funciones
+//     
+// fn hacer_n_veces(f:fn(),n:i64) {
+//     for _ in 0..n {
+//       f();
+//     } // bucle for in
+// }
+// fn main() {
+//     fn ladrar() {
+//         println!("Guau");
+//     }
+//     hacer_n_veces(ladrar,10); // imprime 10 veces resultado de la función ladrar
+// }
+// 📌 - Rust como tal no admite devolver varios valores a la vez, pero es posible usar tuplas y simularlo.
+//
+// fn string_length_and_lines(txt: &String) -> (usize,usize) {
+// (txt.len(),txt.lines().count()) // función contar cantidad caracteres
+// }
+//
+// fn main() {
+// let ss = String::from("Europe's Skies - Alexander Rybak\nSuper Strut - Deodato\nEl Cóndor Pasa - Uña Ramos"); // asignamos 3 lineas de tipo String a variable "ss"
+// let (length,lines) = string_length_and_lines(&ss); // asignamos el valor de la función contar_cantidad_caracteres
+// // a variable longitud y lineas
+// println!("18 - La lista de canciones tiene una longitud de {} caracteres y {} líneas",length,lines); // salida por pantalla variables resultados
+// }
+//
 
 
 
- 
 // 📌 MACRO "println!" - Display the message "Hello, world!"
 // fn main() { 
-//     println!("1 - Hello, world!");
+//     println!("Hello, world!");
 // }
 
 // 📌 MACRO "format!" - Para crear un String
@@ -112,7 +219,7 @@
 //     // println!("1 - Valor de b: {}", _b); // ERROR, b no existe fuera del bloque
 // }
 
-// 📌  MÁS SOBRE LA IMPRESIÓN
+// 📌  IMPRESIÓN - más sobre ella
 // "#r" antepuesto ala variable le permite utilizar nombres reservados, ej, como let, fn, struct, etc.
 // "#r", a veces se necesita imprimir muchas " y caracteres de escape,
 // para ello se usa al comienzo "#r" antes de las primeras comillas 
@@ -981,7 +1088,21 @@
 //                                     // y al mismo tiempo estamos haciendo "shadowing" al  redefinir la variable "xa"
 //     println!("9 - El valor de xa es: {}", xa);
 // }
-    
+//  📌 CASTING - Convertir tipos de datos de forma segura con "as"
+//    fn main() {
+//        let a = 13u8; // tipo de dato "u8" sin signo de 8 bits
+//        let b = 7u32; // tipo de dato "u32" sin signo de 32 bits
+//        let c = a as u32 + b; // convertimos "a" a "u32" y sumamos "b"
+//        println!("variable \"a\" convertido a u32: {}", c); // imprimimos el resultado
+// //     Doble conversión de tipo de dato:
+// //     let mi_numero = 100; println!("{}", mi_numero as u8 as char) 
+//        let a = 65u8; // para convertirlo a char debe ser un integer de 8 bits sin signo, 
+//                   // si fuera i32 o u32 deberíamos convertirlo antes a u8.
+// //     otro ejemplo de casting de tipo integer -> tipo  char, tipo booleano -> tipo integer. 
+//        let falso: bool = false; // tipo de dato "bool" falso.
+//        println!("0 - {} -> {}", a as char, falso as u8); // imprimimos el resultado.
+// }
+   
 //  📌 EXPRESIONES AVANZADAS con variables "let", expresión condicional con "if, else", 
 //   en Rust si algo no lleva punto y coma se vuelve Y evalúa como una expresión
 // fn main () {
@@ -1070,51 +1191,7 @@
 // f(&mut s1);
 // println!("{}",s1);
 
-// 📌 FUNCIONES SIMPLES - Si la función devuelve un valor se debe poner una flecha
-// y el tipo del valor de devolución. Para devolver un valor se puede usar returnfn ladrar() {
-//     println!("Guau");
-// }
-// let b = 42;
-// let c= suma(a,b);
-// println!("17 - resultado es: {}",c);
-// }
 
-//  📌 Rust como tal no admite devolver varios valores a la vez, pero es posible usar tuplas y simularlo.
-// fn string_length_and_lines(txt: &String) -> (usize,usize) {
-// (txt.len(),txt.lines().count()) // función contar cantidad caracteres
-// }
-// fn main() {
-// let ss = String::from("Europe's Skies - Alexander Rybak\nSuper Strut - Deodato\nEl Cóndor Pasa - Uña Ramos"); // asignamos 3 lineas de tipo Striterminalng a variable "ss"
-// let (length,lines) = string_length_and_lines(&ss); // asignamos el valor de la función contar_cantidad_caracteres
-// // a variable longitud y lineas
-// println!("18 - La lista de canciones tiene una longitud de {} caracteres y {} líneas",length,lines); // salida por pantalla variables resultados
-// }
-
-//  📌  las funciones son elementos de primer nivel, lo que quiere decir que pueden pasarse por argumentos 
-//      entre funciones
-
-// fn ladrar () {// 📌 Convertir tipos de datos de forma segura con "as"
-//    fn main() {
-//        let a = 13u8; // tipo de dato "u8" sin signo de 8 bits
-//        let b = 7u32; // tipo de dato "u32" sin signo de 32 bits
-//        let c = a as u32 + b; // convertimos "a" a "u32" y sumamos "b"
-//        println!("variable \"a\" convertido a u32: {}", c); // imprimimos el resultado
-// //     Doble conversión de tipo de dato:
-// //     let mi_numero = 100; println!("{}", mi_numero as u8 as char) 
-//        let a = 65u8; // para convertirlo a char debe ser un integer de 8 bits sin signo, 
-//                   // si fuera i32 o u32 deberíamos convertirlo antes a u8.
-// //     otro ejemplo de casting de tipo integer -> tipo  char, tipo booleano -> tipo integer. 
-//        let falso: bool = false; // tipo de dato "bool" falso.
-//        println!("0 - {} -> {}", a as char, falso as u8); // imprimimos el resultado.
-// }
-//     println!("19 - Guau");
-// } // función ladrar
-// fn hacer_n_veces(f:fn(),n:i64) {
-//     for _ in 0..n {
-//       f();
-//     } // bucle for in
-// }
-// hacer_n_veces(ladrar,10); // imprime 10 veces resultado de la función ladrar
 
 //  📌  Aqui generacidad, poner algo
 
@@ -1154,8 +1231,17 @@
 //     let rectangulo = Rectangulo {origen: p, alto: 50, ancho: 50};
 //     println!("El Area es: {}", rectangulo.area());
 // }
-
-// 📌 MÉTODO .len()
+// 📌 CALCULAR MEMORIA OCUPADA - ejemplo un char y contar los caracteres de un str.
+// fn main() {
+//     let a = 'A'; // tipo de dato "char" con comillas simples
+//     let b = '🎉'; // Emoji también son char, gracias al Unicode otros lenguajes también son char
+//     let c = "Esto es un str";
+//     println!("0 - Tamaño de un char: {} bytes", std::mem::size_of_val(&a)); // imprimimos el tamaño de un char
+//     println!("0 - Tamaño de un char: {} bytes", std::mem::size_of_val(&b)); // imprimimos el tamaño de un char
+//     println!("0 - Tamaño en caracteres de un str: {}", c.chars().count()); // imprimimos el tamaño de un str
+//     println!("0 - Otra forma de imprimir el tamaño: {}", c.len()); // imprimimos el tamaño de un str
+// }
+// 📌 MÉTODO .len() Calcular la longitud en bytes
 //    El método len() en Rust es un método genérico que devuelve la longitud de una colección.
 //    Se puede usar en vectores, arrays, slices, strings, etc.
 // fn main() {
@@ -1252,28 +1338,11 @@
 // Rust es un lenguaje de programación de propósito general, multi-paradigma, concurrente y seguro
 // En Rust hay que favorecer el uso de variables locales, en lugar de globales siempre que sea posible, si necesitamos compartir datos entre funciones, se pueden usar argumentos y retornos de funciones o estructuras de datos compartidas.
 
-//  📌   TIPOS BÁSICOS
 
-// Booleanos - bool para representar verdadero/falso.
-// Números enteros sin signo - u8 u32 u64 u128 para representar números enteros positivos.
-// Números enteros con signo - i8 i32 i64 i128 para representar números enteros positivos y negativos.
-// Números enteros de tamaño de puntero - usize isize se usan para representar índices y tamaños de elementos en memoria.
-// Números en coma flotante - f32 f64.
-// En relación a textos - str char.
-// Tuplas - (valor,valor,...) para pasar secuencias fijas de valores en la pila.
-// Slices - &[T] para referenciar “vistas” en secuencias de valores en la memoria.
-// Un string siempre ocupa 24 bytes en la pila, independientemente de su longitud, es de tamaño fijo.
-// Un i8 siempre ocupa 1 byte en la pila, independientemente de su valor, es de tamaño fijo.
-// Un i32 siempre ocupa 4 bytes en la pila, independientemente de su valor, es de tamaño fijo.
- // Un f32 siempre ocupa 4 bytes en la pila, independientemente de su valor, es de tamaño fijo.
-// Un f64 siempre ocupa 8 bytes en la pila, independientemente de su valor, es de tamaño fijo.
-// Un char siempre ocupa 4 bytes en la pila, independientemente de su valor, es de tamaño fijo.
-// Un bool siempre ocupa 1 byte en la pila, independientemente de su valor, es de tamaño fijo.
-// Un usize e isize siempre o}año de la cadena de texto en la pila, es de tamaño variable + el tamaño de la referencia, generalmente 4 u 8 bytes.
    
     
 // 📌 PRUEBAS arrays, vectores, 
-#![allow(unused)] // desactiva las advertencias para el código no utilizado en el ámbito donde se encuentra la directiva.
+//#![allow(unused)] // desactiva las advertencias para el código no utilizado en el ámbito donde se encuentra la directiva.
 // fn main() {
 // // Arrays
 // let mut notas_array: [i32;5] = [0;5];   
