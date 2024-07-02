@@ -1234,15 +1234,77 @@
 //     println!("Valor de x después de la modificación: {}", r2); // Imprime "Valor de x después de la modificación: 
 // }
   
-//  📌 PRESTAMOS (Prestando en Rust) prestasmo en modo escritura, debemos utilizar "&mut"
-    
+//  📌 PRESTAMOS (Prestando en Rust) prestasmo en modo escritura, debemos utilizar "&mut"    
 // fn f(s: &mut String) {
 //     s.push_str(" & Adios - Xavier Cugat");
 // }
-// let mut s1 = String::from("16 - Bolero - Maurice Ravel");
+// //
+// fn main() {
+// let mut s1 = String::from("Bolero - Maurice Ravel");
 // f(&mut s1);
 // println!("{}",s1);
+// }
+//
+// 📌 TRAITS - (rasgos)
+// Los traits son una forma de definir un comportamiento que un tipo de dato puede tener.
+// Se definen con la palabra clave "trait" seguida del nombre del trait y las funciones que define.
+// Se pueden implementar traits para tipos de datos definidos por el usuario, como "struct" y "enum".
+// ejemplo de traits -> "Display" para imprimir un tipo de dato, "Debug" para imprimir un tipo de dato con "{:?}"
+// Copy y Clone también son traits, Copy se usa para tipos de datos que se copian en lugar de moverse
+//  y Clone se usa para hacer copias de un tipo de dato.
+// Para que un tipo tenga un trait, se debe implementar el trait con la palabra clave "impl" seguida del 
+// nombre del trait y las funciones que define.
+//
+// Hay atributos que se pueden añadir a los traits, como "derive" para implementar traits automáticamente.
+// Esto es lo que sucede con "Debug" y "Display", que se pueden implementar automáticamente con "derive".
+// ejemplo: #[derive(Debug)] #[derive(Display)]
+//
+// #[derive(Debug)]
+// struct Punto {
+//     numero: usize,
+// }
+// fn main() {}
+//
+// Hay  otros traits que son más dificiles de implementar y hay que hacerlo manualmente con "impl"
+// Ejemplo de implementación de un trait para un tipo de dato definido por el usuario.
+//
+// struct Animal {
+//     nombre: String,
+// }
+// //
+// trait Perro {
+//     fn ladrar(&self) {
+//         println!("¡Guau, guau!");
+//     }
+//     fn correr(&self) {
+//         println!("¡Corre, corre!");
+//     }
+// }
+// //
+// impl Perro for Animal {  // Ahora el Animal implementa el trait Perro
+//   fn correr(&self) {
+//       println!("¡{} está corriendo!", self.nombre);
+//   } 
+// }
 
+// //
+// fn main() {
+//     let toto = Animal {
+//        nombre: "Toto".to_string(),
+//     };
+//     toto.ladrar();   // El Animal toto ahora puede ladrar
+//     toto.correr();   // El Animal toto ahora puede correr
+    
+// }
+
+
+
+
+
+
+
+
+// fn main() {
 
 
 // 📌  Aqui generacidad, poner algo
