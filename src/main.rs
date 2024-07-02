@@ -1180,15 +1180,16 @@
 // Distinto comportamiento según el tipo de un valor, la trait Copy (la mayoría de tipos primitivos), 
 // entonces su comportamiento por defecto es de copia, la copia es barata y rápida y no influye 
 // que existan varias copias de lo mismo.
-// Se trata de valores que se almacenan en el stack.
+// Se trata de valores que se almacenan en el stack (Pila).
 // Clone permite hacer copias de datos más complejos, por ejemplo de un vector
-// La primitiva String solo incorpora Clone, crear una copia dela variable daría error como el ejemplo de abajo
-
+// La primitiva String solo incorpora Clone, crear una copia de la variable daría error como el ejemplo de abajo
+// por haber movido el valor de s1 a s2.
+//
 // fn main(){
 //     let s1 = String::from("Adios - Xavier Cugat");
 //     let s2 = s1;
-//     println!("{}",s1); // ERROR hemos movido el valor de s1 a "s2" "s1" ya no es dueño de ese valor", ya no podemos imprimir s1 
-//     // ERROR NO IMPRIme s1
+//     println!("{}",s1); // ERROR hemos movido el valor de s1 a "s2" "s1" ya no es dueño de ese valor"  
+//                        // ya no podemos imprimir s1//     // ERROR NO IMPRIme s1
 // }
 // Este código da error porque el tipo String no implementa Copy. Entonces la línea let s2 = s1; 
 // lo que ha hecho en realidad ha sido mover el valor. Mover significa que le ha transferido el 
@@ -1198,7 +1199,6 @@
     
 // 📌 El tipo String implementa Clone así que es posible generar otro dato String exactamente igual 
 // pero independiente al original.
-
 
 // 📌 Ejemplo de CLONE para un String
 // let s1 = String::from("Adios - Xavier Cugat");
@@ -1211,23 +1211,29 @@
     
 // let s1 =  String::from("Bolero - Maurice Ravel");
 // let s2 = s1.clone();
-// f(s2);ste 
+// f(s2);
 // Este código daría error si al hacer la llamada a la función f hemos transferido la propiedad 
 // del valor de s1 a f. Por ello, cuando intentamos hacer el print no vamos a poder ya que 
 // s1 ya no es dueña de la cadena de texto. 
 // Para solucionar estos problemas tenemos los préstamos, tal y como ha quedado el código.
 // }
 
-    
 // 📌 PRESTAMOS (Prestando en Rust) 2 maneras: solo lectura o con escritura
 // NORMA: solo una con permisos de escritura pero infinidad con permiso de lectura, nunca las dos a la vez. 
-// El prestamo se realiza con el operador "&" que es una "referencia" de lectura al valor
+// El préstamo se realiza con el operador "&" que es una "referencia" de lectura al valor
 // La variable sigue siendo la dueña del valor, solo lo ha prestado y entrega una referencia
+// fn main() {
+//     let mut x = 5;
 
-    
-//        -->-->--> // AQUÍ BUSCAR EJEMPLOS de prestasmos referencia de lectura 
+//     let r1 = &x; // Préstamo inmutable
+//     println!("Valor de x: {}", r1); // Imprime "Valor de x: 5"
 
-    
+//     let r2 = &mut x; // Préstamo mutable
+//     *r2 += 1; // Modifica el valor de x a 6
+
+//     println!("Valor de x después de la modificación: {}", r2); // Imprime "Valor de x después de la modificación: 
+// }
+  
 //  📌 PRESTAMOS (Prestando en Rust) prestasmo en modo escritura, debemos utilizar "&mut"
     
 // fn f(s: &mut String) {
@@ -1239,13 +1245,83 @@
 
 
 
-//  📌  Aqui generacidad, poner algo
+// 📌  Aqui generacidad, poner algo
 
-//  📌  Aqui CLOSURES
+// 📌  Aqui CLOSURES
 
-//  📌  Structs, traits y POO en Rust
+// 📌  Structs, traits y POO en Rust
 
-//  📌 ESTRUCTURAS 
+
+
+// 📌 CONVERTIR String a tipo numérico con .parse()
+// .parse() es un método que convierte un String en un tipo numérico, pero hay 
+// que tener en cuenta que el tipo de dato debe ser el mismo que el tipo de dato del String.
+// .exprect() es un método que se usa para manejar errores, si el método .parse() falla,
+// se puede usar .expect() para mostrar un mensaje de error.
+// fn main() {
+//     let numero = "42"; // Creamos un String con el valor "42".
+//     let numero: i32 = numero.parse().expect("No es un número"); // Convertimos el String en un i32.
+//     println!("El número es: {}", numero); // Imprimimos el número.
+// }
+
+// 📌 CONVERTIR String a tipo numérico con  .parse() y comprobamos con match
+// librería estándar de Rust std::num::ParseIntError, que se usa para manejar errores 
+// al convertir un String en un número.
+// fn main() {
+//     let numero = "42"; // Creamos un String con el valor "42".
+//     let numero: i32 = match numero.parse() { // Convertimos el String en un i32.
+//         Ok(numero) => numero, // Si la conversión es correcta, devolvemos el número.
+//         Err(_) => 0, // Si hay un error, devolvemos 0.
+//     };
+//     println!("El número es: {}", numero); // Imprimimos el número.
+// }
+
+// 📌 CONVERTIR String a tipo numérico con  .parse() y un Result con "std::num::ParseIntError"
+// fn main() {
+//     let numero = "42"; // Creamos un String con el valor "42".
+//     let numero: Result<i32, std::num::ParseIntError> = numero.parse(); // Convertimos el String en un i32.
+//     match numero { // Comprobamos si la conversión es correcta.
+//         Ok(numero) => println!("El número es: {}", numero), // Si la conversión es correcta, imprimimos el número.
+//         Err(_) => println!("No es un número"), // Si hay un error, imprimimos un mensaje de error.
+//     }
+// }
+
+// 📌 EL OPERADOR "?"
+// El operador "?" se usa para manejar errores de forma más sencilla, se coloca al final de una expresión
+// que devuelve un Result, si el Result es Ok, devuelve el valor, si es Err, devuelve el error y sale de la función.
+// Es una forma corta de gestionar un valor de tipo Result, si es Ok, devuelve el valor, si es Err, devuelve el error.
+// también es mas corta qur "match" y que "if let"
+// Después de una función que devuelve un Result, se puede usar "?" para devolver el valor contenido en Ok o el error.
+// 
+
+// 📌 CONVERTIR String a tipo numérico con  .parse() y un Result con "std::num::ParseIntError" 
+// aplicado a un vector de Strings y utilizando "?" para manejar errores.
+//
+// fn parse_str(input: &str) -> Result<i32, std::num::ParseIntError> {
+//     let parsed_number = input.parse::<i32>()?;
+//     Ok(parsed_number)
+// }
+//
+// fn main() {
+//     let str_vec = vec!["Siete", "8", "9.0", "bien", "6060"]; // Creamos un vector con varios Strings.
+//     for item in str_vec { // Recorremos el vector.
+//         let parsed = parse_str(item); // Convertimos el String en un i32.
+//         println!("{:?}", parsed); // Imprimimos el resultado.
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+// 📌 ESTRUCTURAS 
 // Las estructuras son un tipo de dato que permite agrupar varios campos con diferentes tipos en un solo objeto.
 // Se definen con la palabra clave "struct" seguida del nombre de la estructura y los campos o atributos y sus tipos de datos.
 // Se pueden crear instancias de una estructura con la palabra clave "let" seguida del nombre de la estructura y los valores.
@@ -1306,28 +1382,6 @@
 //     let length = s.len(); // length == 13
 //     println!("El tamaño de la cadena de texto es: {}", length);
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
