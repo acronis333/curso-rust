@@ -1265,7 +1265,7 @@
 // }
 // fn main() {}
 //
-// Hay  otros traits que son más dificiles de implementar y hay que hacerlo manualmente con "impl"
+// Hay  otros traits que son más difíciles de implementar y hay que hacerlo manualmente con "impl"
 // Ejemplo de implementación de un trait para un tipo de dato definido por el usuario.
 //
 // struct Animal {
@@ -1294,8 +1294,48 @@
 //     };
 //     toto.ladrar();   // El Animal toto ahora puede ladrar
 //     toto.correr();   // El Animal toto ahora puede correr
-    
 // }
+//
+// 📌 ENCADENAR MÉTODOS
+// Se pueden encadenar métodos en Rust, es decir, llamar a varios métodos seguidos en la misma línea.
+// Para encadenar métodos, se llama a un método después de otro, separados por un punto ".".
+// Se pueden encadenar tantos métodos como se quiera, siempre que el método devuelva un valor que se pueda usar en el siguiente método.
+// fn main() {
+//     let mut s = String::from("Hola, "); // Creamos un String con el valor "Hola, ".
+//     s.push_str("mundo!"); // Añadimos "mundo!" al final del String.
+//     println!("{}", s); // Imprimimos el String.
+// }
+//
+// 📌 ENCADENAR MÉTODOS
+// fn main() {
+//     let s = String::from("Hola, ").push_str("mundo!"); // Creamos un String con el valor "Hola, " y añadimos "mundo!" al final.
+//     println!("{}", s); // Imprimimos el String.
+// }
+//
+// 📌 ENCADENAR MÉTODOS
+// fn main() {
+//     let s = String::from("Hola, ").push_str("mundo!").to_uppercase(); // Creamos un String con el valor "Hola, " 
+//                                                                       // y añadimos "mundo!" al final y lo convertimos a mayúsculas.
+//    println!("{}", s); // Imprimimos el String.
+// }
+//
+// 📌 ENCADENAR MÉTODOS
+// Con el estilo funcional de programación se pueden encadenar métodos. Encadenar métodos significa que 
+// se pueden unir para formar una única sentencia. A continuación se muestra un ejemplo de muchos métodos unidos:
+// fn main() {
+//     let my_vec = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+//     let new_vec = my_vec.into_iter().skip(3).take(4).collect::<Vec<i32>>();
+
+//     println!("{:?}", new_vec);
+// }
+//
+// 📌 ENCADENAR MÉTODOS
+// Si se separan en diferentes líneas para hacerlo más fácil de leer (y se añaden comentarios explicativos):
+// fn main() 
+
+
+
 
 
 
