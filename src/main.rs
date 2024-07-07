@@ -1416,12 +1416,87 @@
 //     my_library.add_book("Demian - die Geschichte einer Jugend");
 //     my_library.add_book("구운몽");
 //     my_library.add_book("吾輩は猫である");
-
-    
-   
+// 
 //     println!("{:?}", my_library.books); // se puede imprimir la lista de libros
+//
 // }
 //
+// 📌 CLOUSURES 
+//
+// Los cierres o closures (en inglés) son una especie de funciones rápidas que no necesitan un nombre. 
+// En ocasiones se les denomina funciones lambdas, pueden tener argumentos y devolver un valor.
+// Son fáciles de encontrar en el código debido a que utilizan || en lugar de ().
+//
+// fn main() {
+//     let my_closure = || println!("Esto es un cierre"); // Se define un cierre que imprime un mensaje.
+//     my_closure();                                      // Se llama al cierre.
+// }
+//
+// Las clausuras son funciones anónimas que se pueden almacenar en variables y pasar como argumentos a otras funciones.
+// Se definen con la palabra clave "move" seguida de una clausura entre llaves "{}".
+// Las clausuras pueden capturar variables del entorno en el que se definen.
+// Entre los símbolos || se pueden añadir variables de entrada y tipos
+// ejemplo:.
+// fn main() {
+//     let my_closure = |x: i32| println!("{}", x);
+//
+//     my_closure(5);
+//     my_closure(5+5);
+// }
+//
+// 📌 CLOUSURES 
+//
+// Cuando un cierre se hace más complejo, se puede escribir con un bloque de código
+// que puede ser tan largo como se requiera
+//
+// fn main() {
+//     let my_closure = || {
+//         let number = 7;
+//         let other_number = 10;
+//         println!("Los dos números son {} y {}.", number, other_number);
+//           // Este cierre puede ser tan largo como se necesite, como sucede con las funciones.
+//     };
+//
+//     my_closure();
+// }
+// 
+// 📌 CLOUSURES 
+// https://www.jmgaguilera.com/rust_facil/34.html -> Cierres en Rust
+//
+// Pero los cierres son especiales porque pueden guardarse valores de variables que se encuentren 
+// fuera del ellos incluso aunque no reciban parámetros
+// Una || que no encierra ninguna variable exterior en su interior es una función anónima. 
+// No es, estrictamente, un closure.
+// Una || que sí encierra una variable exterior en su interior sí es un cierre.
+//
+// fn main() {
+//     let number_one = 6;
+//     let number_two = 10;
+
+//     let my_closure = || println!("{}", number_one + number_two);
+//     my_closure();
+// }
+//
+// 📌 CLOUSURES - Métodos utiles para sus usos con "cierres" o "clousures"
+//
+// fn main() {
+//     let meses = vec!["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+//     let filtered_meses = meses
+//         .into_iter()                         // crea un iterador
+//         .filter(|month| month.len() <= 5)     // Solo los meses con cinco o menos caracters (byte)
+//                                              // En este caso, todos los caracteres son de un byte, por eso funciona usar .len()
+//         .filter(|month| month.contains("u")) // Se seleccionan solo los meses que contengan la letra u
+//         .collect::<Vec<&str>>();
+
+//     println!("{:?}", filtered_meses);
+// }
+//
+
+
+
+
+
 
 
 
@@ -1440,7 +1515,7 @@
 
 // 📌  Aqui generacidad, poner algo
 
-// 📌  Aqui CLOSURES
+// 📌  Aqui CLOSURESCLO
 
 // 📌  Structs, traits y POO en Rust
 
