@@ -1332,7 +1332,98 @@
 //
 // 📌 ENCADENAR MÉTODOS
 // Si se separan en diferentes líneas para hacerlo más fácil de leer (y se añaden comentarios explicativos):
-// fn main() 
+// fn main() {
+//     let my_vec = vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+//     let new_vec = my_vec
+//         .into_iter() // Itera a través de todos los elementos.
+//                      // Esta función devuelve los elementos, no referencias a ellos.
+//         .skip(3) // se salta tres elementos, en este caso: 0, 1 y 2
+//         .take(4) // obtiene los cuatro primeros que quedan: 3, 4, 5 y 6
+//         .collect::<Vec<i32>>(); // los coloca en un nuevo Vec<i32>
+//
+//     println!("{:?}", new_vec);
+// }
+//
+// 📌 ITERADORES 
+// Los iteradores son una forma de recorrer una colección de elementos en Rust.
+// Se pueden crear iteradores con el método "iter" de un vector, que devuelve un iterador
+// que recorre los elementos del vector.
+// Se pueden recorrer los elementos de un iterador con un bucle "for" o con el método "for_each".
+//
+// .iter() -> para iterar a través de referencias a los elementos.
+// .iter_mut() -> para iterar mediante referencias modificables (mutables).
+// .into_iter() -> para obtener un iterador sobre valores, no referencias.
+// .map() -> para transformar los elementos de un iterador.
+// .collect() -> para recopilar los elementos transformados en un nuevo contenedor.
+// .for_each() -> para ejecutar una función en cada elemento de un iterador.
+//  
+// fn main() {
+//     let vec = vec![1, 2, 3, 4, 5]; // Creamos un vector con los valores 1, 2, 3, 4 y 5.
+//     for i in vec.iter() { // Recorremos los elementos del vector con un bucle "for".
+//         println!("{}", i); // Imprimimos cada elemento.
+//     }
+// }
+//
+// 📌 ITERADORES
+// Iteradores con uso de iter(), map(), collect(), into_iter(), map(), collect(), iter_mut(), for_each()
+//
+// https://www.jmgaguilera.com/rust_facil/33.html -> Iteradores en Rust
+//    fn main() {
+//     let vector1 = vec![1, 2, 3]; // Se usará .iter() y .into_iter() sobre este vector
+//     let vector1_a = vector1.iter().map(|x| x + 1).collect::<Vec<i32>>();
+//     let vector1_b = vector1.into_iter().map(|x| x * 10).collect::<Vec<i32>>();
+
+//     let mut vector2 = vec![10, 20, 30]; // Se usará .iter_mut() sobre este otro vector
+//     vector2.iter_mut().for_each(|x| *x +=100);
+
+//     println!("{:?}", vector1_a);
+//     println!("{:?}", vector2);
+//     println!("{:?}", vector1_b);
+// }
+//
+// 📌 ITERADORES - ejemplo: Biblioteca de libros
+
+// #[derive(Debug)] // Se quiere usar print con {:?}
+// struct Library {
+//     library_type: LibraryType, // Este es el enum
+//     books: Vec<String>, // lista de libros
+// }
+
+// #[derive(Debug)]
+// enum LibraryType { // las bibliotecas pueden ser de la ciudad o del país
+//     City,
+//     Country,
+// }
+
+// impl Library {
+//     fn add_book(&mut self, book: &str) { // Se usa add_book para añadir nuevos libros
+//         self.books.push(book.to_string()); // Se toma un &str y lo convierte en String, para añadirlo después a Vec
+//     }
+
+//     fn new() -> Self { // Esta función crea una nueva biblioteca
+//         Self {
+//             library_type: LibraryType::City, // La mayoría son de ciudades, por lo qu ese usa como valor por defecto
+//                                              // la mayor parte de las veces.
+//             books: Vec::new(),
+//         }
+//     }
+// }
+
+// fn main() {
+//     let mut my_library = Library::new(); // crea una nueva biblioteca
+//     my_library.add_book("The Doom of the Darksword"); // se añaden algunos libros
+//     my_library.add_book("Demian - die Geschichte einer Jugend");
+//     my_library.add_book("구운몽");
+//     my_library.add_book("吾輩は猫である");
+
+    
+   
+//     println!("{:?}", my_library.books); // se puede imprimir la lista de libros
+// }
+//
+
+
 
 
 
