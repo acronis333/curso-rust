@@ -1816,9 +1816,104 @@
 // 
 // 📌 Rc
 //
+// En Rust cada valor solo puede ter un dueño. Por eso, el siguiente código no funciona:
+//
+// fn takes_a_string(input: String) {
+//     println!("It is: {}", input)
+// }
+//
+// fn also_takes_a_string(input: String) {
+//     println!("It is: {}", input)
+// }
+//
+// fn main() {
+//     let user_name = String::from("User MacUserson");
+//
+//     takes_a_string(user_name);
+//     also_takes_a_string(user_name); // ⚠️
+// }
+//
+// Después de que takes_a_string reciba user_name, no se puede volver a usar. 
+// En este caso, se podría solventar utilizando user_name.clone(). 
+// Pero en ocasiones, un valor forma parte de un struct y puede que no se pueda clonar ese struct.
+// Rc sirve para permitir que un valor tenga más de un dueño de forma simultánea.
+// Rc anota quienes tienen la propiedad y cuántos. Posteriormente, cuando el número de dueños 
+// baja a cero, el valor asociado se liberará.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/42.html
+// 
 // 📌 Multiples hilos
 //
+// Para ejecutar diferentes tareas al mismo tiempo, se usan los hilos (threads). 
+// Esto significa que el sistema operativo crea este hilo y lo asigna a un núcleo de proceso
+// Los ordenadores modernos suelen tener más de un núcleo de proceso por lo que pueden ejecutar más de una cosa a la vez.
+// Para trabajar con múltiples hilos en Rust, se puede usar la librería estándar std::thread.
+// Se puede crear un nuevo hilo con la función thread::spawn y pasarle un cierre (closure) 
+// con el código que se quiere ejecutar.
+// Se puede esperar a que un hilo termine con el método join.
+// Se puede usar la macro thread::sleep para hacer que un hilo espere un tiempo determinado.
+// Se pueden crear hilos con std::thread::spawn al que se le pasa un cierre para indicarle qué 
+// tiene que hacer. Los hilos son interesantes porque se ejecutan a la vez.
+//
+// ejemplo:
+// fn main() {
+//     std::thread::spawn(|| {
+//         println!("I am printing something");
+//     });
+// }
+//
+// Si se ejecuta este código, en ocasiones se imprimirá algo y otras veces no. 
+// Dependerá también de la velocidad del ordenador en que se ejecute. 
+// Esto sucede porque main() se ejecuta en el hilo principal del programa y el cierre en un hilo secundario. 
+// Cuando el hilo principal, main(), finaliza, el programa se para.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/43.html
+//
 // 📌 Cierres en funciones 
+//
+// NECESARIO: https://www.jmgaguilera.com/rust_facil/44.html
+//
+// 📌 Impl Trait
+//
+// 📌 Arc 
+// 
+// 📌 Canales
+// 
+// 📌 assert_eq!
+//
+// 📌 Atributos
+//
+// Ya se ha visto anteriormente código como este #[derive(Debug)]. Este tipo de código es un atributo. 
+// Los atributos son pequeñas piezas de código que dan información al compilador. No son fáciles de crear, 
+// pero son muy fáciles de usar.
+// Un atributo puede comenzar con solo #, lo que significa que solo afecta al código de la siguiente línea. 
+// Sin embargo, si comienza con #! afectará a todo lo que esté en su espacio.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/49.html
+//
+// 📌 Box
+//
+// Box es un tipo de dato que permite almacenar valores en el heap.
+// Permite almacenar en el heap (el montón) un valor, en lugar de almacenarlo en la pila. 
+// Para crear un elemento de este tipo se usa Box::new() con el elemento como parámetro.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/50.html
+//   
+// 📌 Box y los Rasgos
+// 
+// 📌 Default y el patrón constructor (builder)
+// 
+// 📌 Deref y DerefMut
+// 
+// 📌 Crates (cajones) y módulos
+//
+// 📌 Pruebas (testing) - leer https://www.jmgaguilera.com/rust_facil/55.html
+//   
+// 📌 Crates externas - leer https://www.jmgaguilera.com/rust_facil/56.html
+//
+// 📌 
+
+
+
+
+
+
 
 
 
