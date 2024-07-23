@@ -1806,7 +1806,6 @@
 // 
 // En ocasiones, se necesita escribir código para ayudar a imaginar el proyecto que se está desarrollando.
 // ejemplo:
-https://www.jmgaguilera.com/rust_facil/41.html// }
 //
 // fn delete_libro(libro: Libro) -> Result<(), String> {
 //     todo!()
