@@ -1,4 +1,4 @@
-// 📌 IMPORTACIONE Y USO DE LIBRERIAS -  MÓDULOS - CRATES - etc.
+// 📌 IMPORTACION Y USO DE LIBRERIAS -  MÓDULOS - CRATES - etc.
 // use std::vec; // importamos el módulo vec de la librería estándar de Rust
 
 // 📌   TIPOS DATOS BÁSICOS
@@ -37,31 +37,54 @@
 //     let espacio = ' '; // tipo de dato "char" con comillas simples
 //     let cono_fiesta = '🎉'; // Emoji también son char, gracias al Unicode otros lenguajes también son char
 //     print!("0 - {} {} {}\n", primera_letra, espacio, cono_fiesta);
-//
+
+// // ejemplos:
+
+// // ALMACENAR un carácter en una variable
+//     let caracter: char = 'a';
+
+// // COMPARAR dos caracteresfn main() {
+//     let primera_letra = 'A'; // tipo de dato "char" con comillas simples
+//     let espacio = ' '; // tipo de dato "char" con comillas simples
+//     let cono_fiesta = '🎉'; // Emoji también son char, gracias al Unicode otros lenguajes también son char
+//     print!("0 - {} {} {}\n", primera_letra, espacio, cono_fiesta);
+
 // ejemplos:
-//
+
 // ALMACENAR un carácter en una variable
 //     let caracter: char = 'a';
 
 // COMPARAR dos caracteres
 //     let caracter1: char = 'b';
 //     let caracter2: char = 'c';
-//
+
 //     if caracter1 == caracter2 {
 //     println!("Los caracteres son iguales");
 //     } else {
 //     println!("Los caracteres son diferentes");
 //     }
-//
+
 // CONVERTIR un carácter a una cadena
 //     let caracter: char = 'd';
 //     let cadena = caracter.to_string();
 //     println!("La cadena es: {}", cadena);
-//
+
 // CONVERTIR un carácter a un valor u8
 //     let caracter: char = 'e';
 //     let valor_u8: u8 = caracter as u8;
 //     println!("El valor u8 es: {}", valor_u8);
+// }
+
+// // CONVERTIR un carácter a una cadena
+//     let caracter: char = 'd';
+//     let cadena = caracter.to_string();
+//     println!("La cadena es: {}", cadena);
+
+// // CONVERTIR un carácter a un valor u8
+//     let caracter: char = 'e';
+//     let valor_u8: u8 = caracter as u8;
+//     println!("El valor u8 es: {}", valor_u8);
+// }
 //
 // 📌 TIPOS DE DATOS COMPUESTOS - Tipos compuestos pueden agrupar múltiples valores en un solo tipo. 
 // - Tipos compuestos pueden agrupar múltiples valores en un solo tipo. Rust tiene dos tipos compuestos primitivos: tuplas y arreglos.
@@ -1461,7 +1484,7 @@
 // }
 // 
 // 📌 CLOUSURES 
-// https://www.jmgaguilera.com/rust_facil/34.html -> Cierres en Rust
+// https://www.jmgaguilera.com/rust_facil/34.html -> Closures "Cierres" en Rust
 //
 // Pero los cierres son especiales porque pueden guardarse valores de variables que se encuentren 
 // fuera del ellos incluso aunque no reciban parámetros
@@ -1480,18 +1503,334 @@
 // 📌 CLOUSURES - Métodos utiles para sus usos con "cierres" o "clousures"
 //
 // fn main() {
-//     let meses = vec!["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-
+//     let meses = vec![
+//           "Enero",
+//            "Febrero", 
+//            "Marzo", 
+//            "Abril", 
+//            "Mayo", 
+//            "Junio", 
+//            "Julio", 
+//            "Agosto", 
+//            "Septiembre", 
+//            "Octubre", 
+//            "Noviembre", 
+//            "Diciembre"
+//      ];
+//
 //     let filtered_meses = meses
 //         .into_iter()                         // crea un iterador
 //         .filter(|month| month.len() <= 5)     // Solo los meses con cinco o menos caracters (byte)
 //                                              // En este caso, todos los caracteres son de un byte, por eso funciona usar .len()
 //         .filter(|month| month.contains("u")) // Se seleccionan solo los meses que contengan la letra u
 //         .collect::<Vec<&str>>();
-
+//
 //     println!("{:?}", filtered_meses);
 // }
 //
+// 📌 MACRO dbg!
+//
+// La macro dbg! es una macro de depuración que imprime el valor de una expresión con información adicional.
+// alternativa a println! para depurar, porque es más fácil de teclear y da más información.
+// se puede poner en cualquier parte del código y se puede usar en cualquier tipo de dato.
+//  fn main() {
+//     let mut my_number = dbg!(9);    // Se crea una variable "my_number" con el valor 9 y se imprime con dbg!.
+//     dbg!(my_number += 10);               // Se incrementa el valor de "my_number" en 10 y se imprime con dbg!.
+//
+//     let new_vec = dbg!(vec![8, 9, 10]); // Se crea un vector con los valores 8, 9 y 10 y se imprime con dbg!.
+//
+//     let double_vec = dbg!(new_vec.iter().map(|x| x * 2).collect::<Vec<i32>>()); // Se duplican los valores del
+// vector iterando sobre ellos y mapeándo cada valor multiplicado por 2 y se recolecta o colecciona en un nuevo 
+// vector que se imprime con dbg!.
+//
+//     dbg!(double_vec);   // Se imprime el nuevo vector con dbg!.
+// }
+// 
+// 📌 MACRO ".inspect()"
+//
+// La macro inspect() es una macro de depuración que imprime el valor de una expresión con información adicional.
+// Se puede usar en cualquier parte del código y se puede usar en cualquier tipo de dato.
+// Recibe un elemento iterador y se puede hacer lo que se quiera con él, el valor continuará en la cadena de funciones sin modificar.
+// 
+// fn main() {
+//     let new_vec = vec![8, 9, 10]; // Se crea un vector con los valores 8, 9 y 10.
+//
+//     let double_vec = new_vec     // Se duplican los valores del vector 
+//          .iter()                 // Se crea un iterador para recorrer los elementos del vector.
+//          .inspect(|first_item| println!("El elemento contiene: {}", first_item))  // Se imprime el primer elemento del vector.
+//          .map(|x| x * 2)         // Se mapea cada valor multiplicándolo por 2.
+//          .inspect(|next_item| println!("Y después vale: {}", next_item))  // Se imprime el siguiente elemento del vector.
+//          .collect::<Vec<i32>>();  // Se recolectan los valores en un nuevo vector.
+// }
+//
+// 📌 MACRO ".inspect()"
+// 
+// Como .inspect() recibe de parámetro un cierre (closure), se puede codificar todo lo que se necesite:
+// fn main() {
+//     let new_vec = vec![8, 9, 10];
+//
+//     let _double_vec = new_vec
+//         .iter()
+//         .inspect(|first_item| {
+//             println!("El elemento es: {}", first_item);
+//             match **first_item % 2 { // eL primer elemento es un &i32 **
+//                 0 => println!("Es par."),
+//                 _ => println!("Es impar."),
+//             }
+//             println!("En binario es {:b}.", first_item);
+//         })
+//         .map(|x| x * 2)
+//         .collect::<Vec<i32>>();
+// }
+//
+// 📌 Tipos de &str
+// 
+// let mi_cadena = "Soy un &str", Este tipo de &str dura toda la ejecución del programa ya que están escritas 
+// directamente en el código fuente y así se traspasa al código binario. El tipo real que tienen estas
+// variables es &'static str. El apostrofo ' indica el tiempo o ciclo de vida (lifetime) de este valor. 
+// Las cadenas de caracteres literales tienen un tiempo de vida llamado 'static, que sirve para expresar 
+// que la cadena existe durante toda la ejecución del programa.
+//
+// str prestados: Es la forma habitual del tipo &str. No tiene un tiempo de vida 'static, su tiempo de vida 
+// es menor a la duración de todo el programa. Por ejemplo, si se crea un String y se obtiene una 
+// referencia a ella, Rust la convertirá a &str si se necesita.
+//
+// fn prints_str(my_str: &str) { // Esta función puede recibir &String y &str
+// println!("{}", my_str);
+// }
+
+// fn main() {
+//     let my_string = String::from("I am a string");
+//     prints_str(&my_string); // Se pasa a prints_str u &String
+// }
+// En Rust, todas las referencias tienen un tiempo de vida asociado.
+//
+// 📌 Tiempos de vida (lifetimes)
+// Los tiempos de vida (lifetimes) son una característica de Rust que garantiza que las referencias
+// no sobrevivan a los valores a los que hacen referencia.
+// Los tiempos de vida se definen con el símbolo de apóstrofe ' seguido de un nombre.
+// Los tiempos de vida se pueden añadir a las funciones con la sintaxis <'a> después del nombre de la función.
+// Los tiempos de vida se pueden añadir a las referencias con la sintaxis &'a después del tipo de dato.
+// Los tiempos de vida se pueden añadir a las estructuras con la sintaxis <'a> después del nombre de la estructura.
+// Los tiempos de vida se pueden añadir a las implementaciones con la sintaxis <'a> después del nombre de la 
+// estructura.
+// 
+// El tiempo de vida asociado a todos los valores y variables indica "cuánto vive una variable". 
+// Solo es necesario pensar en ellos cuando se trabaja con referencias. 
+// Esto se debe a que las referencias no pueden vivir más tiempo que el propio objeto al que referencian. 
+// Por ejemplo, esta función no compila:
+//  
+// fn returns_reference() -> &str                     // no compila ⚠️
+//     let my_string = String::from("I am a string");
+//     &my_string // ⚠️
+// }
+//
+// fn main() {}                                       // no compila ⚠️
+// 
+// El problema es que my_string solo vive dentro de la propia función, pero la función intenta devolver una
+// referencia &my_string y esta no podrá existir cuando se libere my_string al terminar de ejecutarse la función. 
+// Por eso el compilador falla.
+// Este otro código tampoco funciona:
+//
+// fn returns_str() -> &str {
+//     let my_string = String::from("I am a string"); // no compila ⚠️
+//     "I am a str" // ⚠️
+// }
+
+// fn main() {                                        // no compila ⚠️
+//     let my_str = returns_str();
+//     println!("{}", my_str);
+// }
+// Aquí el problema es que "I am a str" es un &str que vive en el stack y se libera al final de la función.
+// Por tanto, no se puede devolver una referencia a él.
+// El compilador aquí nos indica una ayuda para solucionar el problema: "help: consider giving it a 'static lifetime".
+// El mensaje missing lifetieme specifier significa que tenemos que añadir ' con un tiempo de vida.
+//
+// Con la modificación, lo siguiente funciona:
+//
+//fn returns_str() -> &'static str {
+//     let my_string = String::from("I am a string");
+//     "I am a str"
+// }
+
+// fn main() {
+//     let my_str = returns_str();
+//     println!("{}", my_str);
+// }
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/37.html
+//
+// 📌 Mutabilidad interior
+// La mutabilidad interior es una característica de Rust que permite tener mutabilidad en un tipo de dato
+// La mutabilidad interior permite modificar el interior de un elemento sin necesidad de que la variable sea mut.
+// Rust permite hacer esto en algunos casos de forma segura, modificando los valores internos de un struct
+// que es inmutable. Cada uno de los mecanismos que se tienen a disposición, 
+// sigue unas reglas que aseguran que la modificación es segura.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/38.html
+//
+// 📌 Mutabilidad interior "Cell"
+// //
+// Cell es la forma mas sencilla de mutabilidad interior, se usa para tipos de datos primitivos.
+// Cell es una estructura que permite la mutabilidad interior de un tipo de dato.
+// Cell se usa para tipos de datos primitivos que implementan copy como i32, f64, bool, etc.
+// Se tiene que importar la librería std::cell::Cell para usar Cell.
+// ejemplo:
+//
+// use std::cell::Cell;
+
+// struct PhoneModel {
+//     company_name: String,
+//     model_name: String,
+//     screen_size: f32,
+//     memory: usize,
+//     date_issued: u32,
+//     on_sale: Cell<bool>,
+// }
+
+// fn main() {
+//     let super_phone_3000 = PhoneModel {
+//         company_name: "YY Electronics".to_string(),
+//         model_name: "Super Phone 3000".to_string(),
+//         screen_size: 7.5,
+//         memory: 4_000_000,
+//         date_issued: 2020,
+//         on_sale: Cell::new(true),
+//     };
+
+//     // 10 years later, super_phone_3000 is not on sale anymore
+//     super_phone_3000.on_sale.set(false);
+// }
+//
+// Cellfunciona para todos los tipos, pero funciona mejor para los tipos simples Copy 
+// porque Cell no usa referencias. 
+// 
+// 📌 Mutabilidad interior "RefCell"
+// 
+// Un RefCell es otra forma de cambiar valores sin necesidad de declararlos mut. 
+// Es como Cell, pero utiliza referencias en lugar de copias.
+// RefCell tiene muchos métodos, pero los más importantes son .borrow() y .borrow_mut().
+// cons estos métodos se puede hacer lo mismo que con & y &mut. las reglas son las mismas:
+//  - Se pueden hacer muchos préstamos simultáneos.
+//  - Solo se puede hacer un préstamo modificable.
+//  - No se pueden hacer préstamos simultáneos de ambos tipos.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/38.html
+// 
+// 📌 Mutabilidad interior "Mutex"
+// 
+// Los Mutex posibilitan otra forma de modificar valores sin declararlos como mut. 
+// Significa exclusión mutua, lo que significa que "solo puede modificarlo un proceso cada vez". 
+// Por eso, el uso de mutex es seguro, porque permite la modificación interna, pero solo a un proceso cada vez. 
+// Es útil en la programación concurrente, donde varios procesos pueden modificar un valor al mismo tiempo.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/38.html
+//
+// 📌 Mutabilidad interior "RwLock"
+//
+// RwLock es una variante de Mutex que permite varios préstamos simultáneos en modo lectura,
+// pero solo un préstamo en modo escritura.
+// RwLock es útil cuando se necesita leer un valor muchas veces y modificarlo pocas veces.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/38.html
+//
+// 📌 Mutabilidad interior "Atomic" 
+// //
+// Atomic es una variante de Mutex que permite la modificación de valores de forma atómica.
+// Atomic es útil en la programación concurrente, donde varios procesos pueden modificar un valor al mismo tiempo.
+// Atomic es más rápido que Mutex, pero solo se puede usar con tipos de datos primitivos.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/38.html
+//
+// 📌 Cow
+// Cow es un tipo de dato que permite tener una referencia o una copia de un valor.
+// es un tipo de enumerado que puede ser "clone on write" (clonar al escribir) o 
+// "borrow on write" (prestar al escribir).
+// Permite devolver una referencia o una copia de un valor sin tener que clonarlo.
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/39.html
+//
+// 📌 Alias de Tipos
+//
+// Los alias de tipos son una forma de dar un nombre más corto a un tipo de dato.
+// ejemplo de un nombre más facil de recordar para un tipo de dato.
+//
+// type CharacterVec = Vec<char>;
+//
+// fn main() {}
+//
+// EL siguiente ejemplo sirve para mostrar un caso con un tipo difícil de entender:
+//
+// fn returns<'a>(input: &'a Vec<char>) -> std::iter::Take<std::iter::Skip<std::slice::Iter<'a, char>>> {
+//     input.iter().skip(4).take(5)
+// }
+//
+// fn main() {}
+//
+// Con un alias queda mucho más claro:
+//
+// type SkipFourTakeFive<'a> = std::iter::Take<std::iter::Skip<std::slice::Iter<'a, char>>>;
+
+// fn returns<'a>(input: &'a Vec<char>) -> SkipFourTakeFive {
+//     input.iter().skip(4).take(5)
+// }
+
+// fn main() {}
+// 
+// 📌 Alias de Tipos
+//
+// también se puede importar un tipo para hacer las definiones más simples.
+// ejemplo:
+// use std::iter::{Take, Skip};
+// use std::slice::Iter;
+
+// fn returns<'a>(input: &'a Vec<char>) -> Take<Skip<Iter<'a, char>>> {
+//     input.iter().skip(4).take(5)
+// }
+
+// fn main() {}
+// Así que se puede decidir qué es mejor en cada caso.
+// 
+// Los alias no crean un tipo nuevo. Solo se trata de un nuevo nombre que representa al tipo ya existente.
+// type File = String;
+//
+// fn main() {
+//     let my_file = File::from("I am file contents");
+//     let my_string = String::from("I am file contents");
+//     println!("{}", my_file == my_string);
+// }
+//
+// Los alias no crean un tipo nuevo. Solo se trata de un nuevo nombre que representa al tipo ya existente. 
+// Por ello, si se escribe el siguiente código type File = String;, el compilador solo ve el tipo String
+// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/40.html
+//
+// 📌 MACRO todo!
+//
+// La macro todo! es una macro que se usa para marcar tareas pendientes en el código.
+// Se puede usar para marcar partes del código que faltan por implementar.
+// Se puede usar para marcar partes del código que se deben revisar, que se deben eliminar, refactorizar, 
+// mejorar, documentar o testear.
+// 
+// En ocasiones, se necesita escribir código para ayudar a imaginar el proyecto que se está desarrollando.
+// ejemplo:
+https://www.jmgaguilera.com/rust_facil/41.html// }
+//
+// fn delete_libro(libro: Libro) -> Result<(), String> {
+//     todo!()
+// }
+//
+// fn main() {}
+// NECEARIO: leer https://www.jmgaguilera.com/rust_facil/41.html
+// 
+// 📌 Rc
+//
+// 📌 Multiples hilos
+//
+// 📌 Cierres en funciones 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
