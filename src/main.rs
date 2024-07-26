@@ -44,6 +44,15 @@
 // BOOLEANOS: -> bool, representan valores lógicos: true o false, ocupan 1 byte en la pila independientemente de su valor.
 // true = verdadero
 // false = falso
+//
+//
+// Para manejar explícitamente la posibilidad de desbordamiento, puede usar estas familias de métodos 
+// -proporcionados por la biblioteca estándar para tipos numéricos primitivos:
+//
+// Envolver en todos los modos con los métodos wrapping_*, como wrapping_add.
+// Devolver el valor None si hay desbordamiento con los métodos checked_*.
+// Devolver el valor y un booleano que indica si hubo desbordamiento con los métodos overflowing_*.
+// Saturar en los valores mínimos o máximos del valor con los métodos saturating_*.
 
 // 📌   CARACTERES: -> (char UTF-8) representa un único carácter Unicode, entre comillas simples.
 // Un char siempre ocupa 4 bytes en la pila, independientemente de su valor, es de tamaño fijo.
@@ -158,7 +167,15 @@
 //
 // También se puede añadir _ para añadir claridad a la lectura.
 // El _ no modifica el número. Solo lo hace más fácil de leer. Y no importa el cuantos _ se utilizan.
-// el tipo numérico por defecto suele ser i32, si se quiere otro tipo se debe especificar.
+// ejemplo:.
+//
+// fn main() {
+//     let numero = 0________u8;
+//     let numero2 = 1___6______2____4______i32;
+//     println!("{}, {}", numero, numero2);
+// }
+//
+// El tipo numérico por defecto suele ser i32, si se quiere otro tipo se debe especificar.
 
 // 📌   INFERENCIA DE TIPOS  
 // 
@@ -169,7 +186,7 @@
 // ->  ejemplo:. let b = 24_u8; // tipo de dato "u8" sin signo de 8 bits.
 // El guión bajo no afecta al valor, solo es para hacerlo más legible, se pueden poner varios guiones bajos en cualquier posición.
 
-// 📌   VARIABLES -> Declaración y los bloques de código
+// 📌   VARIABLES - Declaración y los bloques de código
 // todo!(cambiar valores de las variables y ver como se comporta el programa y los errores que da)
 // todo!(cambiar valores de los ejemplos para el libro)
 // Se usa la palabra reservada let para declarar una variable (para decirle a Rust que construya una variable).
@@ -225,6 +242,21 @@
 //     println!("El valor u8 es: {}", valor_u8);
 // }
 
+// 📌   VARIABLES - ámbito de una variable
+//
+// Se pueden asignar variables sin valor, pero se debe especificar el tipo de dato, ej:. let a: i32;
+// Las variables existen dentro de un bloque, se declaran con "let" y se pueden reasignar, pero desaparecen al salir del bloque
+// la linea de impresión de "b" da error porque no existe fuera del bloque
+//
+// fn main() {
+//     let a = 42;
+//     {
+//         let _b = 13;
+//     }
+//     println!("Valor de a: {}", a);
+//     println!("Valor de b: {}", _b); // 🤣 ERROR, b no existe fuera del bloque
+// }
+
 // 📌   VARIABLES CON NÚMEROS DECIMALES 
 //
 // Se utiliza el punto y NO la coma, se utilizan dos tipos f32 y f64, por defecto f64
@@ -242,12 +274,119 @@
 //     let tercer_decimal = mi_decimal + mi_otro_decimal;
 // }
 
-// 📌   IMPRESIÓN - MACRO "println!" - Display the message "Hello, world!"
+// 📌   VARIABLES Y MUTABILIDAD
+// 
+// Las variables son inmutables por defecto, para hacerlas mutables se debe añadir mut después de let.
+// Las variables inmutables no se pueden cambiar una vez que se les ha asignado un valor.
+// Las variables mutables se pueden cambiar después de haber sido asignadas.
+// Las variables mutables se pueden reasignar, pero no se puede cambiar su tipo.
+// Las variables mutables se pueden cambiar en cualquier momento, pero no se pueden cambiar de nuevo a inmutables.
+// Las variables mutables se pueden cambiar en cualquier ámbito, pero no se pueden cambiar en un ámbito inmutable.
+// Las variables mutables se pueden cambiar en cualquier bloque de código, pero no se pueden cambiar en un bloque inmutable.
+// Las variables mutables se pueden cambiar en cualquier función, pero no se pueden cambiar en una función inmutable.
+// Las variables mutables se pueden cambiar en cualquier módulo, pero no se pueden cambiar en un módulo inmutable.
+// Las variables mutables se pueden cambiar en cualquier archivo, pero no se pueden cambiar en un archivo inmutable.
+// Las variables mutables se pueden cambiar en cualquier proyecto, pero no se pueden cambiar en un proyecto inmutable.
+// Las variables mutables se pueden cambiar en cualquier biblioteca, pero no se pueden cambiar en una biblioteca inmutable.
+
+// 📌   VARIABLES Y MUTABILIDAD
+//
+// Para poder modificar la variable se debe añadir mut después de let
+//
+// fn main() { 
+//     let mut number = 5; // mut proporciona mutabilidad a la variable en cuanto al dato, pero no podemos cambiar el tipo de dato
+//                         // salvo que hagamos shadowing (ocultación) de la variable.
+//     number += 1;
+//     println!("valor que reemplaza el anterior '5' por misma variable: {}",number);
+// }
+
+// 📌   VARIABLES - copia
+//
+// Rust tiene una característica especial para los tipos de datos primitivos, la trait "Copy" 
+// que permite que los valores se copien en lugar de moverse.
+//
+// Son valores de tamaño fijo, conocidos y pequeños que se almacenan en el stack (enteros,flotantes y char) 
+// -y no en el heap, por lo que son rápidos de copiar y no influye que existan varias copias de lo mismo.
+//
+// Pueden copiarse cuando se pasan como argumentos a una función, se asignan a otra variable o se devuelven de una función.
+//
+// fn print_number(number: i32) { // Esta función no devuelve nada
+//     // Si el  número no se copiara, se movería y no se podría usar, la función seria su dueña.                   
+// println!("{}", number);
+// }
+//
+// fn main() {
+//     let mi_numero = 8;
+//     print_number(mi_numero); // Imprime 8, la función obtiene una copia del valor de "mi_numero"
+//     print_number(mi_numero); // Imprime 8 de nuevo, la función obtiene una copia automaticamente del valor de "mi_numero".
+// }
+
+// 📌   VARIABLES - clone
+//
+// El tipo String, no implementa la característica copy por lo que el valor de la variable se mueve 
+// -al pasarla la primera vez, para poder copiarla se usa la trait "Clone".
+//
+// Lo ideal es utilizar la referencia es más eficiente porque clone copia el valor gastando más memoria y la referencia solo el puntero. 
+//
+// fn print_country(country_name: String) {         // Esta función no devuelve nada
+//     println!("{}", country_name);
+//     }
+//
+// fn main() {
+//         let country = String::from("España");
+//         print_country(country.clone());
+//         print_country(country);
+// }
+
+// 📌   CONSTANTES
+//
+// Las constantes son valores inmutables que se pueden definir en cualquier ámbito, incluidos los globales.
+// Se definen con la palabra clave "const" y se les debe asignar un tipo de dato.
+//
+// Se les debe asignar un valor constante, no se les puede asignar un valor que se calcule en tiempo de ejecución.
+// Se escriben en mayúsculas y con guiones bajos para separar las palabras.
+// Las constantes no pueden ser sombreadas por variables con el mismo nombre, son validas en todo el tiempo 
+// -de vida del programa dentro del ámbito en el que se declararon y se pueden declarar en cualquier ámbito, incluido el global.
+//
+// SCREAMING_SNAKE_CASE -> para constantes y estáticas, en mayusculas y guiones bajos
+// ejemplo: const MAX_POINTS: u32 = 100_000; // constante de tipo u32 con valor 100_000
+
+// 📌   SHADOWING - Ocultación
+//
+// Recordamos que el ocultamiento de variables no destruye la variable anterior, solo la bloquea, la oculta, "shadowing" 
+// -con el uso de referencias se puede acceder a la variable anterior, solo si no se cambio el tipo de dato 
+// -o esta en un bloque diferente.
+// En general, se usa la ocultación de variables en estos casos, cuando se quiere usar una variable para un cálculo 
+// -y luego otro más, sin tener mucho interés por los valores intermedios.
+//
+// fn main() {
+//     let pais = String::from("España"); // variable "pais" con valor "España"
+//     let pais_ref = &pais; // variable "pais_ref" con referencia a "pais"
+//     let pais = 8; // redefinimos la variable "pais" con el valor 8
+//     println!("{}, {}", pais_ref, pais); // imprimimos el valor de "pais_ref" y "pais"
+//     // hemos ocultado la variable "pais" con otra variable de diferente tipo y valor
+//     // no se destruye la variable anterior, solo se bloquea, se oculta, "shadowing"
+//     // la variable pais se destruirá al salir del bloque,
+// }
+
+// 📌   SHADOWING - Ocultación
+//
+// fn main() {
+//     let number = 5;                          // variable "number" con valor 5
+//     println!("Valor de number: {}", number); // imprimimos el valor de "number" = 5
+//     let number = 9.9;            // redefinimos la variable "number" con el valor 9,8 y de tipo f64, pero es completamente diferente
+//     println!("Valor de number: {}", number); // imprimimos el valor de "number" = 9.9
+//     // hemos ocultado la variable "number" con otra variable de diferente tipo y valor
+//     // no se destruye la variable anterior, solo se bloquea, se oculta, "shadowing"
+//     // ejemplo de utilidad: para hacer varios calculos con la misma variable.
+// }
+
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - MACRO "println!" - Display the message "Hello, world!"
 // fn main() { 
 //     println!("Hello, world!");
 // }
 
-// 📌   IMPRESIÓN - pasar argumentos a la macro println!() entre corchetes "brakes"
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - pasar argumentos a la macro println!() entre corchetes "brakes"
 //
 // Llamar a macro println! con 4 argumentos: string, valor, string, valor
 //
@@ -255,7 +394,7 @@
 //     println!("2 - {} - {} - {} - {}", "Hola", 42, "mundo", 13);
 // }
 
-// 📌   IMPRESIÓN -  valores directos y con variables
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN -  valores directos y con variables
 //
 // fn main() {
     // println!("Valor directo sin pasar variable: {}", 42); // imprimir valor directo
@@ -263,7 +402,7 @@
     // println!("Valor con variable a: {}", a); // imprimir variable "a"
 // }
 
-// 📌   IMPRESIÓN - VISUALIZACIÓN - DEPURACIÓN
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - VISUALIZACIÓN - DEPURACIÓN
 // 
 // Para imprimir valores en la consola se utilizan las macros println! y print!
 // Con print! se imprime sin salto de línea, con println! se imprime con salto de línea
@@ -295,7 +434,9 @@
 // } 
 //
 
-// 📌   IMPRESIÓN - Se pueden añadir números entre las llaves para indicar el orden de las variables a utilizar
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - Se pueden añadir números entre las llaves ...
+//
+// Se pueden añadir números entre las llaves para indicar el orden de las variables a utilizar.
 //
 // fn main () {
 //     let nombre_padre = "Juan";
@@ -304,7 +445,7 @@
 //     println!("Este es {1} {2}, hijo de {0} {2}.", nombre_padre, nombre_hijo, apellido);
 // }
 
-// 📌   IMPRESIÓN - Variables y una tupla de diferentes tipos
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - Variables y una tupla de diferentes tipos
 // 
 // fn main() {
 //     let text1 = "La primera letra del alfabeto";
@@ -313,7 +454,7 @@
 //     println!("{}: {} y {} {} y \n - array pos 0 = {} \n - array pos 1 = {}", text1, 'A', text2, 'Z', sa.0, sa.1);
 // }
 
-// 📌   IMPRESIÓN - Aquí los tipos los e implementado yo, después de la variable insertar los ":" y el tipo.
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - Aquí los tipos los e implementado yo, después de la variable insertar los ":" y el tipo.
 //
 // fn main() {
 //     let _x: u32 = 42; // integer de 32 bits sin signo
@@ -323,7 +464,7 @@
 //     println!("Esto es un Texto &str: {}", a_url);
 // }
 
-// 📌   IMPRESIÓN - Formatos
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - Formatos
 //
 // Los valores numéricos se pueden imprimir en binario, octal, hexadecimal, etc.
 // Se pueden añadir números entre las llaves para indicar el orden de las variables a utilizar
@@ -343,7 +484,7 @@
 //     println!("Valor de \"a\" en hexadecimal: {:x}", a);      // imprimimos el valor de "a" en hexadecimal
 // }
 
-// 📌   IMPRESIÓN - Avanzado 
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - Avanzado 
 //
 // "#r" antepuesto ala variable le permite utilizar nombres reservados, ej, como let, fn, struct, etc.
 // "#r", a veces se necesita imprimir muchas comillas dobles " y caracteres de escape
@@ -366,7 +507,7 @@
 //     println!("Ciudad: {ciudad}, País: {país}, Provincia: {provincia} Este repite ciudad -> {ciudad}");
 // }  
 
-// 📌   IMPRESIÓN - Imprimiendo valores pasados por valor o por referencia
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - Imprimiendo valores pasados por valor o por referencia
 //
 // Imprimiendo Valores Pasados por Valor
 // Cuando pasamos un valor por valor a una función, podemos imprimirlo directamente dentro de esa función.
@@ -392,7 +533,7 @@
 //     imprimir_valor(&num);
 // }
 
-// 📌   IMPRESIÓN - Imprimiendo con la macro "format!()" - Para crear un String
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - Imprimiendo con la macro "format!()" - Para crear un String
 //
 // fn main() {
 //     let s = format!(" Hello, world!");
@@ -409,7 +550,7 @@
 //     println!("mi_string: {} y mi_string2: {}", mi_string, mi_string2);
 // }
 
-// 📌   IMPRESIÓN - Imprimiendo el retorno de una función
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - Imprimiendo el retorno de una función
 //
 // fn numero() -> i32 {     // función que devuelve un valor de tipo i32, en este caso 8, al no tener punto y coma.
 //    8
@@ -419,12 +560,20 @@
 //   println!("¡Hola, mundo número {}!", numero()); // llamamos a la función numero() dentro de la macro y la imprimimos.
 // }
 
+// 📌   IMPRESIÓN - VISUALIZACIÓN Y DEPURACIÓN - Temas relacionados
+//
+//
+// Impresión personalizada con std::fmt: Crear formatos personalizados para tus tipos de datos.
+// Impresión de estructuras recursivas: Cómo manejar estructuras que se refieren a sí mismas.
+// Impresión de resultados de cálculos: Formatear números con precisión y unidades.
+
 // 📌   FUNCIONES
 //
-// Las funciones son bloques de código reutilizables que realizan una tarea específica fundamentales para
+// Las funciones son bloques de código reutilizables que realizan una tarea específica, son fundamentales para
 // -organizar el código, mejorar la legibilidad y facilitar el mantenimiento de programas más grandes.
 //
-// Se definen con la palabra clave fn seguida del nombre de la función y los paréntesis.
+// Las funciones se definen con la palabra clave fn seguida del nombre de la función y los paréntesis 
+// -junto a su contenido encerrado entre llaves.
 //
 // ejemplo:. fn nombre_funcion() { // código de la función }
 // 
@@ -470,28 +619,28 @@
 //     ladrar();
 // }
 
-// 📌   FUNCIONES - Argumentos por valor
+// 📌   FUNCIONES - Pasar argumentos por valor
 //
-// Por valor: Se crea una copia del argumento y se pasa a la función. Cualquier modificación dentro de la función 
+// Por valor: Se crea una copia del argumento y se pasa como parámetros a la función, cualquier modificación dentro de la función 
 // -no afecta al valor original.
 //
-// fn duplicar(x: i32) -> i32 {
-//     x * 2
+// fn duplicar(x: i32) -> i32 {     // función duplicar que recibe un valor de tipo i32 y devuelve un valor de tipo i32
+//     x * 2                        // devuelve el valor de "x" multiplicado por 2
 // }
 //
 // fn main() {
 //     let a = 42;
 //     let b = duplicar(a);
-//   println!("El doble de {} es {}", a, b);
+//     println!("El doble de {} es {}", a, b);
 // }
 
-// 📌   FUNCIONES - Argumentos por referencia
+// 📌   FUNCIONES - Pasar argumentos por referencia
 //
-// Por referencia: Se pasa una referencia al argumento a la función. Cualquier modificación dentro de la función
+// Por referencia: Se pasa un argumento de referencia a los parámetros de la función. cualquier modificación dentro de la función
 // -afecta al valor original.
 //
-// fn duplicar(x: &mut i32) {
-//     *x *= 2;
+// fn duplicar(x: &mut i32) {       // función duplicar que recibe una referencia mutable a un valor de tipo i32 
+//     *x *= 2;                     // multiplica el valor de "x" por 2, pero antes se debe desreferenciar el valor de "x" con "*"
 // }
 //
 // fn main() {
@@ -501,23 +650,58 @@
 // }
 //      
 
-
-
-// 📌 FUNCIONES - Pasar función como parámetro
-//     
-// fn ladrar() {
+// 📌   FUNCIONES - Pasar función como argumentos
+// 
+// Pasar funciones como argumentos es una característica muy poderosa que nos permite crear código
+// -más flexible y reutilizable, esto se conoce como funciones de primer nivel
+//  
+// Funciones de primer orden: Permiten pasar funciones como argumentos a otras funciones, 
+// -lo que permite reutilizar código.
+//
+// fn ladrar() {                           // función ladrar que imprime "Guau"
 //     println!("Guau");
 // }
-// fn hacer_n_veces(f:fn(),n:i64) {
-//     for _ in 0..n {
-//       f();
-//     } // bucle for in
+// fn hacer_n_veces(f:fn(),n:i64) {        // función hacer_n_veces que recibe una función y un valor de tipo i64
+//     for _ in 0..n {                     // bucle for que se ejecuta n veces
+//       f();                              // llama a la función f
+//     }                                   // fin del bucle for
 // }
+//
+// fn main() {                             // función principal
+//        hacer_n_veces(ladrar,2);         // imprime 2 veces resultado de la función ladrar
+// }
+// 
+// LECTURAS DE INTERÉS:
+// Abstracción: Permite crear funciones más genéricas que pueden trabajar con diferentes tipos de operaciones 
+// -sin conocer los detalles internos de esas operaciones
+// 
+// Callbacks: Se utiliza comúnmente para implementar mecanismos de devolución de llamada, donde una función
+// -se ejecuta cuando ocurre un determinado evento.
+// 
+// Algoritmos genéricos: Facilita la creación de algoritmos que pueden trabajar con diferentes tipos de datos
+// -siempre y cuando estos datos admitan ciertas operaciones.
+//
+// ejemplo avanzado:.
+// 
+// fn apply<F>(x: i32, f: F) ->i32
+// where
+//     F: Fn(i32) -> i32, 
+// {
+//     f(x)
+// }
+//
 // fn main() {
-//        hacer_n_veces(ladrar,2); // imprime 10 veces resultado de la función ladrar
+//     let add_one = |x| x + 1;
+//     let double = |x| x * 2;
+//
+//     let result1 = apply(5, add_one);
+//     let result2 = apply(3, double);
+//
+//     println!("result1 = {}", result1);
+//     println!("result2 = {}", result2);
 // }
   
-// 📌 FUNCIONES - Devolución de varios valores a la vez 
+// 📌   FUNCIONES - Devolución de varios valores a la vez 
 //
 // Como tal no admite devolver varios valores a la vez, pero es posible usar tuplas y simularlo.
 // todo!(cambiar valores de las variables y ver como se comporta el programa y los errores que da)
@@ -534,14 +718,15 @@
 //     println!("La lista de canciones tiene una longitud de {} caracteres y {} líneas",length,lines); 
 // } 
 
-// 📌 FUNIONES -  Devolución sin punto y coma 
+// 📌   BLOQUE FUNCIONAL -  Devolución de valores sin punto y coma 
 //
-// Usar bloque de código,para devolver un valor sin punto y coma, de lo contrario devolvería nada "()"
+// Usamos un bloque de código para devolver un valor a traves de na expresión  sin punto y coma 
+// -de lo contrario devolvería nada "()"
 //
 // fn main() {
 //     let mi_numero = {
 //         let segundo_numero = 29;
-//         segundo_numero + 13
+//         segundo_numero + 13          // expresión sin punto y coma
 //     };
 //     println!("1 - Valor de a: {}", mi_numero);
 //     println!("2 - Valor de a: {:?}", mi_numero); // otra forma de imprimir valor, con {:?} se imprime el valor de la variable
@@ -550,68 +735,26 @@
 
 
 
-// 📌 CONSTANTES
-// Las constantes son valores inmutables que se pueden definir en cualquier ámbito, incluidos los globales.
-// Se definen con la palabra clave "const" y se les debe asignar un tipo de dato.
-// Se les debe asignar un valor constante, no se les puede asignar un valor que se calcule en tiempo de ejecución.
-// Se escriben en mayúsculas y con guiones bajos para separar las palabras.
-// Las constantes no pueden ser sombreadas por variables con el mismo nombre
-// son validas en todo el tiempo de vida del programa dentro del ámbito en el que se declararon 
-// y se pueden declarar en cualquier ámbito, incluido el global.
-// SCREAMING_SNAKE_CASE -> para constantes y estáticas, en mayusculas y guiones bajos
-// ejemplo: const MAX_POINTS: u32 = 100_000; // constante de tipo u32 con valor 100_000
 
-// 📌 VARIABLES - ámbito de una variable
-// Se pueden asignar variables sin valor, pero se debe especificar el tipo de dato, ej:. let a: i32;
-// Las variables existen dentro de un bloque, se declaran con "let" y se pueden reasignar, pero desaparecen al salir del bloque
-// la linea de impresión de "b" da error porque no existe fuera del bloque
-//
-// fn main() {
-//     let a = 42;
-//     {
-//         let _b = 13;
-//     }
-//     println!("Valor de a: {}", a);
-//     println!("Valor de b: {}", _b); // 🤣 ERROR, b no existe fuera del bloque
-// }
 
-// 📌 VARIABLES - mutabilidad
-// Para poder modificar la variable se debe añadir mut después de let
-//
-// fn main() { 
-//     let mut number = 5; // mut proporciona mutabilidad a la variable en cuanto al dato, pero no podemos cambiar el tipo de dato
-//                         // salvo que hagamos shadowing (ocultación) de la variable.
-//     number += 1;
-//     println!("valor que reemplaza el anterior '5' por misma variable: {}",number);
-// }
+
+
+
+
 
 // 📌 SHADOWING - Ocultación
 //
 // fn main() {
-//     let number = 5; // variable "number" con valor 5
+//     let number = 5;                          // variable "number" con valor 5
 //     println!("Valor de number: {}", number); // imprimimos el valor de "number" = 5
-//     let number = 9.9; // redefinimos la variable "number" con el valor 9,8 y de tipo f64, pero es completamente diferente
+//     let number = 9.9;            // redefinimos la variable "number" con el valor 9,8 y de tipo f64, pero es completamente diferente
 //     println!("Valor de number: {}", number); // imprimimos el valor de "number" = 9.9
 //     // hemos ocultado la variable "number" con otra variable de diferente tipo y valor
 //     // no se destruye la variable anterior, solo se bloquea, se oculta, "shadowing"
 //     // ejemplo de utilidad: para hacer varios calculos con la misma variable.
 // }
 
-// 📌 SHADOWING, Ocultación
-// Recordamos que el ocultamiento de variables no destruye la variable anterior, solo la bloquea, la oculta, "shadowing" 
-// con el uso de referencias se puede acceder a la variable anterior.
-// En general, se usa la ocultación de variables en estos casos. Cuando se quiere usar una variable para un cálculo 
-// y luego otro más, sin tener mucho interés por los valores intermedios.
-//
-// fn main() {
-//     let pais = String::from("España"); // variable "pais" con valor "España"
-//     let pais_ref = &pais; // variable "pais_ref" con referencia a "pais"
-//     let pais = 8; // redefinimos la variable "pais" con el valor 8
-//     println!("{}, {}", pais_ref, pais); // imprimimos el valor de "pais_ref" y "pais"
-//     // hemos ocultado la variable "pais" con otra variable de diferente tipo y valor
-//     // no se destruye la variable anterior, solo se bloquea, se oculta, "shadowing"
-//     // la variable pais se destruirá al salir del bloque,
-// }
+
 
 // 📌 LA PILA Y LA MEMORIA DINÁMICA - PUNTERO = REFERENCIA (que apunta a la memoria de otro valor)
 // La pila "stack" es una estructura de datos que almacena variables en un orden determinado, se accede a ellas mediante un puntero.
@@ -695,31 +838,7 @@
 //     println!("{}", pais); // comprobamos que la variable "pais" sigue siendo dueña del valor.  
 // } 
 
-// 📌 VARIABLES - COPIA 
-// Rust tiene una característica especial para los tipos de datos primitivos, la trait "Copy", que permite que los valores se copien en lugar de moverse.
-// Son valores de tamañol fijo, conocido y pequeño que se almacenan en el stack (enteros,flotantes y char), no en el heap, por lo que son rápidos de copiar y no influye que existan varias copias de lo mismo.
-// Pueden copiarse cuando se pasan por parametro a una función, se asignan a otra variable o se devuelven de una función.
-// fn print_number(number: i32) { // Esta función no devuelve nada
-//     // Si el  número no se copiara, se movería y no se podría usar, la función seria su dueña.                   
-// println!("{}", number);
-// }
-// fn main() {
-//     let mi_numero = 8;
-//     print_number(mi_numero); // Imprime 8, la función obtiene una copia del valor de "mi_numero"
-//     print_number(mi_numero); // Imprime 8 de nuevo, la función obtiene una copia del valor de "mi_numero".
-// }
 
-// 📌 VARIABLES - CLONE
-// El tipo String, no implementa la característica copiar, por lo que el valor de la variable se mueve al pasarla la primera vez, para poder copiarla se usa la trait "Clone".
-// Lo ideal es utilizar la referencia es más eficiente porque clone copia el valor gastando más memoria y la referencia solo el puntero. 
-// fn print_country(country_name: String) { // Esta función no devuelve nada
-//     println!("{}", country_name);
-//     }
-//     fn main() {
-//         let country = String::from("España");
-//         print_country(country.clone());
-//         print_country(country);
-//     }
 
 // 📌 TIPOS COLECCIÓN
 // Rust tiene varios tipos de colecciones, como vectores, arrays, tuplas, etc.
@@ -1917,6 +2036,11 @@
 
 
 
+      
+
+    
+
+
 
 
 
@@ -2124,7 +2248,6 @@
 // no es algo compilado, es código lo que se devuelve
 // NECESARIO: leer https://www.jmgaguilera.com/rust_facil/58.html
 
-// 📌 CARGO
 
 
 // 📌  Aqui generacidad, poner algo
@@ -2132,6 +2255,11 @@
 // 📌  Aqui CLOSURESCLO
 
 // 📌  Structs, traits y POO en Rust
+
+
+      
+
+    
 
 
 
@@ -2241,24 +2369,6 @@
 //     println!("0 - Otra forma de imprimir el tamaño: {}", c.len()); // imprimimos el tamaño de un str
 // }
 
-      
-
-    
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
 
     
 // ver: hasmap, hashset, List
@@ -2288,53 +2398,10 @@
 // 📌 ESTRUCTURAS e IMPLEMENTACIONES con "impl"
 
 
-// 📌  CARGO - Administrador de paquetes y compilador de Rust
-//
-// cargo new -> crea un directorio de proyecto
-// cargo clean sirve para eliminar las librerías que se hayan descargado por ser necesarias para el proyecto.
-// cargo build -> compila el proyecto para que se pueda ejecutar
-// cargo run  -> compila si hay cambios en el proyecto y ejecuta el mismo
-// cargo check -> testea el proyecto
-// cargo run lo compila y ejecuta (--bin [programa_rust] -> si el proyecto esta en otro directorio)
-// cargo build --release -> para compilarlo con optimizaciones (construido para distribuir)
-// cargo build --release y cargo run --release hace lo mismo que los anteriores, pero optimizado para distribuir.
-//
-// cargo install cargo-edit -> instala el paquete cargo-edit
-// cargo check sirve para validar el código. Es como compilar, pero sin que genere el código ejecutable. 
-// es una forma de validar si no se quiere ejecutar el código, ya que es más rápida que build o run.
-//
-// cargo edit -> nos ayuda con las dependencias inserta o importa el nombre de un crate (libreria o módulo)
-// -> reescribe el archivo Cargo.toml para adicionar de pendencias -> https://github.com/killercup/cargo-edit
-// -> viendo la versión que necesitas en crates.io
-//
-// sobre el compilador: siempre tarda más la primera vez que se ejecuta cargo build o carga run. Después de esta primera vez,
-// recordará las librerías usadas y compilará más rápido. Eso sí, después de un cargo clean, volverá a tardar mucho 
-// en compilar ya que es como si fuese la primera vez que lo hace.
 
 
-// 📌 APUNTES Y NOTAS VARIAS
-//
-// #[allow(dead_code)] suprime las advertencias para código muerto o  no utilizado en el ámbito donde se encuentra la directiva.
-// #![allow(unused)] directiva de nivel de atributo que desactiva las advertencias para el código no utilizado en todo el archivo. 
-// #[ no_mangle ] // evita que el compilador cambie el nombre de la función, cuando optimice el código.
-// #[derive(Debug)] // permite imprimir la estructura con println!("{:?}", estructura)
-// Guión bajo (underscores) como sufijo de las variables (delante de ellas) para que no salga la advierta de "variable no utilizada
-// Es una convención en Rust utilizar snake_case para: variables, funciones y archivos
-// SCREAMING_SNAKE_CASE -> para constantes y estáticas, en mayusculas y guiones bajos
-// PascalCas -> se utiliza para tipos, rasgos y enums
-// CamelCase -> se utiliza para funciones y métodos
-// Rust es un lenguaje de programación de sistemas, de bajo nivel, con un alto rendimiento y seguro
-// Rust es un lenguaje de programación de propósito general, multi-paradigma, concurrente y seguro
-// En Rust hay que favorecer el uso de variables locales, en lugar de globales siempre que sea posible,
-// si necesitamos compartir datos entre funciones, se pueden usar argumentos y retornos de funciones
-// o estructuras de datos compartidas.
-// El entorno de pruebas de Rust, https://play.rust-lang.org/, es una herramienta online para probar código Rust.
-//
-// Rustfmt formatea el código correctamente.
-// Clippy da información extra sobre cómo hacer mejor el código.
-// emoticonos utilizados 🚧 y ⚠️
-// Comentarios // o /* ... */
-//
+
+
 
    
     
@@ -2378,6 +2445,109 @@
 // };
 // println!("El valor de x es: {}", x);
 // }
+
+// 📌   CARGO Y BIBLIOTECAS
+//
+// Las bibliotecas son un conjunto de funciones y estructuras de datos que se pueden usar en un programa.
+// Rust tiene un sistema de gestión de paquetes llamado Cargo que permite añadir bibliotecas a un proyecto.
+// Cargo se encarga de descargar, compilar e instalar las bibliotecas necesarias para un proyecto.
+// Cargo.toml es el archivo de configuración de Cargo y se usa para añadir bibliotecas a un proyecto.
+// Cargo.lock es un archivo que se crea para guardar las versiones de las bibliotecas usadas en un proyecto.
+// Cargo.toml es un archivo de texto que se usa para configurar un proyecto Rust.
+// El archivo Cargo.toml contiene información sobre el proyecto, las dependencias y las versiones de las bibliotecas.
+// Cargo.toml se puede editar manualmente o con la herramienta cargo-edit.
+
+// 📌   CARGO - Administrador de paquetes y compilador de Rust
+//
+// cargo new -> crea un directorio de proyecto
+// cargo clean sirve para eliminar las librerías que se hayan descargado por ser necesarias para el proyecto.
+// cargo build -> compila el proyecto para que se pueda ejecutar
+// cargo run  -> compila si hay cambios en el proyecto y ejecuta el mismo
+// cargo check -> testea el proyecto
+// cargo build --release -> para compilarlo con optimizaciones (construido para distribuir)
+// cargo build --release y cargo run --release hace lo mismo que los anteriores, pero optimizado para distribuir.
+//
+// Cargo.toml es el archivo de configuración de Cargo y se usa para añadir bibliotecas a un proyecto.
+// Cargo.toml es un archivo de texto que se usa para configurar un proyecto Rust.
+// Cargo.lock es un archivo que se crea para guardar las versiones de las bibliotecas usadas en un proyecto.
+// El archivo Cargo.toml contiene información sobre el proyecto, las dependencias y las versiones de las bibliotecas.
+// Cargo.toml se puede editar manualmente o con la herramienta cargo-edit.
+// cargo install cargo-edit -> instala el paquete cargo-edit
+// cargo check sirve para validar el código. Es como compilar, pero sin que genere el código ejecutable. 
+// es una forma de validar si no se quiere ejecutar el código, ya que es más rápida que build o run.
+//
+// cargo edit -> nos ayuda con las dependencias inserta o importa el nombre de un crate (libreria o módulo)
+// -> reescribe el archivo Cargo.toml para adicionar dependencias -> https://github.com/killercup/cargo-edit
+// -> viendo la versión que necesitas en crates.io
+//
+// sobre el compilador: siempre tarda más la primera vez que se ejecuta cargo build o carga run 
+// -después de esta primera vez, recordará las librerías usadas y compilará más rápido.
+// -eso sí, después de un cargo clean, volverá a tardar mucho en compilar ya que es como si fuese la primera vez que lo hace.
+
+// 📌   CARGO EDIT
+// cargo install cargo-edit -> instala el paquete cargo-edit
+// cargo add [nombre_crate] -> añade una biblioteca a un proyecto
+// cargo rm [nombre_crate] -> elimina una biblioteca de un proyecto
+// cargo upgrade -> actualiza todas las bibliotecas de un proyecto
+// cargo upgrade [nombre_crate] -> actualiza una biblioteca de un proyecto
+// cargo install [nombre_crate] -> instala una biblioteca de forma global
+// cargo uninstall [nombre_crate] -> desinstala una biblioteca de forma global
+
+// 📌   CARGO EDIT - Ejemplo
+// cargo add rand -> añade la biblioteca rand a un proyecto
+// cargo rm rand -> elimina la biblioteca rand de un proyecto
+// cargo upgrade -> actualiza todas las bibliotecas de un proyecto
+// cargo upgrade rand -> actualiza la biblioteca rand de un proyecto
+// cargo install cargo-edit -> instala la herramienta cargo-edit
+// cargo uninstall cargo-edit -> desinstala la herramienta cargo-edit
+// cargo install rustfmt -> instala la herramienta rustfmt
+// cargo uninstall rustfmt -> desinstala la herramienta rustfmt
+
+// 📌   CARGO EDIT - Ejemplo
+// cargo add rand -> añade la biblioteca rand a un proyecto
+// cargo rm rand -> elimina la biblioteca rand de un proyecto
+// cargo upgrade -> actualiza todas las bibliotecas de un proyecto
+// cargo upgrade rand -> actualiza la biblioteca rand de un proyecto
+// cargo install cargo-edit -> instala la herramienta cargo-edit
+// cargo uninstall cargo-edit -> desinstala la herramienta cargo-edit
+// cargo install rustfmt -> instala la herramienta rustfmt
+// cargo uninstall rustfmt -> desinst// Cargo también se encarga de gestionar las dependencias entre las bibliotecas.
+
+// 📌  APUNTES Y NOTAS VARIAS
+//
+// #[allow(dead_code)] suprime las advertencias para código muerto o  no utilizado en el ámbito donde se encuentra la directiva.
+// #![allow(unused)] directiva de nivel de atributo que desactiva las advertencias para el código no utilizado en todo el archivo. 
+// #[ no_mangle ] // evita que el compilador cambie el nombre de la función, cuando optimice el código.
+// #[derive(Debug)] // permite imprimir la estructura con println!("{:?}", estructura)
+// Guión bajo (underscores) como sufijo de las variables (delante de ellas) para que no salga la advierta de "variable no utilizada
+// Es una convención en Rust utilizar snake_case para: variables, funciones y archivos
+// SCREAMING_SNAKE_CASE -> para constantes y estáticas, en mayusculas y guiones bajos
+// PascalCas -> se utiliza para tipos, rasgos y enums
+// CamelCase -> se utiliza para funciones y métodos
+// Rust es un lenguaje de programación de sistemas, de bajo nivel, con un alto rendimiento y seguro
+// Rust es un lenguaje de programación de propósito general, multi-paradigma, concurrente y seguro
+// En Rust hay que favorecer el uso de variables locales, en lugar de globales siempre que sea posible,
+// si necesitamos compartir datos entre funciones, se pueden usar argumentos y retornos de funciones
+// o estructuras de datos compartidas.
+// El entorno de pruebas de Rust, https://play.rust-lang.org/, es una herramienta online para probar código Rust.
+//
+// Rustfmt formatea el código correctamente.
+// Clippy da información extra sobre cómo hacer mejor el código.
+// emoticonos utilizados 🚧 y ⚠️
+// Comentarios // o /* ... */
+//
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
