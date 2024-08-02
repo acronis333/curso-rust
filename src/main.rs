@@ -2146,6 +2146,96 @@
 //         println!("{:?}", parsed);                                    // Imprimimos el resultado.
 //     }
 // }
+ 
+// 📌   MÉTODO .chars() - convertir una cadena de caracteres (string) en iterador
+// de caracteres individuales
+// 
+// Al llamar a chars() sobre una cadena, se obtiene un iterador de tipo Chars.
+// que permite recorrer una secuencia de valores de forma eficiente.
+// Cada elemento del iterador Chars es un char, que representa un carácter Unicode.
+//
+// Posibilidades: Convertir a Vector, a mayusculas o minuscula, contar, buscar, modificar
+// -verificar si es digito, etc.
+// 
+// // Imprimir cada carácter en linea nueva
+// fn main() {
+//     let cadena = "Hola, mundo!";
+//     for caracter in cadena.chars() {
+//         println!("{}", caracter);
+//     }
+// }
+//
+// Contar carácteres
+// fn main() {
+//     let cadena = "Hola, mundo!";
+//     let num_caracteres = cadena.chars().count();
+//     println!("La cadena tiene {} caracteres.", num_caracteres);
+// }
+//
+// Búscar un carácter
+// fn main() {
+//     let cadena = "Hola, mundo!";
+//     if cadena.chars().any(|c| c == 'a') {
+//         println!("La cadena contiene la letra 'a'.");
+//     }
+// }
+//
+// Convertir a UN Vector
+// fn main() {
+//     let cadena = "Hola";
+//     let caracteres: Vec<char> = cadena.chars().collect();
+//     println!("{:?}", caracteres);
+// }
+//
+// El iterador Chars consume la cadena original, por lo que no puedes modificar 
+// -la cadena mientras iteras sobre ella.
+
+// 📌   MÉTODO .rev() - Invertir el oredn de un iterador
+//
+// El método rev() invierte el orden de un iterador. Se puede usar con cualquier iterador.
+// Por ejemplo para invertir el orden de los elementos de un vector, una palabra o una cadena.
+//
+// ejemplo para un invertir un vector de tipo char
+//
+// fn main() {
+//     let numeros: Vec<char> = vec!['h', 'o', 'l', 'a'];    
+//     let numeros_invertidos: Vec<char> = numeros.iter().rev().cloned().collect();
+//     println!("{:?}", numeros_invertidos); // Imprime [5, 4, 3, 2, 1]
+// }
+//
+// otro ejemplo para invertir un vector de tipo String
+//
+// pub fn reverse(input: Vec<String>) -> String {
+//     let concatenated: String = input.concat();
+//     concatenated.chars().rev().collect()
+// }
+// fn main() {
+//     let mi_vector: Vec<String> = vec!["Hola".to_string(), "Mundo".to_string()];
+//     let salida: String = reverse(mi_vector);
+//     println!("{}", salida);
+// }
+//
+
+// Para invertir cadenas: Al convertir una cadena en un iterador de caracteres, puedes invertir 
+// -el orden de los caracteres.
+// Invertir cualquier secuencia: rev() puede ser aplicado a cualquier tipo de iterador, incluyendo 
+// -iteradores creados a partir de conjuntos, mapas, y otros tipos de colecciones.
+//
+// ejemplo para invertir cadenas
+//
+// fn main() {
+//     let cadena = "Hola, mundo!";
+//     let cadena_invertida: String = cadena.chars().rev().collect();
+//     println!("{}", cadena_invertida); // Imprime "!odnum ,aloH"
+// }
+//
+
+
+
+
+
+
+
 
 // 📌   CICLOS DE VIDA - lifetime de String y &str
 // 
