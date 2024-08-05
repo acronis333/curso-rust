@@ -2488,26 +2488,93 @@
 
 // 📌   ATRIBUTOS
 //
-// Ya se ha visto anteriormente código como este #[derive(Debug)]. Este tipo de código es un atributo. 
-// Los atributos son pequeñas piezas de código que dan información al compilador. No son fáciles de crear, 
-// pero son muy fáciles de usar.
+// Ya se ha visto anteriormente código como este #[derive(Debug)], este tipo de código es un atributo. 
+// Los atributos son pequeñas piezas de código que dan información al compilador, noo son fáciles de crear 
+// -pero son muy fáciles de usar.
+//
 // Un atributo puede comenzar con solo #, lo que significa que solo afecta al código de la siguiente línea. 
 // Sin embargo, si comienza con #! afectará a todo lo que esté en su espacio.
+//
+// ejemplos:. #[warn(dead_code)] "y #[warn(unused_variables)], para código que no se utiliza y variables que
+// -tampoco se utilizán, si cambiamos "warn" por "allow", dejara de darnos esos avisos.
+//
+// El atributo #![no_std] indica a Rust que no incorpore la librería estándar, esto implica que no se dispone
+// -de Vec, String y todo lo que aporta esta librería, Es útil cuando no es necesaria
+// -y el código tiene que ejecutarse en pequeños dispositivos con poca memoria.
+//
+// El atributo #[derive(NombreDeRasfgo)] permite derivar algunos rasgos para los struct y enum que se creen. 
+// Diversos rasgos de uso común, como Debug, pueden derivarse de esta forma. Otros, como Display, no se pueden
+// -derivar, en el caso de Display es necesario que el desarrollador codifique cómo se quiere mostrar el elemento.
+//
+// Recordatorio:  El guión bajo, "underscore" delante de la variable para que no de avisos de no utilizarse.
+//
+// Pero en los casos de rasgos que se pueden derivar, se pueden indicar tantos como se necesite
+// ejemplo:. #[derive(Debug, PartialEq, Eq, Ord, PartialOrd, Hash, Clone)]
+// -aunque solo se necesite uno, se pueden mencionar varios
+//
+// El atributo #[cfg()] significa configuración e indica al compilador si ejecutar código o no. 
+// Normalmente, se encuentra de la siguiente forma #[cfg(test)], Se usa cuando se escriben funciones de prueba 
+// para que el compilador solo las ejecute cuando se está probando.
+//
+//
 // NECESARIO: leer https://www.jmgaguilera.com/rust_facil/49.html
+// NECESARIO: https://doc.rust-lang.org/reference/attributes.html
 
 // 📌   BOX
 //
-// Box es un tipo de dato que permite almacenar valores en el heap.
-// Permite almacenar en el heap (el montón) un valor, en lugar de almacenarlo en la pila. 
+// Box es un tipo de dato que permite almacenar valores en el heap ("el montón" o memoria dinámica). 
 // Para crear un elemento de este tipo se usa Box::new() con el elemento como parámetro.
-// NECESARIO: leer https://www.jmgaguilera.com/rust_facil/50.html
-  
-// 📌   BOX Y LOS RASGOS
 // 
-// 📌 Default y el patrón constructor (builder)
+//
+//
+// ¿Por qué usar Box?
 // 
+// Indirección: Permite crear referencias a valores en el heap, lo que es útil para trabajar con datos de tamaño
+// -desconocido o para implementar estructuras de datos más complejas.
+//
+// Tratar valores como valores únicos: Aunque se almacena en el heap, un Box representa un valor único, lo que
+// -significa que no puede haber múltiples referencias mutables a él.
+// Resolver problemas de tamaño: En algunas situaciones, el tamaño de un valor puede no ser conocido en tiempo de
+// -compilación. Box permite almacenar estos valores sin tener que preocuparse por su tamaño exacto.
+//
+// Implementar estructuras de datos dinámicas: Box es fundamental para construir estructuras de datos como listas
+// -enlazadas, árboles y grafos, donde el tamaño de la estructura puede crecer o decrecer 
+// durante la ejecución del programa.
+//
+// ejemplo:. -> let x = 5; let boxed_x = Box::new(x);
+// ejemplo de desreferenciar un box -> let y = *boxed_x; // Desreferenciamos para obtener el valor 
+// El operador * se utiliza para desreferenciar un Box y obtener el valor que contiene.
+//
+// Características clave de Box:
+// Ownership: Un Box tiene la propiedad exclusiva del valor que contiene. Esto significa que solo puede haber una
+// -referencia mutable a un Box en un momento dado.
+//
+// Dereferenciación: El operador * se utiliza para desreferenciar un Box y obtener el valor que contiene.
+// Size: El tamaño de un Box es fijo, independientemente del tamaño del valor que contiene. Esto se debe a que 
+// -un Box es esencialmente un puntero al valor en el heap.
+//
+// Traits: Box implementa varios traits útiles, como Deref y DerefMut, que permiten usar un Box como si fuera el valor que contiene en muchas situaciones.
+//
+//
+// Usos comunes de Box
+// Recursión: Box es fundamental para implementar estructuras de datos recursivas como listas enlazadas y árboles.
+// Traits objects: Los Box se utilizan para crear objetos de tipos dinámicos, lo que permite el polimorfismo
+// en tiempo de ejecución.
+// Smart pointers: Box es el smart pointer más básico en Rust. 
+// Otros smart pointers como Rc y Arc se construyen sobre Box.
+//
+// Consideraciones importantes:
+// Costo de rendimiento: Crear un Box implica una asignación de memoria en el heap, lo que puede tener un
+// -impacto en el rendimiento en comparación con el uso de variables en la pila.
+// Ownership y lifetimes: Es importante tener cuidado con la propiedad y los lifetimes cuando se trabaja
+// -con Box para evitar errores de memoria.
+
+// 📌   Default y el patrón constructor (builder)
+// 
+// https://www.jmgaguilera.com/rust_facil/52.html
+
 // 📌 Deref y DerefMut
-// 
+
 // 📌 Crates (cajones) y módulos
 //
 // 📌 Pruebas (testing) - leer https://www.jmgaguilera.com/rust_facil/55.html
