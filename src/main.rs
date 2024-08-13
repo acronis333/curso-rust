@@ -354,55 +354,6 @@
 // }
 
 // 📌   VARIABLES - clone
-//
-// El tipo String, no implementa la característica copy por lo que el valor de la variable se mueve 
-// -al pasarla la primera vez, para poder copiarla se usa la trait "Clone".
-//
-// Lo ideal es utilizar la referencia es más eficiente porque clone copia el valor gastando más memoria y la referencia solo el puntero. 
-//
-// fn print_country(country_name: String) {         // Esta función no devuelve nada
-//     println!("{}", country_name);
-//     }
-//
-// fn main() {
-//         let country = String::from("España");
-//         print_country(country.clone());
-//         print_country(country);
-// }
-
-// 📌   CADENA DE CARACTEREs - String y &str
-//
-// Rust tiene dos tipos de datos para representar cadenas de caracteres: String y &str.
-// Ambos tipos de datos se utilizan para almacenar cadenas de caracteres, pero tienen diferencias importantes.
-// Los dos son UTF-8
-// &str es una cadena de caracteres, una referencia a un bloque de memoria en la pila 
-// -que contiene la cadena de caracteres.
-// Cuando se escribe let mi_variable = "¡Hola, mundo!" se crea una &str, este tipo es muy rápido.
-//
-// &str tiene "&" como primer carácter debido a que es necesaria una referencia para utilizar el tipo str. 
-// -esto es porque necesita conocer el tamaño, así que se le da una referencia, las referencias siempre tienen el mismo tamaño.
-// Al utilizar & una referencia para interactuar con el tipo str, nunca se es dueño del tipo
-// 
-// String es una cadena de caracteres que reside en el heap, es más complejo pero tiene mas funciones.
-// Un String es un puntero a un bloque de memoria en el heap que contiene la cadena de caracteres.
-// Cuando se escribe let mi_variable = String::from("¡Hola, mundo!") se crea un String, este tipo es más lento.
-// String siempre es dueño de la cadena de caracteres, por lo que se encarga de liberar la memoria cuando ya no se necesita.
-//
-// ejemplo:. let mi_variable1 = "¡Hola, mundo!"; // tipo de dato "&str" 
-// ejemplo:. let mi_variable2 = String::from("¡Hola, mundo!"); // tipo de dato "String"
-//
-// Por eso es necesario usar &, porque así se construye un puntero (tipo de tamaño fijo) que puede almacenarse 
-// -en la pila. Si se escribiera str, Rust no sabría qué hacer al no conocer su tamaño.
-//
-// std::mem::size_of_val() devuelve el tamaño en bytes de una variable
-//
-// Hay varias formas de construir un String, la más común es con el método from de la clase "String::from()".
-// También se puede construir un String a partir de un &str con el método ".to_string()".
-//
-// Otra forma de construir un String es con el método ".to_owned()" que convierte un &str en un String.
-// También se puede construir un String con la macro "format!" que permite formatear una cadena de caracteres.
-// 
-
 // 📌   CONSTANTES
 //
 // Las constantes son valores inmutables que se pueden definir en cualquier ámbito, incluidos los globales.
@@ -1252,8 +1203,8 @@
 
 // 📌   TUPLAS Y DESESTRUCTURACIÓN
 // 
-// Son como una estructura sin nombre de campos, una especie de array donde 
-// -cada elemento puede ser de un tipo diferente pero especificado de antemano
+// Las tuplas son como una estructura pero sin nombre de campos, una especie de array donde 
+// -cada elemento puede ser de un tipo diferente pero especificado de antemano.
 //
 // Las tuplas son un tipo de dato que permite agrupar varios valores en un solo valor compuesto.
 // Podemos agrupar valores de diferentes tipos en una tupla, pero una vez definida 
@@ -1269,12 +1220,22 @@
     // println!("\n{}", random);
     // println!("{}", z_name);
     // println!("{}\n", has_beers);
-// } convertido a u32: {}", c);
-    // let t = true;
-    // println!("{}", t as u8);
 // }
 
-// 📌   TUPLAS
+// 📌   TUPLAS - asociando valores de una tupla a variables de una tupla
+//
+// fn main() {
+// 	let (uno, dos, tres) = (1, 2, 3);
+//
+// 	println!("Uno = {}", uno);
+// 	println!("Dos = {}", dos);
+// 	println!("Tres = {}", tres);
+// }
+
+// 📌   TUPLAS - comoposiciones complejas
+// 
+// Ejemplo de tupla compuesta por un entero, un string y un booleano.
+//
 // fn main() {
 //     let random_tuple = ("Esto es un texto", "8", "vec!['a']", "'b'", "[8,9,10], 7.7");
 //     println!(
@@ -1293,6 +1254,54 @@
 //     );
 // }
   
+// 📌   HASMAP - 
+// 
+// Un Hasmap es una colección de datos que almacena pares clave-valor, donde cada clave
+// -es única y está asociada a un valor.
+// Esta estrucutra de datos es muy útil para almacenar datos y buscar un valor asociado a una clave.
+//
+// use std::collections::HashMap; // Importamos la librería HashMap
+// Para crear un HashMap se usa la macro "new" y se añaden los pares clave-valor con el método "insert".
+// ejem:. let mut mi_hashmap = HashMap::new(); // Creamos un HashMap vacío
+// ejem:. mi_hashmap.insert("clave", "valor"); // Añadimos un par clave-valor al HashMap
+//
+// método .get() para obtener un valor de un HashMap, pasandole la clave.
+// ejem:. let valor = mi_hashmap.get("clave"); // Obtenemos el valor asociado a una clave
+//
+// método .contains_key() para comprobar si una clave existe en un HashMap.
+// ejem:. let contiene_clave = mi_hashmap.contains_key("clave"); // Comprobamos si una clave existe
+//
+// método .remove() para eliminar un par clave-valor de un HashMap.
+// ejem:. mi_hashmap.remove("clave"); // Eliminamos un par clave-valor de un HashMap
+//
+// método .iter() para recorrer los pares clave-valor de un HashMap.
+// método .iter_mut() para recorrer los pares clave-valor de un HashMap y modificarlos.
+// método .entry() para recorrer los pares clave-valor de un HashMap y modificarlos.
+// método .or_insert() para recorrer los pares clave-valor de un HashMap y modificarlos.
+// método .collect() para recorrer los pares clave-valor de un HashMap y modificarlos. 
+//
+// Para recorrer los pares clave-valor de un HashMap se usa un bucle "for".
+// ejem:. for (clave, valor) in &mi_hashmap { // Recorremos los pares clave-valor de un HashMap
+// 
+//use std::collections::HashMap;
+//
+// fn main() 
+// {
+// 	let mut mapa = HashMap::new();
+
+// 	mapa.insert(String::from("primero"), 10);
+// 	mapa.insert(String::from("segundo"), 20);
+
+// 	mapa.insert(String::from("primero"), 30);
+
+// 	for (clave, valor) in &mapa
+// 	{
+// 		println!("{}: {}", clave, valor);
+// 	}
+// }
+
+
+
 // 📌   ENUM - Enumeraciones
 // Las enumeraciones son un tipo de dato que permite definir un tipo de dato con un número limitado de valores posibles.
 // Se pueden definir enumeraciones con la palabra reservada "enum" seguida del nombre de la enumeración y entre llaves los valores posibles separados por comas. (la coma en el último valor es opcional pero importante si solemos cambiar de sitio los valores).
@@ -2271,51 +2280,7 @@
 // El iterador Chars consume la cadena original, por lo que no puedes modificar 
 // -la cadena mientras iteras sobre ella.
 
-// 📌   MÉTODO .rev() - Invertir el oredn de un iterador
-//
-// El método rev() invierte el orden de un iterador. Se puede usar con cualquier iterador.
-// Por ejemplo para invertir el orden de los elementos de un vector, una palabra o una cadena.
-//
-// ejemplo para un invertir un vector de tipo char
-//
-// fn main() {
-//     let numeros: Vec<char> = vec!['h', 'o', 'l', 'a'];    
-//     let numeros_invertidos: Vec<char> = numeros.iter().rev().cloned().collect();
-//     println!("{:?}", numeros_invertidos); // Imprime [5, 4, 3, 2, 1]
-// }
-//
-// otro ejemplo para invertir un vector de tipo String
-//
-// pub fn reverse(input: Vec<String>) -> String {
-//     let concatenated: String = input.concat();
-//     concatenated.chars().rev().collect()
-// }
-// fn main() {
-//     let mi_vector: Vec<String> = vec!["Hola".to_string(), "Mundo".to_string()];
-//     let salida: String = reverse(mi_vector);
-//     println!("{}", salida);
-// }
-//
-
-// Para invertir cadenas: Al convertir una cadena en un iterador de caracteres, puedes invertir 
-// -el orden de los caracteres.
-// Invertir cualquier secuencia: rev() puede ser aplicado a cualquier tipo de iterador, incluyendo 
-// -iteradores creados a partir de conjuntos, mapas, y otros tipos de colecciones.
-//
-// ejemplo para invertir cadenas
-//
-// fn main() {
-//     let cadena = "Hola, mundo!";
-//     let cadena_invertida: String = cadena.chars().rev().collect();
-//     println!("{}", cadena_invertida); // Imprime "!odnum ,aloH"
-// }
-//
-
-
-
-
-
-
+// 📌   MÉTODO .rev() - Invertir el 
 
 
 // 📌   CICLOS DE VIDA - lifetime de String y &str
