@@ -8,7 +8,7 @@
 // -los bloques constructores para crear tipos más complejos.
 
 // 📌   TIPOS DATOS BÁSICOS (Primitivos en Rust) se dividen en escalares y compuestos
-// 
+// HASMA
 // Los tipos de datos primitivos son los tipos de datos básicos que el lenguaje proporciona de forma nativa. 
 // Son los bloques constructores a partir de los cuales se crean tipos más complejos. 
 // En Rust los tipos primitivos se dividen en escalares y compuestos.
@@ -416,40 +416,8 @@
 //     // ejemplo de utilidad: para hacer varios calculos con la misma variable.
 // }
 
-// 📌   SLICE - Porciones de código
-// 
-// Slice es una referencia a una porción de una colección de datos, como un arreglo o una cadena.
-// Los slices son útiles para trabajar con partes de una colección de datos sin tener que copiar toda la colección.
-// Este tipo de dato no posee la propiedad de los datos a los que apunta, solo una referencia a ellos.
-//
-// ejemplo:. 
-// let a = [1, 2, 3, 4, 5]; // arreglo de 5 elementos
-// let slice = &a[1..3]; // slice de 2 elementos, desde el índice 1 al 3
-// -el índice 3 no se incluye, por lo que el slice contiene los elementos 2 y 3.
-// 
-// ejemplo: función que toma un slice de una cadena y devuelve la palabra segun el indice indicado de la cadena.
-// fn obtener_palabra(texto: &str, indice: usize) -> &str {
-//     // Dividimos el texto en palabras usando espacios como delimitadores
-//     let palabras: Vec<&str> = texto.split_whitespace().collect();
-//
-//     // Verificamos si el índice está dentro de los límites del vector de palabras
-//     if indice < palabras.len() {
-//         return palabras[indice];
-//     } else {
-//         return ""; // O puedes retornar un mensaje de error
-//     }
-// }
-// fn main() {
-//     let texto = "Hola, mundo! como estas"; // texto de ejemplo
-//     let palabra = obtener_palabra(texto, 3); // obtenemos la segunda palabra
-//     println!("La palabra es: {}", palabra); // imprimimos la palabra
-// }
-//
-
 // 📌   REFERENCIAS
-//
-// Como protege rust el acceso a zonas de memoria erróneas, no permite el acceso a zonas
-// -de memoria que no le pertenecen, un ejemplo.
+// Como protege rust el acceso a zonas de memoria erróneas, no permite el acceso a zonas de memoria que no le pertenecen, un ejemplo.
 //
 // fn return_str() -> &'static str {
 //     let pais = String::from("España");
@@ -1057,6 +1025,8 @@
 //     println!("{}", ref_tres);
 // }
 
+
+
 // 📌   TIPOS COLECCIÓN
 //
 // Rust tiene varios tipos de colecciones, como vectores, arrays, tuplas, etc.
@@ -1333,7 +1303,7 @@
 //
 // Para recorrer los pares clave-valor de un HashMap se usa un bucle "for".
 // ejem:. for (clave, valor) in &mi_hashmap { // Recorremos los pares clave-valor de un HashMap
-
+// 
 // 📌   HASMAP - ejemplos
 //
 // use std::collections::HashMap;
@@ -1350,7 +1320,7 @@
 // 		println!("{}: {}", clave, valor);
 // 	}
 // }
-
+//
 // 📌   HASMAP - ejemplos
 //
 // use std::collections::HashMap;
@@ -1408,16 +1378,14 @@
 //     comprobar_el_cielo(&estado);   
 // }
 
-// 📌   BUCLES - Crear un bucle con loop
-// Un bucle "loop" es un bucle que se ejecuta indefinidamente hasta que se le pone una sentencia
-// - "break" para salir del bucle.
-//
+// 📌   BUCLES - Podemos crear un bucle con loop hacer que continue hasta que queramos que se detenga con "break", por ejemplo comparando un valor
 // fn main() {
 //     loop {
 //         break; // Este bucle se ejecuta indefinidamente si no se le pone un "break".
 //     }
 // } 
-//
+
+// 📌   BUCLES
 // fn main() {
 //     let mut contador = 0; // inicializamos la variable "contador" con valor 0.
 //     loop {                // creamos un bucle "loop".
@@ -1479,10 +1447,8 @@
 // En los bucles for se crea una variable a la que le asignamos el valor de cada iteración, en este caso "contador". si no se necesita la variable se puede usar "_" para indicar que no se va a usar.
 
 // 📌   BUCLES - loop con break y devolución de valor.
-// 
-// Break tambien se puede usar para devolver un valor, para ello escribimos "break valor"
-// -y el valor o variable que queremos devolver.
-// 
+// Break tambien se puede usar para devolver un valor, para ello escribimos "break valor" y el valor o variable que queremos devolver.
+// 📌 
 // fn main() {
 //     let mut contador = 5;
 //     let mi_numero = loop {
@@ -1495,13 +1461,10 @@
 // }
 
 // 📌   BUCLES - for (Comprobación de colores con un bucle)
-//
 // fn match_colores(rbg: (i32, i32, i32)) {
 //     println!("Comparación de un color con {} rojo, {} azul, y {} verde:", rbg.0, rbg.1, rbg.2);
-// //Coloca los colores en un vec. Dentro son tuplas con los nombres de los colores y los valores de los colores.
-//     let new_vec = vec![(rbg.0, "rojo"), (rbg.1, "azul"), (rbg.2, "verde")]; 
-// //Comienza a verdadero y se cambia a falso si algún compomente no tiene 10
-//     let mut todos_tienen_al_menos_10 = true; 
+//     let new_vec = vec![(rbg.0, "rojo"), (rbg.1, "azul"), (rbg.2, "verde")]; // Coloca los colores en un vec. Dentro son tuplas con los nombres de los colores
+//     let mut todos_tienen_al_menos_10 = true; // Comienza a verdadero y se cambia a falso si algún compomente no tiene 10
 //     for item in new_vec { // cada item es una tupla con un número y un nombre de color.
 //         if item.0 < 10 { // item.0 es el número, si es menor que 10
 //             todos_tienen_al_menos_10 = false; // Ahora es false
@@ -1513,7 +1476,8 @@
 //     }
 //     println!(); // Añade una línea vacía para separar
 // }
-//
+
+// 📌   BUCLES -
 // fn main() {
 //     let first = (200, 20,0);
 //     let second = (50, 50, 50);
@@ -1891,71 +1855,32 @@
 //        println!("0 - {} -> {}", a as char, falso as u8); // imprimimos el resultado.
 // }
    
-// 📌   EXPRESIONES AVANZADAS con variables "let" y if como expresiones
-//   
-// En Rust si algo no lleva punto y coma se vuelve y evalúa como una expresión
-//
+// 📌   EXPRESIONES AVANZADAS con variables "let", expresión condicional con "if, else", 
+//   en Rust si algo no lleva punto y coma se vuelve Y evalúa como una expresión
 // fn main () {
-// let age: u8 = 15;
-// let xx = if age > 17
-// {
-//     "Mayor de edad"
-// } else 
-// {
-//     "Menor de edad"
-// };
-// println!("Eres {}",xx);
+    // let age: u8 = 15;
+    // let xx = if age > 17
+    // {
+    //     "Mayor de edad"
+    // } else 
+    // {
+    //     "Menor de edad"
+    // };
+    // println!("13 - Eres{}",xx);
 // }
 
-// 📌   EXPRESIONES AVANZADAS - if como expresiones
-//
-// fn main() {
-//     let numero = 5;
-//     let resultado = if numero > 0 {
-//         "Es positivo"
-//     } else if numero < 0 {
-//         "Es negativo"
-//     } else {
-//         "Es cero"
-//     };
-//     println!("El número es: {}", resultado);
+// 📌   EXPRESIONES AVANZADAS con variables "let", una operación de "a*b"
+// fn main () {
+//     let u = 2;
+//     let _xa = u+age;                // el valor de "u" se suma al de "age"
+//     println!("14 - Valor de x: {}",_xa);        // imprime la expresión avanzada de "x"
 // }
-//
     
-// 📌   EXPRESIONES AVANZADAS - operador de propagación (..)
-// 
-// El operador de propagación ".." se usa para crear rangos, slices y para desempaquetar arrays y tuplas:
-//
-// let numeros = [1, 2, 3, 4, 5];
-// let primeros_tres = &numeros[..3]; // Slice de los primeros tres elementos
-// let rango = 0..5; // Rango de 0 a 4
-//
-
-// 📌   EXPRESIONES AVANZADAS - match
-//
-// Match es una expresión que permite comparar un valor con multiples patrones
-// -y ejecutar un bloque de código dependiendo de qué patrón coincida.
-// 
-// La sintaxis de match es la siguiente:
-// match valor {                        // Compara el valor con los patrones
-//     patron1 => bloque_de_codigo1,    // Si el valor coincide con patron1, ejecuta bloque_de_codigo1
-//     patron2 => bloque_de_codigo2,    // Si el valor coincide con patron2, ejecuta bloque_de_codigo2
-//     patron2 => bloque_de_codigo2,    // Si el valor coincide con patron2, ejecuta bloque_de_codigo2
-//     patron3 => bloque_de_codigo3,    // Si el valor coincide con patron3, ejecuta bloque_de_codigo3
-//     ...
-//     _ => bloque_de_codigo_default,   // Si el valor no coincide con ninguno de los patrones 
-                                        // -ejecuta bloque_de_codigo_default
-// }
-//
-// ejemplos:.
-// fn main() {
-//     let numero = 3;
-//     match numero {
-//         0 => println!("Es cero"),
-//         1..=5 => println!("Está entre 1 y 5"),
-//         _ => println!("Es otro número"),
-//     }
-// }
+// 📌   Rust no deja la memoria al descubierto ni usa GC. Para ello el compilador realiza
+// una tarea de dueños y préstamos que veremos a continuación
+// Las REGLAS -> Cada valor en Rust tiene una variable que es su dueñ
+//            -> Un valor solo puede tener un dueño a la ve
+//            -> Cuando el dueño desaparece, el valor lo hace a su vez, de forma automátic
 
 // 📌   La trait COPY y CLONE
 //    
@@ -2105,11 +2030,9 @@
 // }
 
 // 📌   ITERADORES 
-//
 // Los iteradores son una forma de recorrer una colección de elementos en Rust.
 // Se pueden crear iteradores con el método "iter" de un vector, que devuelve un iterador
 // que recorre los elementos del vector.
-//
 // Se pueden recorrer los elementos de un iterador con un bucle "for" o con el método "for_each".
 //
 // .iter() -> para iterar a través de referencias a los elementos.
@@ -2121,8 +2044,8 @@
 //  
 // fn main() {
 //     let vec = vec![1, 2, 3, 4, 5]; // Creamos un vector con los valores 1, 2, 3, 4 y 5.
-//     for i in vec.iter() {          // Recorremos los elementos del vector con un bucle "for".
-//         println!("{}", i);         // Imprimimos cada elemento.
+//     for i in vec.iter() { // Recorremos los elementos del vector con un bucle "for".
+//         println!("{}", i); // Imprimimos cada elemento.
 //     }
 // }
 
